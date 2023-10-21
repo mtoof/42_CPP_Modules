@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:28:32 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/20 19:28:23 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/10/21 21:19:33 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define CONTACT_HPP
 
 #include <iostream>
-#include <iomanip>
+#include <string>
 
 class Contact
 {
@@ -32,8 +32,9 @@ public:
 	std::string	const&get_NickName() const;
 	std::string	const&get_PhoneNumber() const;
 	std::string	const&get_DarkestSecret() const;
-	void		display() const;
-	void		add_contact() const;
+	void		display(void) const;
+	bool		isValid(void) const;
+	void		addContact(void) const;
 };
 
-#endif;
+#endif

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Phonebook.hpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:53:43 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/20 19:26:57 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/10/21 20:52:54 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-#include <iostream>
-#include <string>
 #include "Contact.hpp"
+#include <iomanip>
 
 typedef enum e_userinput
 {
 	EXIT,
-	ADD, 
+	ADD,
 	SEARCH,
 	INVALID
 }	t_userinput;
@@ -39,5 +38,7 @@ public:
 	~PhoneBook();
 	t_userinput	command();
 };
+
+void	user_input(std::string &prompt);
 
 #endif

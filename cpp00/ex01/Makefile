@@ -6,14 +6,16 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/16 14:52:33 by mtoof             #+#    #+#              #
-#    Updated: 2023/10/17 10:30:50 by mtoof            ###   ########.fr        #
+#    Updated: 2023/10/21 21:49:43 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Phonebook
-SRC = Phonebook.cpp Contac.cpp main.cpp
+NAME = PhoneBook
+SRC = PhoneBook.cpp Contact.cpp main.cpp
+HEADER = Contact.hpp PhoneBook.hpp
 FLAG =  -Wall -Wextra -Werror -std=c++98
-OBJ = $(SRC:.cpp=.o)
+OBJ_DIR = obj/
+OBJS = $(SRC:%.cpp=$(OBJ_DIR)%.o)
 # ANSI escape sequences for text formatting
 BOLD = \033[1m
 GREEN = \033[0;32m
@@ -21,18 +23,19 @@ YELLOW = \033[0;33m
 CYAN = \033[0;36m
 NC = \033[0m
 
-%.o: %.cpp
-	@g++ $(FLAG) -c $< -o $@
-
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJS)
 	@echo "$(YELLOW)$(BOLD)Make outfiles...$(NC)"
-	@g++ $(FLAG) $(OBJ) -o $(NAME)
+	@g++ $(FLAG) $(OBJS) -o $(NAME)
+
+$(OBJ_DIR)%.o: %.cpp
+	@mkdir -p $(OBJ_DIR)
+	@g++ $(FLAG) -c $< -o $@
 
 clean:
 	@echo "$(CYAN)$(BOLD)Cleaning object files...$(NC)"
-	@/bin/rm -f $(OBJ)
+	@/bin/rm -rf $(OBJ_DIR)
 
 fclean: clean
 	@echo "$(CYAN)$(BOLD)Cleaning $(NAME)..."
