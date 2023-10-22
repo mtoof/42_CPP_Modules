@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:30:59 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/21 22:11:46 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/10/22 16:27:27 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void	banner()
     std::cout<<"   #       #    # #    # #   ## #      #     # #    # #    # #   #  " << std::endl;
     std::cout<<"   #       #    #  ####  #    # ###### ######   ####   ####  #    # " << std::endl;
 	std::cout<<"\n"<<std::endl;
-    std::cout<<"=================================================================== " << std::endl;
+    std::cout<<"======================================================================" << std::endl;
 	std::cout<<"\n"<<std::endl;
+	std::cout<<"               use ADD, SEARCH or EXIT command\n"<<std::endl;
 }
 
 void	user_input(std::string &prompt)
