@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:29:22 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/22 16:53:33 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/10/23 13:39:38 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ Contact Contact::addContact()
 {
 	Contact contact;
 
+	std::cout<<"\n"<<std::flush;
 	std::cout << "First name: "<<std::flush;
 	user_input(contact.first_name);
 	std::cout << "Last name: "<<std::flush;
@@ -35,6 +36,7 @@ Contact Contact::addContact()
 	user_input(contact.phone_number);
 	std::cout << "Darkest secret: "<<std::flush;
 	user_input(contact.darkest_secret);
+	std::cout<<"\n"<<std::flush;
 	return(contact);
 }
 
@@ -60,16 +62,6 @@ std::string	const&Contact::get_lastname() const
 std::string	const&Contact::get_nickname() const
 {
 	return (nickname);
-}
-
-std::string	const&Contact::get_phonenumber() const
-{
-	return (phone_number);
-}
-
-std::string	const&Contact::get_darkestsecret() const
-{
-	return (darkest_secret);
 }
 
 void	Contact::display(void) const

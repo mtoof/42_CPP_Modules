@@ -6,16 +6,29 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 10:30:59 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/22 16:27:27 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/10/23 14:12:25 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-void	banner()
+static void	exit_banner()
 {
-	std::cout << "\033[2J\033[1;1H";
-	std::cout<<std::endl;
+	std::cout << "\033[2J\033[1;1H"<<std::flush;
+	std::cout<<"  .oooooo.                              .o8   .o8                         "<< std::endl;
+	std::cout<<" d8P'  `Y8b                             888   888                             "<< std::endl;
+	std::cout<<"888            .ooooo.   .ooooo.   .oooo888   888oooo.  oooo    ooo  .ooooo.  "<< std::endl;
+	std::cout<<"888           d88' `88b d88' `88b d88' `888   d88' `88b  `88.  .8'  d88' `88b "<< std::endl;
+	std::cout<<"888     ooooo 888   888 888   888 888   888   888   888   `88..8'   888ooo888 "<< std::endl;
+	std::cout<<"`88.    .88'  888   888 888   888 888   888   888   888    `888'    888    .o "<< std::endl;
+	std::cout<<" `Y8bood8P'   `Y8bod8P' `Y8bod8P' `Y8bod88P   `Y8bod8P'     .8'     `Y8bod8P' "<< std::endl;
+	std::cout<<"                                                        .o..P'                "<< std::endl;
+	std::cout<<"                                                        `Y8P'                 "<< std::endl;
+	std::cout<<"                                                                              "<< std::endl;
+}
+static void	start_banner()
+{
+	std::cout << "\033[2J\033[1;1H"<<std::flush;
 	std::cout<<"  #     #             # "<< std::endl;
     std::cout<<"  ##   ## #   #      # #   #    # ######  ####   ####  #    # ###### " << std::endl;
     std::cout<<"  # # # #  # #      #   #  #    # #      #      #    # ##  ## #      " << std::endl;
@@ -25,8 +38,8 @@ void	banner()
     std::cout<<"  #     #   #      #     # #    # ######  ####   ####  #    # ###### " << std::endl;
     std::cout<<"                                                                     " << std::endl;
     std::cout<<"   ######                              ######                       " << std::endl;
-    std::cout<<"   #     # #    #  ####  #    # ###### #     #  ####   ####  #    # " << std::endl;
-    std::cout<<"   #     # #    # #    # ##   # #      #     # #    # #    # #   #  " << std::endl;
+    std::cout<<"   #     # #       ####  #    # ###### #     #  ####   ####  #    # " << std::endl;
+    std::cout<<"   #     # #      #    # ##   # #      #     # #    # #    # #   #  " << std::endl;
     std::cout<<"   ######  ###### #    # # #  # #####  ######  #    # #    # ####   " << std::endl;
     std::cout<<"   #       #    # #    # #  # # #      #     # #    # #    # #  #   " << std::endl;
     std::cout<<"   #       #    # #    # #   ## #      #     # #    # #    # #   #  " << std::endl;
@@ -34,7 +47,7 @@ void	banner()
 	std::cout<<"\n"<<std::endl;
     std::cout<<"======================================================================" << std::endl;
 	std::cout<<"\n"<<std::endl;
-	std::cout<<"               use ADD, SEARCH or EXIT command\n"<<std::endl;
+	std::cout<<"               Use ADD, SEARCH or EXIT command\n"<<std::endl;
 }
 
 void	user_input(std::string &prompt)
@@ -49,8 +62,9 @@ void	user_input(std::string &prompt)
 
 int main()
 {
-	banner();
+	start_banner();
 	PhoneBook my_phonebook;
 	while (my_phonebook.command());
+	exit_banner();
 	return (0);
 }

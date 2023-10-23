@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:54:49 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/23 13:21:32 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/10/23 13:43:46 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ void	PhoneBook::add_contact(void)
 		std::cout<< "\nERROR: Invalid contact!\n" <<std::endl;
 		return ;
 	}
+	std::cout<< "===================================" <<std::endl;
+	std::cout<< "Added successfully!" <<std::endl;
+	std::cout<< "===================================\n" <<std::endl;
 	contacts[contact_index] = contact;
 	contact_index = (contact_index + 1) % max_size;
 	if (counter < max_size)
@@ -75,13 +78,10 @@ void	PhoneBook::print_contact_list(void) const
 	<<std::setw(10) << truncate("Nickname")<<std::endl;
 	for(int index = 0; index < counter; index++)
 	{
-		std::cout << std::right<<std::setw(10)<< \
-		index << "|" <<std::setw(10) << \
-		truncate(contacts[index].get_firstname()) << "|" \
-		<< std::setw(10) << \
-		truncate(contacts[index].get_lastname()) << "|" \
-		<< std::setw(10) << \
-		truncate(contacts[index].get_nickname()) << std::endl;
+		std::cout << std::right<<std::setw(10)<< index << "|" \
+		<< std::setw(10) << truncate(contacts[index].get_firstname()) << "|" \
+		<< std::setw(10) << truncate(contacts[index].get_lastname()) << "|" \
+		<< std::setw(10) << truncate(contacts[index].get_nickname()) << std::endl;
 	}
 	std::cout<<"\n"<<std::endl;
 }
