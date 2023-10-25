@@ -5,15 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/16 14:52:33 by mtoof             #+#    #+#              #
-#    Updated: 2023/10/25 17:35:06 by mtoof            ###   ########.fr        #
+#    Created: 2023/10/25 15:49:42 by mtoof             #+#    #+#              #
+#    Updated: 2023/10/25 17:55:58 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = PhoneBook
-SRC = PhoneBook.cpp Contact.cpp main.cpp
+NAME = zombie
+
+SRC = Zombie.cpp main.cpp randomChump.cpp newZombie.cpp
 SRC_DIR = src/
-HEADER_DIR = header/
+HEADER = header/
 FLAG =  -Wall -Wextra -Werror -std=c++98
 OBJ_DIR = obj/
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
@@ -35,7 +36,7 @@ $(NAME): $(OBJS)
 
 $(OBJ_DIR)%.o: %.cpp
 	@mkdir -p $(OBJ_DIR)
-	@g++ $(FLAG) -I$(HEADER_DIR) -c $< -o $@
+	@g++ $(FLAG) -I$(HEADER) -c $< -o $@
 
 clean:
 	@echo "$(CYAN)$(BOLD)Cleaning object files...$(NC)"

@@ -6,22 +6,26 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/24 17:47:32 by mtoof             #+#    #+#              #
-#    Updated: 2023/10/24 17:47:44 by mtoof            ###   ########.fr        #
+#    Updated: 2023/10/25 16:27:01 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = account
 SRC = Account.cpp tests.cpp
-HEADER = Account.hpp
+SRC_DIR = src/
+HEADER = header/
 FLAG =  -Wall -Wextra -Werror -std=c++98
 OBJ_DIR = obj/
-OBJS = $(SRC:%.cpp=$(OBJ_DIR)%.o)
+SRCS = $(addprefix $(SRC_DIR), $(SRC))
+OBJS = $(SRCS:$(SRC_DIR)%.cpp=$(OBJ_DIR)%.o)
 # ANSI escape sequences for text formatting
 BOLD = \033[1m
 GREEN = \033[0;32m
 YELLOW = \033[0;33m
 CYAN = \033[0;36m
 NC = \033[0m
+
+vpath %.cpp $(SRC_DIR)
 
 all: $(NAME)
 
@@ -31,7 +35,7 @@ $(NAME): $(OBJS)
 
 $(OBJ_DIR)%.o: %.cpp
 	@mkdir -p $(OBJ_DIR)
-	@g++ $(FLAG) -c $< -o $@
+	@g++ $(FLAG) -I$(HEADER) -c $< -o $@
 
 clean:
 	@echo "$(CYAN)$(BOLD)Cleaning object files...$(NC)"

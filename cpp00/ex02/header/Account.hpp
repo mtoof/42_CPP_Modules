@@ -9,8 +9,8 @@
 
 
 #pragma once
-#ifndef __ACCOUNT_HPP__
-#define __ACCOUNT_HPP__
+#ifndef ACCOUNT_HPP
+#define ACCOUNT_HPP
 
 // ************************************************************************** //
 //                               Account Class                                //
