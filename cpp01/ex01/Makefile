@@ -6,13 +6,13 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 15:49:42 by mtoof             #+#    #+#              #
-#    Updated: 2023/10/26 09:09:19 by mtoof            ###   ########.fr        #
+#    Updated: 2023/10/26 09:09:44 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = BraiiiiiiinnnzzzZ
+NAME =  Moar_brainz
 
-SRC = Zombie.cpp main.cpp randomChump.cpp newZombie.cpp
+SRC = Zombie.cpp main.cpp zombieHorde.cpp
 SRC_DIR = src/
 HEADER = header/
 FLAG =  -Wall -Wextra -Werror -std=c++98

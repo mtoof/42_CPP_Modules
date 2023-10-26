@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 15:50:09 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/26 09:22:13 by mtoof            ###   ########.fr       */
+/*   Created: 2023/10/25 17:47:15 by mtoof             #+#    #+#             */
+/*   Updated: 2023/10/26 09:20:09 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#include "../header/Zombie.hpp"
 
-#include <iostream>
-#include <string>
-
-class Zombie
+int main()
 {
-private:
-	std::string	_name;
-public:
-	Zombie();
-	~Zombie();
-	void	announce(void);
-	void	set_name(std::string name_val);
-};
+	int N = 10;
+	Zombie* zombie_ptr = zombieHorde(N, "test");
+	
+	for (int index = 0;index < N; index++)
+		zombie_ptr[index].announce();
 
-void	randomChump(std::string name);
-Zombie*	newZombie(std::string name);
-
-#endif
+	delete[] zombie_ptr;
+	return (0);
+}

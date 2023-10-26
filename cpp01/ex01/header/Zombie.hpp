@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:50:09 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/26 09:22:13 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/10/26 09:06:25 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,9 @@ public:
 	Zombie();
 	~Zombie();
 	void	announce(void);
-	void	set_name(std::string name_val);
+	void	set_name(std::string name);
 };
 
-void	randomChump(std::string name);
-Zombie*	newZombie(std::string name);
+Zombie* zombieHorde(int N, std::string name);
 
 #endif
