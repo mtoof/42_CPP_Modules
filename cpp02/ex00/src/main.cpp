@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sed.hpp                                            :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 19:31:01 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/30 14:19:08 by mtoof            ###   ########.fr       */
+/*   Created: 2023/10/30 11:50:40 by mtoof             #+#    #+#             */
+/*   Updated: 2023/10/30 15:09:31 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SED_HPP
-#define SED_HPP
+#include "Fixed.hpp"
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
+int main( void )
+{
+	Fixed a;
+	Fixed b( a );
+	Fixed c;
 
-#endif
+	c = b;
+
+	std::cout << a.getRawBits() << std::endl;
+	std::cout << b.getRawBits() << std::endl;
+	std::cout << c.getRawBits() << std::endl;
+	return 0;
+}

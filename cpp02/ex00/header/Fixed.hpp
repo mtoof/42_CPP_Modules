@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sed.hpp                                            :+:      :+:    :+:   */
+/*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/28 19:31:01 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/30 14:19:08 by mtoof            ###   ########.fr       */
+/*   Created: 2023/10/30 11:41:21 by mtoof             #+#    #+#             */
+/*   Updated: 2023/10/30 17:51:56 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SED_HPP
-#define SED_HPP
+#ifndef FIXED_HPP
+#define FIXED_HPP
 
 #include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
+
+class  Fixed
+{
+private:
+	int					_fixed_point_number;
+	static const int	_fractional_bits = 8;
+public:
+	Fixed();
+	Fixed(const Fixed &fixed_class);
+	Fixed	&operator=(const Fixed &rhs);
+	~Fixed();
+	int	 getRawBits( void ) const;
+	void setRawBits( int const raw );
+};
+
 
 #endif
