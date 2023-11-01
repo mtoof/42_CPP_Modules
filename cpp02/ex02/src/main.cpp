@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:50:40 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/31 15:58:42 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/01 09:56:51 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main( void )
 {
-	Fixed a;
+	Fixed a(11);
 	Fixed b(11);
 	std::cout << "// Comparison Operations" << std::endl;
 	std::cout << std::boolalpha << "Less than = " << (b < a) << std::endl;
@@ -31,7 +31,7 @@ int main( void )
 	std::cout  << "b + a = " << (b + a) << std::endl;
 	std::cout  << "b - a = " << (b - a) << std::endl;
 	std::cout  << "b * a = " << (b * a) << std::endl;
-	std::cout  << "b / a = " << (b / 2) << std::endl;
+	std::cout  << "b / a = " << (b / a) << std::endl;
 	
 	std::cout << "// Increment/Decrement Operations" << std::endl;
 	Fixed c(12);

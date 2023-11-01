@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:42:20 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/31 16:06:18 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/01 10:15:15 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,22 @@ Fixed	Fixed::operator--(int) //post inc
 
 // ========================static member min/max functions==========================
 
-static Fixed	&min(Fixed	&a, Fixed &b);
-static Fixed	&min(const Fixed &a, const Fixed &b);
-static Fixed	&max(Fixed	&a, Fixed &b);
-static Fixed	&max(const Fixed &a, const Fixed &b);
+Fixed	&Fixed::min(Fixed	&a, Fixed &b)
+{
+	return (a < b ? a : b);
+}
+
+Fixed	&Fixed::min(const Fixed &a, const Fixed &b)
+{
+	return (Fixed &)(a < b ? a : b);
+}
+
+Fixed	&Fixed::max(Fixed	&a, Fixed &b)
+{
+	return (a > b ? a : b);
+}
+
+Fixed	&Fixed::max(const Fixed &a, const Fixed &b)
+{
+	return (Fixed &)(a > b ? a : b);	
+}
