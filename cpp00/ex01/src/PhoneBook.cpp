@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Phonebook.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:54:49 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/23 13:43:46 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/01 12:41:25 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,18 @@ void	PhoneBook::print_contact_list(void) const
 	std::cout<<"\n"<<std::endl;
 }
 
+int		my_stoi(std::string str)
+{
+	for(int	i = 0; i < (int)str.length(); i++)
+	{
+		if (i == 0 && (str.at(i) == '-' || str.at(i) == '+'))
+			i++;
+		if (!isdigit(str.at(i)))
+			return (-1);
+	}
+	return (atoi(str.c_str()));
+}
+
 void	PhoneBook::search_contact(void)
 {
 	int			result_index;
@@ -100,7 +112,7 @@ void	PhoneBook::search_contact(void)
 	std::cout << "Contact index > ";
 	user_input(input_index);
 	result_index = -1;
-	try {result_index = std::stoi(input_index);} catch(...){};
+	try {result_index = my_stoi(input_index);} catch(...){};
 	if (result_index < 0 || result_index > counter - 1)
 	{
 		std::cout<<"Wrong index\n"<<std::endl;
