@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 12:31:59 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/28 20:42:44 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/06 15:35:44 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ int	ft_error(int ac , char **av)
 int	check_read_write_files(std::ifstream &fd_read, std::ofstream &fd_write, char *av)
 {
 	std::string des_file_name;
+	struct stat fileStat;
+    if (stat(av, &fileStat) == 0)
+	{
+		if (S_ISDIR(fileStat.st_mode))
+		{
+            std::cout << av << " is a directory." << std::endl;
+			return (1);
+		}
+	}
 	fd_read.open(av, std::ios::in);
 	if (fd_read.fail())
 	{

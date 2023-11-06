@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:42:20 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/30 18:27:19 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/10/31 14:58:08 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ Fixed::Fixed(const float fvalue) : _fixed_point_number(std::roundf(fvalue * (1 <
 	std::cout << "Float Constructor called" << std::endl;
 }
 
-Fixed	&Fixed::operator=(const Fixed &rhs) //Copy assignment Constructor
+Fixed	&Fixed::operator=(const Fixed &rhs) //Copy assignment operator
 {
 	std::cout << "Copy assignment operator called" << std::endl;
 	if (this == &rhs)

@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:43:47 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/06 15:43:48 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/06 16:00:43 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ bool bsp( Point const a, Point const b, Point const c, Point const point)
         return true;
     return false;
 }
+
 	// Triangle Area = 0.5 * |x1(y2 - y3) + x2(y3 - y1) + x3(y1 - y2)|
 
 	//α = ((y2 - y3)(x - x3) + (x3 - x2)(y - y3)) / ((y2 - y3)(x1 - x3) + (x3 - x2)(y1 - y3))

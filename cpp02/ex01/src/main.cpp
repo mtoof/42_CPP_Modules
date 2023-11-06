@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:50:40 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/30 18:25:11 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/10/31 10:13:44 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int main( void )
 {
 	Fixed a;
-	Fixed const b( 10 );
-	Fixed const c( 42.42f );
-	Fixed const d( b );
-	a = Fixed( 1234.4321f );
+	Fixed const b(10);
+	Fixed const c(42.42f);
+	Fixed const d(b);
+	a = Fixed(1234.4321f);
 	std::cout << "a is " << a << std::endl;
 	std::cout << "b is " << b << std::endl;
 	std::cout << "c is " << c << std::endl;

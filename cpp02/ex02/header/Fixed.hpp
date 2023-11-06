@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:41:21 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/31 16:05:23 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/01 15:05:13 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ public:
 	Fixed	operator++(int);//post inc
 	Fixed	operator--(int);//post dec
 	
-	static Fixed	&min(Fixed	&a, Fixed &b);
-	static Fixed	&min(const Fixed &a, const Fixed &b);
-	static Fixed	&max(Fixed	&a, Fixed &b);
-	static Fixed	&max(const Fixed &a, const Fixed &b);
+	static Fixed&	min(Fixed	&a, Fixed &b);
+	static const Fixed&	min(const Fixed &a, const Fixed &b);
+	static Fixed&	max(Fixed	&a, Fixed &b);
+	static const Fixed&	max(const Fixed &a, const Fixed &b);
 	float 	toFloat( void ) const;
 	int 	toInt( void ) const;
 	int	 getRawBits( void ) const;

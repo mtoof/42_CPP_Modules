@@ -6,11 +6,11 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 15:49:42 by mtoof             #+#    #+#              #
-#    Updated: 2023/10/30 15:30:16 by mtoof            ###   ########.fr        #
+#    Updated: 2023/10/31 10:14:47 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =  my_first_class_ex01
+NAME =  fixed_class_ex01
 
 SRC = main.cpp Fixed.cpp
 SRC_DIR = src/

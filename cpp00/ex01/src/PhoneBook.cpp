@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 14:54:49 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/01 12:41:25 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/03 13:53:06 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,16 @@ void	PhoneBook::print_contact_list(void) const
 
 int		my_stoi(std::string str)
 {
-	for(int	i = 0; i < (int)str.length(); i++)
+	int i = 0;
+	if (i == 0 && (str.at(i) == '-' || str.empty()))
+		return (-1);
+	else if (i == 0 && str.at(i) == '+')
+		i++;
+	while (i < (int)str.length())
 	{
-		if (i == 0 && (str.at(i) == '-' || str.at(i) == '+'))
-			i++;
 		if (!isdigit(str.at(i)))
 			return (-1);
+		i++;
 	}
 	return (atoi(str.c_str()));
 }
@@ -103,12 +107,12 @@ void	PhoneBook::search_contact(void)
 	int			result_index;
 	std::string input_index;
 
-	print_contact_list();
 	if (counter == 0)
 	{
 		std::cout << "\nThe phonebook is empty\n"<<std::endl;
 		return ;
 	}
+	print_contact_list();
 	std::cout << "Contact index > ";
 	user_input(input_index);
 	result_index = -1;
