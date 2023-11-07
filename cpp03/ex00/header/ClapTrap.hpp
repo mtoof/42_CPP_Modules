@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:01:14 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/06 17:22:14 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/07 16:59:58 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ private:
 	int			_attack_damage;
 	
 public:
+	ClapTrap();
 	ClapTrap(std::string name_val);
 	~ClapTrap();
 	ClapTrap(const ClapTrap &rhs);
@@ -32,6 +33,7 @@ public:
 	void attack(const std::string& target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
+	void set_attack_damage(unsigned int amount); // my own test
 };
 
 

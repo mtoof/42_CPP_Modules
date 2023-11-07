@@ -6,13 +6,13 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 15:49:42 by mtoof             #+#    #+#              #
-#    Updated: 2023/11/06 15:49:30 by mtoof            ###   ########.fr        #
+#    Updated: 2023/11/07 10:14:58 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =  fixed_class_ex03
+NAME =  clapTrap_ex00
 
-SRC = main.cpp Fixed.cpp bsp.cpp Point.cpp
+SRC = main.cpp ClapTrap.cpp
 SRC_DIR = src/
 HEADER = header/
 FLAG =  -Wall -Wextra -Werror -std=c++98
