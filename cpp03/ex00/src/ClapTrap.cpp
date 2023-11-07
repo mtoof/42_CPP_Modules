@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:10:18 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/07 16:59:27 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/07 17:14:57 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 ClapTrap::ClapTrap() :_name(""), _hit(10), _energy(10), _attack_damage(0)// Default Constructor
 {
-	std::cout << "Default Constructor called." << std::endl;
+	std::cout << "Default Constructor ClapTrap called." << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name_val) :_name(name_val), _hit(10), _energy(10), _attack_damage(0)// Default Constructor
 {
-	std::cout << "Constructor called" << std::endl;
+	std::cout << "Constructor ClapTrap called" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &rhs) // Copy constructor
 {
-	std::cout << "Copy Constructor called." << std::endl;
+	std::cout << "Copy Constructor ClapTrap called." << std::endl;
 	*this = rhs;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &rhs) // Copy assignment operator
 {
-	std::cout << "Copy assignment operator called." << std::endl;
+	std::cout << "Copy assignment operator ClapTrap called." << std::endl;
 	if (this != &rhs)
 	{
 		this->_name = rhs._name;
@@ -43,7 +43,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &rhs) // Copy assignment operator
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "Destructor for called." << std::endl;
+	std::cout << "Destructor ClapTrap called." << std::endl;
 }
 
 void ClapTrap::attack(const std::string& target)
