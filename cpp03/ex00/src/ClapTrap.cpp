@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:10:18 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/08 17:07:17 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/08 17:12:56 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 
 void	ClapTrap::set_attackDamage(unsigned int amount) // my own test
 {
-	this->_attackDamage += amount;
+	this->_attackDamage = amount;
 }
 
 int ClapTrap::get_attackDamage() const
@@ -116,3 +116,7 @@ void	ClapTrap::healthReport()
 {
 	std::cout << "ClapTrap " << _name << " has " << _hitPoint << " amount of hitPoint" << std::endl;
 }
+// When ClapTrack attacks, it causes its target to lose <attack damage> hit points.
+// When ClapTrap repairs itself, it gets <amount> hit points back. Attacking and repairing
+// cost 1 energy point each. Of course, ClapTrap can’t do anything if it has no hit points
+// or energy points left.

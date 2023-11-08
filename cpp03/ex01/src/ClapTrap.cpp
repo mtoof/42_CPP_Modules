@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:10:18 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/08 15:28:41 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/08 17:13:11 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 
 void	ClapTrap::set_attackDamage(unsigned int amount) // my own test
 {
-	this->_attackDamage += amount;
+	this->_attackDamage = amount;
 }
 
 int ClapTrap::get_attackDamage() const

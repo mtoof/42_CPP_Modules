@@ -6,11 +6,11 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 15:49:42 by mtoof             #+#    #+#              #
-#    Updated: 2023/11/08 14:26:30 by mtoof            ###   ########.fr        #
+#    Updated: 2023/11/08 17:11:24 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =  ScavTrap_ex01
+NAME =  scavTrap_ex01
 
 SRC = main.cpp ClapTrap.cpp ScavTrap.cpp
 SRC_DIR = src/
