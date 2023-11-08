@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:01:14 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/08 15:29:45 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/08 17:30:54 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ public:
 	virtual void attack(const std::string& target);
 	virtual void takeDamage(unsigned int amount);
 	virtual void beRepaired(unsigned int amount);
-	virtual void healthReport();
+	virtual void healthReport() const;
 	void set_attackDamage(unsigned int amount); // my own test
 	int get_attackDamage() const; // my own test
 };

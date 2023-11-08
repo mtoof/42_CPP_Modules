@@ -6,11 +6,11 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:53:24 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/08 17:30:30 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/08 17:31:48 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "../header/ScavTrap.hpp"
 
 ScavTrap::ScavTrap():ClapTrap()
 {

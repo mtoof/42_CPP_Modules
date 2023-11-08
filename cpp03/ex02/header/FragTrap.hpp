@@ -1,42 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 17:01:14 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/08 17:31:15 by mtoof            ###   ########.fr       */
+/*   Created: 2023/11/08 17:17:24 by mtoof             #+#    #+#             */
+/*   Updated: 2023/11/08 17:29:01 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_HPP
-#define CLAPTRAP_HPP
+#ifndef FRAGTRAP_HPP
+#define FRAGTRAP_HPP
 
-#include <iostream>
-#include <string.h>
+#include "ClapTrap.hpp"
 
-class ClapTrap
+class FragTrap: public ClapTrap
 {
 private:
-	std::string _name;
-	int			_hitPoint;
-	int			_energyPoint;
-	int			_attackDamage;
-	
+
 public:
-	ClapTrap();
-	ClapTrap(std::string name_val);
-	~ClapTrap();
-	ClapTrap(const ClapTrap &rhs);
-	ClapTrap &operator=(const ClapTrap &rhs);
+	FragTrap();
+	FragTrap(std::string name_val);
+	~FragTrap();
+	FragTrap(const FragTrap &rhs);
+	FragTrap &operator=(const FragTrap &rhs);
 	void attack(const std::string& target);
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
-	void set_attackDamage(unsigned int amount); // my own test
-	int get_attackDamage() const; // my own test
+	int getHitPoint() const;
 	void healthReport() const;
+	void highFivesGuys(void) const;
 };
-
 
 #endif

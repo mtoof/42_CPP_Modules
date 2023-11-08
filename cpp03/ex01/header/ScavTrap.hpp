@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:30:15 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/08 15:27:52 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/08 17:30:18 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ public:
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
 	int getHitPoint() const;
-	void healthReport();
+	void healthReport() const;
 };
 
 

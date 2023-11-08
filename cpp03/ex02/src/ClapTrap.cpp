@@ -6,11 +6,11 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:10:18 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/08 17:30:39 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/08 17:32:10 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ClapTrap.hpp"
+#include "../header/ClapTrap.hpp"
 
 ClapTrap::ClapTrap() :_name(""), _hitPoint(10), _energyPoint(10), _attackDamage(0)// Default Constructor
 {

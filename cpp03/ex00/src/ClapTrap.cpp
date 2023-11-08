@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:10:18 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/08 17:12:56 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/08 17:31:24 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int ClapTrap::get_attackDamage() const
 	return (_attackDamage);
 }
 
-void	ClapTrap::healthReport()
+void	ClapTrap::healthReport() const
 {
 	std::cout << "ClapTrap " << _name << " has " << _hitPoint << " amount of hitPoint" << std::endl;
 }

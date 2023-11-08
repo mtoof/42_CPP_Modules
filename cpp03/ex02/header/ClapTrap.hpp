@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:01:14 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/08 17:31:15 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/08 17:29:49 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,24 @@
 
 class ClapTrap
 {
-private:
+protected:
 	std::string _name;
 	int			_hitPoint;
 	int			_energyPoint;
 	int			_attackDamage;
-	
 public:
 	ClapTrap();
 	ClapTrap(std::string name_val);
 	~ClapTrap();
 	ClapTrap(const ClapTrap &rhs);
 	ClapTrap &operator=(const ClapTrap &rhs);
-	void attack(const std::string& target);
-	void takeDamage(unsigned int amount);
-	void beRepaired(unsigned int amount);
+
+	virtual void attack(const std::string& target);
+	virtual void takeDamage(unsigned int amount);
+	virtual void beRepaired(unsigned int amount);
+	virtual void healthReport() const;
 	void set_attackDamage(unsigned int amount); // my own test
 	int get_attackDamage() const; // my own test
-	void healthReport() const;
 };
 
 
