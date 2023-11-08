@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:10:18 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/08 17:07:17 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/08 15:28:41 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 		if (_hitPoint > 0)
 			std::cout << " received " << amount << " damage, hp is " << _hitPoint << std::endl;
 		else
-		{
 			std::cout << " received " << amount << " damage and died in action." << std::endl;
-			_hitPoint = 0;
-		}
 	}
 	else
 		std::cout << "ClapTrap " << _name << " has already died in action." << std::endl;
@@ -99,7 +96,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 		std::cout << "ClapTrap " << _name << " has already died in action. " << std::endl;
 	}
 	else
-		std::cout << "ClapTrap " << _name << " has no energy to be repaired. " << std::endl;
+		std::cout << "ClapTrap " << _name << " has no energy to repair. " << std::endl;
 }
 
 void	ClapTrap::set_attackDamage(unsigned int amount) // my own test
@@ -114,5 +111,5 @@ int ClapTrap::get_attackDamage() const
 
 void	ClapTrap::healthReport()
 {
-	std::cout << "ClapTrap " << _name << " has " << _hitPoint << " amount of hitPoint" << std::endl;
+	std::cout << "ClapTrap " << _name << " has " << _hitPoint << "amount of hitPoint" << std::endl;
 }

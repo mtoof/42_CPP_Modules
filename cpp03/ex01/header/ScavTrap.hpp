@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 17:01:14 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/08 15:26:35 by mtoof            ###   ########.fr       */
+/*   Created: 2023/11/08 13:30:15 by mtoof             #+#    #+#             */
+/*   Updated: 2023/11/08 15:27:52 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_HPP
-#define CLAPTRAP_HPP
+#ifndef SCAVTRAP_HPP
+#define SCAVTRAP_HPP
 
-#include <iostream>
-#include <string.h>
+#include "ClapTrap.hpp"
 
-class ClapTrap
+class ScavTrap: public ClapTrap
 {
-private:
-	std::string _name;
-	int			_hitPoint;
-	int			_energyPoint;
-	int			_attackDamage;
-	
 public:
-	ClapTrap();
-	ClapTrap(std::string name_val);
-	~ClapTrap();
-	ClapTrap(const ClapTrap &rhs);
-	ClapTrap &operator=(const ClapTrap &rhs);
+	ScavTrap();
+	ScavTrap(std::string name_val);
+	~ScavTrap();
+	ScavTrap(const ScavTrap &rhs);
+	ScavTrap &operator=(const ScavTrap &rhs);
 	void attack(const std::string& target);
+	void guardGate();
 	void takeDamage(unsigned int amount);
 	void beRepaired(unsigned int amount);
-	void set_attackDamage(unsigned int amount); // my own test
-	int get_attackDamage() const; // my own test
+	int getHitPoint() const;
 	void healthReport();
 };
 
