@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:42:20 by mtoof             #+#    #+#             */
-/*   Updated: 2023/10/30 17:53:23 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/09 11:53:18 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,13 @@ Fixed::Fixed(const Fixed &fixed_class) //copy Constructor
 	*this = fixed_class;
 }
 
-Fixed	&Fixed::operator=(const Fixed &rhs) //Copy assignment Constructor
+Fixed	&Fixed::operator=(const Fixed &rhs) //Copy assignment operator
 {
 	std::cout << "Copy assignment operator called" << std::endl;
-	if (this == &rhs)
-		return (*this);
-	this->_fixed_point_number = rhs.getRawBits();
+	if (this != &rhs)
+	{
+		this->_fixed_point_number = rhs.getRawBits();
+	}
 	return (*this);
 }
 
