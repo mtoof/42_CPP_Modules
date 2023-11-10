@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:57:48 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/09 17:44:28 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/10 19:20:41 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,21 @@
 
 DiamondTrap::DiamondTrap()
 {
+	_hitPoint = 100;
+	_energyPoint = 50;
+	_attackDamage = 30;
 	std::cout << "Diamond Default Constructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string name_value): ClapTrap(name_value + "_clap_name")
+DiamondTrap::DiamondTrap(std::string name_value): ClapTrap(name_value + "_clap_name"), _name(name_value)
 {
 	std::cout << "Diamond Constructor called" << std::endl;
-	this->_name = name_value;
-	_hitPoint = FragTrap::_hitPoint;
-	_energyPoint = ScavTrap::_energyPoint;
-	_attackDamage = FragTrap::_attackDamage;
+	_hitPoint = 100;
+	_energyPoint = 50;
+	_attackDamage = 30;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap &rhs): ClapTrap(rhs), ScavTrap(rhs), FragTrap(rhs)
+DiamondTrap::DiamondTrap(const DiamondTrap &rhs)
 {
 	std::cout << "Diamond copy Constructor called" << std::endl;
 	*this = rhs;
@@ -50,58 +52,12 @@ DiamondTrap::~DiamondTrap()
 	std::cout << "Diamond destructor called" << std::endl;
 }
 
-void	DiamondTrap::attack(const std::string& target)
-{
-	ScavTrap::attack(target);
-}
-
 void DiamondTrap::whoAmI()
 {
-	std::cout << "DiamondTrap name is " << _name << "its ClapTrap name is " << ClapTrap::_name << std::endl;
+	std::cout << "DiamondTrap name is " << _name << " its ClapTrap name is " << ClapTrap::_name << std::endl;
 }
 
-void FragTrap::takeDamage(unsigned int amount)
+void	DiamondTrap::healthReport() const
 {
-	if (_hitPoint > 0)
-	{
-		std::cout << "FragTrap " << _name << " hp was " << _hitPoint;
-		_hitPoint -= amount;
-		if (_hitPoint > 0)
-			std::cout << " received " << amount << " damage, hp is " << _hitPoint << std::endl;
-		else
-		{
-			std::cout << " received " << amount << " damage and died in action." << std::endl;
-			_hitPoint = 0;
-		}
-	}
-	else
-		std::cout << "FragTrap " << _name << " has already died in action." << std::endl;
-}
-
-void FragTrap::beRepaired(unsigned int amount)
-{
-	if (_energyPoint > 0)
-	{
-		if (_hitPoint > 0)
-		{
-			--_energyPoint;
-			_hitPoint += amount;
-			std::cout << "FragTrap " << _name << " got " << amount << " hit point back." << std::endl;
-			return ;
-		}
-		else
-		std::cout << "FragTrap " << _name << " has already died in action. " << std::endl;
-	}
-	else
-		std::cout << "FragTrap " << _name << " has no energy to repair. " << std::endl;
-}
-
-int	FragTrap::getHitPoint() const
-{
-	return (_hitPoint);
-}
-
-void	FragTrap::healthReport() const
-{
-	std::cout << "FragTrap " << _name << " has " << _hitPoint << " amount of hitPoint" << std::endl;
+	std::cout << "DiamondTrap " << DiamondTrap::_name << " has " << DiamondTrap::_hitPoint << " amount of hitPoint, " << "energy level is " << DiamondTrap::_energyPoint << " and attachDamage is " << DiamondTrap::_attackDamage << std::endl;
 }

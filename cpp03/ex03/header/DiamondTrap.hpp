@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:33:28 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/09 17:49:48 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/10 16:54:16 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,14 @@ class DiamondTrap: public ScavTrap, public FragTrap
 {
 private:
 	std::string _name;
+	using ScavTrap::_energyPoint;
 public:
 	DiamondTrap();
 	DiamondTrap(std::string name_value);
 	DiamondTrap(const DiamondTrap &rhs);
 	DiamondTrap &operator=(const DiamondTrap &rhs);
 	~DiamondTrap();
-	void attack(const std::string& target);
-	// void takeDamage(unsigned int amount);
-	// void beRepaired(unsigned int amount);
-	// void healthReport() const;
-	// int getHitPoint() const;
+	virtual void	healthReport() const; // my own test
 	void whoAmI();
 };
 

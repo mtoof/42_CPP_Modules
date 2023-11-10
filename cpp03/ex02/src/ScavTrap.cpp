@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:53:24 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/08 17:31:48 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/10 14:46:46 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,50 +87,4 @@ void ScavTrap::guardGate()
 		std::cout << "ScavTrap " << _name << " is now in Gate keeper mode." << std::endl;
 		this->_energyPoint -= 1;
 	}
-}
-
-void ScavTrap::takeDamage(unsigned int amount)
-{
-	if (_hitPoint > 0)
-	{
-		std::cout << "ScavTrap " << _name << " hp was " << _hitPoint;
-		_hitPoint -= amount;
-		if (_hitPoint > 0)
-			std::cout << " received " << amount << " damage, hp is " << _hitPoint << std::endl;
-		else
-		{
-			std::cout << " received " << amount << " damage and died in action." << std::endl;
-			_hitPoint = 0;
-		}
-	}
-	else
-		std::cout << "ScavTrap " << _name << " has already died in action." << std::endl;
-}
-
-void ScavTrap::beRepaired(unsigned int amount)
-{
-	if (_energyPoint > 0)
-	{
-		if (_hitPoint > 0)
-		{
-			--_energyPoint;
-			_hitPoint += amount;
-			std::cout << "ScavTrap " << _name << " got " << amount << " hit point back." << std::endl;
-			return ;
-		}
-		else
-		std::cout << "ScavTrap " << _name << " has already died in action. " << std::endl;
-	}
-	else
-		std::cout << "ScavTrap " << _name << " has no energy to repair. " << std::endl;
-}
-
-int	ScavTrap::getHitPoint() const
-{
-	return (_hitPoint);
-}
-
-void	ScavTrap::healthReport() const
-{
-	std::cout << "ScavTrap " << _name << " has " << _hitPoint << " amount of hitPoint" << std::endl;
 }

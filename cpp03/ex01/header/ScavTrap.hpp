@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:30:15 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/08 17:30:18 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/10 14:44:49 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ public:
 	ScavTrap &operator=(const ScavTrap &rhs);
 	void attack(const std::string& target);
 	void guardGate();
-	void takeDamage(unsigned int amount);
-	void beRepaired(unsigned int amount);
 	int getHitPoint() const;
-	void healthReport() const;
 };
 
 

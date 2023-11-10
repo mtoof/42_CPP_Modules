@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:17:24 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/09 17:19:00 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/10 15:44:26 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@ public:
 	~FragTrap();
 	FragTrap(const FragTrap &rhs);
 	FragTrap &operator=(const FragTrap &rhs);
-	void attack(const std::string& target);
-	void takeDamage(unsigned int amount);
-	void beRepaired(unsigned int amount);
-	void healthReport() const;
-	int getHitPoint() const;
 	void highFivesGuys(void) const;
 };
 

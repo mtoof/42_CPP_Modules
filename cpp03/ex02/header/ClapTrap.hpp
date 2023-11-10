@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:01:14 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/08 17:29:49 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/10 10:13:57 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ public:
 	ClapTrap &operator=(const ClapTrap &rhs);
 
 	virtual void attack(const std::string& target);
-	virtual void takeDamage(unsigned int amount);
-	virtual void beRepaired(unsigned int amount);
-	virtual void healthReport() const;
+	void takeDamage(unsigned int amount);
+	void beRepaired(unsigned int amount);
+	void healthReport() const;
 	void set_attackDamage(unsigned int amount); // my own test
 	int get_attackDamage() const; // my own test
 };
