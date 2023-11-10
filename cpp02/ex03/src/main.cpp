@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/30 11:50:40 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/06 15:59:30 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/10 19:10:38 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,16 @@ int main( void )
 	Point c(20, 0);
 	Point p1(10, 15);
 	Point p2(30, 15);
+	Point p3(10, 0);
 	if (bsp(a, b, c, p1))
 		std::cout << "Inside the area" << std::endl;
 	else
 		std::cout << "Outside the area" << std::endl;
 	if (bsp(a, b, c, p2))
+		std::cout << "Inside the area" << std::endl;
+	else
+		std::cout << "outside the area" << std::endl;
+	if (bsp(a, b, c, p3))
 		std::cout << "Inside the area" << std::endl;
 	else
 		std::cout << "outside the area" << std::endl;

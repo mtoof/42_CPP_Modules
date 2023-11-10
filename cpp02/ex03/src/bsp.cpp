@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 15:43:47 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/06 16:00:43 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/10 19:03:12 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ bool bsp( Point const a, Point const b, Point const c, Point const point)
 
 	double epsilon = 1e-6;
 
-	if (fabs(total_area - (alpha + beta + gamma)) < epsilon)
-        return true;
-    return false;
+	if (ft_abs(total_area - (alpha + beta + gamma)) < epsilon &&
+			alpha > epsilon && beta > epsilon && gamma > epsilon)
+		return true;
+	return false;
 }
 
 	// Triangle Area = 0.5 * |x1(y2 - y3) + x2(y3 - y1) + x3(y1 - y2)|
