@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:30:15 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/13 16:58:47 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/13 18:36:41 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ public:
 	ScavTrap &operator=(const ScavTrap &rhs);
 	virtual void attack(const std::string& target);
 	void guardGate();
+	void	set_energyPoint();
 };
 
 

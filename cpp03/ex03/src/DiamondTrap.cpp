@@ -6,29 +6,21 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:57:48 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/13 17:51:31 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/13 18:43:40 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap()
+DiamondTrap::DiamondTrap():ClapTrap("unknown_clap_name"), _name("unknown")
 {
-	this->ClapTrap::_hitPoint = FragTrap::_hitPoint;
-	this->ClapTrap::_energyPoint = ScavTrap::_energyPoint;
-	this->ClapTrap::_attackDamage = FragTrap::_attackDamage;
+	ScavTrap::set_energyPoint();
 	std::cout << "Diamond Default Constructor called." << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string name_value)
+DiamondTrap::DiamondTrap(std::string name_value): ClapTrap(name_value + "_clap_name"), ScavTrap(name_value), FragTrap(name_value), _name(name_value)
 {
-	FragTrap fragtrap;
-	ScavTrap scavtrap;
-	ClapTrap::set_name(name_value + "_clap_name");
-	_name = name_value;
-	this->_hitPoint = fragtrap.get_hitPoint();
-	this->_energyPoint = scavtrap.get_energyPoint();
-	this->_attackDamage = fragtrap.get_attackDamage();
+	ScavTrap::set_energyPoint();
 	std::cout << "Diamond Argument Constructor called." << std::endl;
 }
 
@@ -63,5 +55,5 @@ void DiamondTrap::whoAmI()
 
 void	DiamondTrap::healthReport() const
 {
-	std::cout << "DiamondTrap " << DiamondTrap::_name << " has " << this->ClapTrap::_hitPoint << " amount of hitPoint, " << "energy level is " << this->ClapTrap::_energyPoint << " and attachDamage is " << this->ClapTrap::_attackDamage << std::endl;
+	std::cout << "DiamondTrap " << DiamondTrap::_name << " has " << this->ClapTrap::_hitPoint <<" amount of hitPoint, " << "energy level is " << this->ClapTrap::_energyPoint << " and attachDamage is " << this->ClapTrap::_attackDamage << std::endl;
 }

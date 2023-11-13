@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 13:53:24 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/13 17:47:48 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/13 18:37:14 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,9 @@ void ScavTrap::guardGate()
 		std::cout << "ScavTrap " << _name << " is now in Gate keeper mode." << std::endl;
 		ScavTrap::_energyPoint -= 1;
 	}
+}
+
+void	ScavTrap::set_energyPoint()
+{
+	_energyPoint = 50;
 }
