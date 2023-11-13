@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:57:48 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/10 19:20:41 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/13 17:51:31 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,28 @@
 
 DiamondTrap::DiamondTrap()
 {
-	_hitPoint = 100;
-	_energyPoint = 50;
-	_attackDamage = 30;
-	std::cout << "Diamond Default Constructor called" << std::endl;
+	this->ClapTrap::_hitPoint = FragTrap::_hitPoint;
+	this->ClapTrap::_energyPoint = ScavTrap::_energyPoint;
+	this->ClapTrap::_attackDamage = FragTrap::_attackDamage;
+	std::cout << "Diamond Default Constructor called." << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string name_value): ClapTrap(name_value + "_clap_name"), _name(name_value)
+DiamondTrap::DiamondTrap(std::string name_value)
 {
-	std::cout << "Diamond Constructor called" << std::endl;
-	_hitPoint = 100;
-	_energyPoint = 50;
-	_attackDamage = 30;
+	FragTrap fragtrap;
+	ScavTrap scavtrap;
+	ClapTrap::set_name(name_value + "_clap_name");
+	_name = name_value;
+	this->_hitPoint = fragtrap.get_hitPoint();
+	this->_energyPoint = scavtrap.get_energyPoint();
+	this->_attackDamage = fragtrap.get_attackDamage();
+	std::cout << "Diamond Argument Constructor called." << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &rhs)
 {
-	std::cout << "Diamond copy Constructor called" << std::endl;
 	*this = rhs;
+	std::cout << "Diamond copy Constructor called." << std::endl;
 }
 
 DiamondTrap &DiamondTrap::operator=(const DiamondTrap &rhs)
@@ -39,17 +43,17 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &rhs)
 	if (this != &rhs)
 	{
 		_name = rhs._name;
-		_hitPoint = rhs._hitPoint;
-		_energyPoint = rhs._energyPoint;
-		_attackDamage = rhs._attackDamage;
+		this->ClapTrap::_hitPoint = rhs.ClapTrap::_hitPoint;
+		this->ClapTrap::_energyPoint = rhs.ClapTrap::_energyPoint;
+		this->ClapTrap::_attackDamage = rhs.ClapTrap::_attackDamage;
 	}
-	std::cout << "Diamond copy assignment called" << std::endl;
+	std::cout << "Diamond copy assignment called." << std::endl;
 	return (*this);
 }
 
 DiamondTrap::~DiamondTrap()
 {
-	std::cout << "Diamond destructor called" << std::endl;
+	std::cout << "Diamond destructor called." << std::endl;
 }
 
 void DiamondTrap::whoAmI()
@@ -59,5 +63,5 @@ void DiamondTrap::whoAmI()
 
 void	DiamondTrap::healthReport() const
 {
-	std::cout << "DiamondTrap " << DiamondTrap::_name << " has " << DiamondTrap::_hitPoint << " amount of hitPoint, " << "energy level is " << DiamondTrap::_energyPoint << " and attachDamage is " << DiamondTrap::_attackDamage << std::endl;
+	std::cout << "DiamondTrap " << DiamondTrap::_name << " has " << this->ClapTrap::_hitPoint << " amount of hitPoint, " << "energy level is " << this->ClapTrap::_energyPoint << " and attachDamage is " << this->ClapTrap::_attackDamage << std::endl;
 }

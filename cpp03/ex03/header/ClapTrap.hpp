@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:01:14 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/10 15:00:46 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/13 17:50:34 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ public:
 	void beRepaired(unsigned int amount);
 	virtual void healthReport() const; // my own test
 	void set_attackDamage(unsigned int amount); // my own test
+	void set_name(std::string name_value); // my own test
 	int get_attackDamage() const; // my own test
+	int get_energyPoint() const; // my own test
+	int get_hitPoint() const; // my own test
 };
 
 #endif

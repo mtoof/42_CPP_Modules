@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:10:18 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/10 15:54:28 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/13 17:51:12 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ ClapTrap::ClapTrap() :_name("unknown"), _hitPoint(10), _energyPoint(10), _attack
 
 ClapTrap::ClapTrap(std::string name_val) :_name(name_val), _hitPoint(10), _energyPoint(10), _attackDamage(0)// Default Constructor
 {
-	std::cout << "ClapTrap Constructor called." << std::endl;
+	std::cout << "ClapTrap Argument Constructor called." << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &rhs) // Copy constructor
 {
-	std::cout << "ClapTrap Copy Constructor called." << std::endl;
 	*this = rhs;
+	std::cout << "ClapTrap Copy Constructor called." << std::endl;
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &rhs) // Copy assignment operator
@@ -104,9 +104,24 @@ void	ClapTrap::set_attackDamage(unsigned int amount) // my own test
 	this->_attackDamage = amount;
 }
 
+void	ClapTrap::set_name(std::string name_value) // my own test
+{
+	this->_name= name_value;
+}
+
 int ClapTrap::get_attackDamage() const
 {
 	return (_attackDamage);
+}
+
+int ClapTrap::get_energyPoint() const
+{
+	return (_energyPoint);
+}
+
+int ClapTrap::get_hitPoint() const
+{
+	return (_hitPoint);
 }
 
 void	ClapTrap::healthReport() const

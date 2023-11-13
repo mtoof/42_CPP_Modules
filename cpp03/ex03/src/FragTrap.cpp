@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:22:51 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/10 18:31:34 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/13 17:47:27 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 FragTrap::FragTrap()
 {
-	std::cout << "Default FragTrap Constructor called" << std::endl;
+	std::cout << "FragTrap Default Constructor called." << std::endl;
 	_hitPoint = 100;
 	_energyPoint = 100;
 	_attackDamage = 30;
@@ -26,13 +26,13 @@ FragTrap::FragTrap(std::string name_val):ClapTrap(name_val)
 	_hitPoint = 100;
 	_energyPoint = 100;
 	_attackDamage = 30;
-	std::cout << "FragTrap Constructor called" << std::endl;
+	std::cout << "FragTrap Argument Constructor called." << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &rhs)
 {
 	*this = rhs;
-	std::cout << "FragTrap copy constructor called" << std::endl;
+	std::cout << "FragTrap copy constructor called." << std::endl;
 }
 
 FragTrap &FragTrap::operator=(const FragTrap &rhs)
@@ -55,7 +55,7 @@ FragTrap::~FragTrap()
 
 void	FragTrap::highFivesGuys() const
 {
-	if (this->_hitPoint == 0)
+	if (FragTrap::_hitPoint == 0)
 	{
 		std::cout << "FragTrap " << _name << " can't Hive five anyone, " << _name << " has already died in action." << std::endl;
 		return ;

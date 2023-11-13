@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:33:28 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/10 16:54:16 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/13 17:09:59 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@
 #include "../header/FragTrap.hpp"
 #include "../header/ScavTrap.hpp"
 
-class DiamondTrap: public ScavTrap, public FragTrap
+class DiamondTrap: public FragTrap, public ScavTrap
 {
 private:
 	std::string _name;
-	using ScavTrap::_energyPoint;
 public:
 	DiamondTrap();
 	DiamondTrap(std::string name_value);
