@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 11:57:48 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/13 18:43:40 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/13 18:46:31 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &rhs)
 	if (this != &rhs)
 	{
 		_name = rhs._name;
-		this->ClapTrap::_hitPoint = rhs.ClapTrap::_hitPoint;
-		this->ClapTrap::_energyPoint = rhs.ClapTrap::_energyPoint;
-		this->ClapTrap::_attackDamage = rhs.ClapTrap::_attackDamage;
+		this->_hitPoint = rhs._hitPoint;
+		this->_energyPoint = rhs._energyPoint;
+		this->_attackDamage = rhs._attackDamage;
 	}
 	std::cout << "Diamond copy assignment called." << std::endl;
 	return (*this);
