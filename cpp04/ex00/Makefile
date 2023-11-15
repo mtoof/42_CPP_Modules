@@ -6,13 +6,13 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 15:49:42 by mtoof             #+#    #+#              #
-#    Updated: 2023/11/13 17:58:11 by mtoof            ###   ########.fr        #
+#    Updated: 2023/11/15 16:10:46 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =  polymorphism_ex00
 
-SRC = main.cpp 
+SRC = main.cpp Animal.cpp Cat.cpp Dog.cpp WrongCat.cpp WrongAnimal.cpp
 SRC_DIR = src/
 HEADER = header/
 FLAG =  -Wall -Wextra -Werror -std=c++98
