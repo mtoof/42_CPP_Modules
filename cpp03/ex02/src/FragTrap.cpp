@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:22:51 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/10 14:46:32 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/15 15:14:01 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ FragTrap::FragTrap(std::string name_val):ClapTrap(name_val)
 
 FragTrap::FragTrap(const FragTrap &rhs)
 {
-	*this = rhs;
 	std::cout << "FragTrap copy constructor called" << std::endl;
+	*this = rhs;
 }
 
 FragTrap &FragTrap::operator=(const FragTrap &rhs)
 {
+	std::cout << "FragTrap copy assignment called" << std::endl;
 	if (this != &rhs)
 	{
 		_name = rhs._name;
@@ -41,7 +42,6 @@ FragTrap &FragTrap::operator=(const FragTrap &rhs)
 		_energyPoint = rhs._energyPoint;
 		_attackDamage = rhs._attackDamage;
 	}
-	std::cout << "FragTrap copy assignment called" << std::endl;
 	return (*this);
 }
 
