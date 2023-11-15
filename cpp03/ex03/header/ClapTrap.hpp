@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:01:14 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/13 17:50:34 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/15 18:36:49 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ protected:
 public:
 	ClapTrap();
 	ClapTrap(std::string name_val);
-	virtual ~ClapTrap();
+	~ClapTrap();
 	ClapTrap(const ClapTrap &rhs);
 	ClapTrap &operator=(const ClapTrap &rhs);
 	virtual void attack(const std::string& target);
