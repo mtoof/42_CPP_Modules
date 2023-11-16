@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   AMateria.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/13 18:00:21 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/16 18:02:10 by mtoof            ###   ########.fr       */
+/*   Created: 2023/11/16 17:57:35 by mtoof             #+#    #+#             */
+/*   Updated: 2023/11/16 18:07:38 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#ifndef AMATERIA_HPP
+#define AMATERIA_HPP
 
-#include <string>
 #include <iostream>
-#include "Brain.hpp"
+#include <string>
+#include "ICharacter.hpp"
 
-class Animal
+class AMateria
 {
 protected:
-	std::string _type;
-public:
-	Animal();
-	Animal(const Animal &rhs);
-	Animal &operator=(const Animal &rhs);
-	virtual ~Animal(); 
-	std::string getType() const;
-	virtual void makeSound() const;
-};
 
+public:
+	AMateria(std::string const & type);
+
+	std::string const & getType() const; //Returns the materia type
+	virtual AMateria* clone() const = 0;
+	virtual void use(ICharacter& target);
+};
 
 #endif

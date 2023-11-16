@@ -6,14 +6,14 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 18:00:21 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/16 17:17:27 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/16 18:01:00 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ANIMAL_HPP
 #define ANIMAL_HPP
 
-#include <string.h>
+#include <string>
 #include <iostream>
 #include "Brain.hpp"
 
