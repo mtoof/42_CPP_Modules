@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:25:26 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/15 19:35:01 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/16 17:02:42 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ public:
 
 	void	setAnIdea(unsigned int index, std::string idea);
 	std::string	getAnIdea(unsigned int index) const;
+	void	getAllIdeas(void) const;
 };
 
 

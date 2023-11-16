@@ -67,3 +67,8 @@ std::string Dog::getAnIdea(unsigned int index)
 	}
 	return (brain->getAnIdea(index));
 }
+
+void	Dog::getAllIdeas(void) const
+{
+	brain->getAllIdeas();
+}

@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:27:01 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/15 18:17:10 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/16 17:05:18 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,16 @@ std::string	Brain::getAnIdea(unsigned int index) const
 		return NULL;
 	}
 	return (ideas[index]);
+}
+
+void	Brain::getAllIdeas(void) const
+{
+	int index = 0;
+	
+	while (!ideas[index].empty())
+	{
+		std::cout << ideas[index] << std::endl;
+		index++;
+	}
 }
 

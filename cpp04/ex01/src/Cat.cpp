@@ -66,3 +66,8 @@ std::string Cat::getAnIdea(unsigned int index)
 	}
 	return (brain->getAnIdea(index));
 }
+
+void	Cat::getAllIdeas(void) const
+{
+	brain->getAllIdeas();
+}

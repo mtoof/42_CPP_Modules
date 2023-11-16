@@ -44,7 +44,7 @@ int main()
 	std::stringstream idea;
 
 
-	for (int index = 0; index < 10; index++)
+	for (int index = 0; index < 20; index++)
 	{
 		idea << "new idea " << index << " cat 1";
 		cat1.setAnIdea(index, idea.str());
@@ -58,8 +58,7 @@ int main()
 	Cat cat2(cat1);
 
 	std::cout << "cat2 ideas" << std::endl;
-	for (int index = 0; index < 10; index++)
-		std::cout << cat1.getAnIdea(index) << std::endl;
+	cat2.getAllIdeas();
 //==============================================//
 
 	return (0);
