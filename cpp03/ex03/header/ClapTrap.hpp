@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 17:01:14 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/16 15:35:58 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/11/16 18:02:29 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define CLAPTRAP_HPP
 
 #include <iostream>
-#include <string.h>
+#include <string>
 
 class ClapTrap
 {
