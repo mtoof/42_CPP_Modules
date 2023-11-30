@@ -17,10 +17,10 @@ Fixed::Fixed() : _fixed_point_number(0) //Default Constructor
 	std::cout << "Default Constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed &fixed_class) //copy Constructor
+Fixed::Fixed(const Fixed &rhs) //copy Constructor
 {
 	std::cout << "Copy Constructor called" << std::endl;
-	*this = fixed_class;
+	*this = rhs;
 }
 
 Fixed::Fixed(const int ivalue) :  _fixed_point_number(ivalue << _fractional_bits)//Integer Constructor
@@ -28,7 +28,8 @@ Fixed::Fixed(const int ivalue) :  _fixed_point_number(ivalue << _fractional_bits
 	std::cout << "Int Constructor called" << std::endl;
 }
 
-Fixed::Fixed(const float fvalue) : _fixed_point_number(std::roundf(fvalue * (1 << _fractional_bits)))//Float Constructor
+Fixed::Fixed(const float fvalue) 
+: _fixed_point_number(std::roundf(fvalue * (1 << _fractional_bits)))//Float Constructor
 {
 	std::cout << "Float Constructor called" << std::endl;
 }

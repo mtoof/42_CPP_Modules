@@ -25,7 +25,7 @@ public:
 	Fixed();
 	Fixed(const int ivalue);
 	Fixed(const float fvalue);
-	Fixed(const Fixed &fixed_class);
+	Fixed(const Fixed &rhs);
 	Fixed	&operator=(const Fixed &rhs);
 	~Fixed();
 	float 	toFloat( void ) const;
