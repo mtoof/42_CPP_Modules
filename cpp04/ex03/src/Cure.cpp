@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                            :+:      :+:    :+:   */
+/*   Cure.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 17:59:36 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/05 16:22:05 by mtoof            ###   ########.fr       */
+/*   Created: 2023/12/05 17:15:30 by mtoof             #+#    #+#             */
+/*   Updated: 2023/12/05 17:19:02 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ICE_HPP
-#define ICE_HPP
+#include "../header/Cure.hpp"
 
-#include "AMateria.hpp"
-
-class Ice: public AMateria
+Cure::Cure()
 {
-private:
 	
-public:
-	Ice();
-	Ice(const Ice &rhs);
-	Ice &operator=(const Ice &rhs);
-	~Ice();
-	virtual AMateria* clone() const;
-	virtual void use(ICharacter& target);
-};
+}
 
-#endif
+Cure::Cure(const Cure &rhs)
+{
+	
+}
+
+Cure &Cure::operator=(const Cure &rhs)
+{
+	
+}
+
+Cure::~Cure()
+{
+	
+}
+
+AMateria* Cure::clone() const
+{
+	
+}
+
+void Cure::use(ICharacter& target)
+{
+	
+}
