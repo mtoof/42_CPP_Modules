@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:08:01 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/05 16:10:57 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/06 18:41:43 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,13 @@
 
 #include "ICharacter.hpp"
 
+class AMateria;
+
 class Character:public ICharacter
 {
 private:
 	std::string _name;
+	AMateria* 	_inventory[4];
 public:
 	Character();
 	Character(std::string name);
@@ -26,8 +29,8 @@ public:
 	Character &operator=(const Character &rhs);
 	~Character();
 
-	virtual std::string const & getName() const;
-	virtual void equip(AMateria* m);
+	virtual std::string const &getName() const;
+	virtual void equip(AMateria* materia);
 	virtual void unequip(int idx);
 	virtual void use(int idx, ICharacter& target);
 };

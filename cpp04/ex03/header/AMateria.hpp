@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:57:35 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/05 16:03:44 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/06 18:18:45 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 #include <iostream>
 #include <string>
-#include "ICharacter.hpp"
+
+class ICharacter;
 
 class AMateria
 {
