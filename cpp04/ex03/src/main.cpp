@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:46:40 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/07 18:45:50 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/07 21:50:40 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int main()
 	ICharacter* bob = new Character("bob");
 	me->use(0, *bob);
 	me->use(1, *bob);
+	me->unequip(0);
+	me->unequip(1);
 	delete bob;
 	delete me;
 	delete src;

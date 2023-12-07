@@ -6,7 +6,7 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 15:49:42 by mtoof             #+#    #+#              #
-#    Updated: 2023/12/06 18:37:28 by mtoof            ###   ########.fr        #
+#    Updated: 2023/12/07 21:49:51 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME =  interface_recap
 SRC = main.cpp AMateria.cpp Cure.cpp Ice.cpp MateriaSource.cpp Character.cpp
 SRC_DIR = src/
 HEADER = header/
-FLAG =  -Wall -Wextra -Werror -std=c++98
+FLAG =  -Wall -Wextra -Werror -std=c++98 # -g -fsanitize=address
 OBJ_DIR = obj/
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 OBJS = $(SRCS:$(SRC_DIR)%.cpp=$(OBJ_DIR)%.o)

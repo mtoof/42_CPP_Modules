@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:08:01 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/07 18:36:10 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/07 21:37:32 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class Character:public ICharacter
 private:
 	std::string _name;
 	AMateria* 	_inventory[4];
-	// AMateria*	floor[50];
+	AMateria*	floor[20];
 public:
 	Character();
 	Character(std::string name);

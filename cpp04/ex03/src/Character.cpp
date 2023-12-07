@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:45:52 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/07 17:53:50 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/07 21:52:50 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ Character::Character()
 	std::cout << "Character Constructor called" << std::endl;
 	for (int i = 0; i < 4; ++i)
  		_inventory[i] = NULL;
+	for (int i = 0; i < 20; ++i)
+ 		floor[i] = NULL;
 }
 
 Character::Character(std::string name): _name(name)
@@ -26,6 +28,8 @@ Character::Character(std::string name): _name(name)
 	std::cout << "Character Argument Constructor called" << std::endl;
 	for (int i = 0; i < 4; ++i)
  		_inventory[i] = NULL;
+	for (int i = 0; i < 20; ++i)
+ 		floor[i] = NULL;
 }
 
 Character::Character(const Character &rhs)
@@ -47,12 +51,25 @@ Character &Character::operator=(const Character &rhs)
 				delete this->_inventory[index];
 		}
 		
+		for (int index = 0; index < 20; index++)
+		{
+			if (this->floor[index] != NULL)
+				delete this->floor[index];
+		}
+		
 		for (int index = 0; index < 4; ++index)
 		{
 			if (rhs._inventory[index] != NULL)
 				this->_inventory[index] = rhs._inventory[index]->clone();
 			else
 				this->_inventory[index] = NULL;
+		}
+		for (int index = 0; index < 20; ++index)
+		{
+			if (rhs.floor[index] != NULL)
+				this->floor[index] = rhs.floor[index]->clone();
+			else
+				this->floor[index] = NULL;
 		}
 	}
 	return (*this);
@@ -65,6 +82,11 @@ Character::~Character()
 	{
 		if (this->_inventory[i] != NULL)
 			delete this->_inventory[i];
+	}
+	for (int i = 0; i < 20; i++)
+	{
+		if (this->floor[i] != NULL)
+			delete this->floor[i];
 	}
 }
 
@@ -81,7 +103,7 @@ void Character::equip(AMateria* materia)
 		{
 			if (this->_inventory[idx] == NULL)
 			{
-				this->_inventory[idx] = materia->clone();
+				this->_inventory[idx] = materia;
 				std::cout << GREEN "Materia " << materia->getType() << " equipted successfully" RESET << std::endl;
 				return;
 			}
@@ -97,8 +119,16 @@ void Character::unequip(int idx)
 {
 	if (idx >=0 && idx < 4)
 	{
-		this->_inventory[idx] = NULL;
+		for (int index = 0; index < 20; index++)
+		{
+			if (floor[index] == NULL)
+			{
+				floor[index] = _inventory[index];
+				break;
+			}
+		}
 		std::cout << GREEN "Materia " << _inventory[idx]->getType() << " unequipted successfully" RESET << std::endl;
+		this->_inventory[idx] = NULL;
 	}
 }
 
