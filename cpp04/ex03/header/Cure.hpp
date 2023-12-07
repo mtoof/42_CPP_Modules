@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:59:33 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/05 16:21:39 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/07 15:52:39 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define CURE_HPP
 
 #include "AMateria.hpp"
+#include "colors.hpp"
 
 class Cure: public AMateria
 {

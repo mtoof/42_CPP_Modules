@@ -6,16 +6,16 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:38:28 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/06 18:36:12 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/07 15:54:28 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATERIASOURCE_HPP
 #define MATERIASOURCE_HPP
 
-#include "../header/IMateriaSource.hpp"
-#include "AMateria.hpp"
+#include "IMateriaSource.hpp"
 #include <string>
+#include "colors.hpp"
 
 class MateriaSource:public IMateriaSource
 {

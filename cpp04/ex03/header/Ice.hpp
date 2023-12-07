@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 17:59:36 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/05 16:22:05 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/07 15:54:13 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define ICE_HPP
 
 #include "AMateria.hpp"
+#include "colors.hpp"
 
 class Ice: public AMateria
 {

@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:08:01 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/06 18:41:43 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/07 15:52:36 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define CHARACHTER_HPP
 
 #include "ICharacter.hpp"
+#include "colors.hpp"
 
 class AMateria;
 
@@ -29,7 +30,7 @@ public:
 	Character &operator=(const Character &rhs);
 	~Character();
 
-	virtual std::string const &getName() const;
+	virtual std::string const & getName() const;
 	virtual void equip(AMateria* materia);
 	virtual void unequip(int idx);
 	virtual void use(int idx, ICharacter& target);

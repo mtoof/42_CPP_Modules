@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:34:18 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/06 18:20:34 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/07 15:56:23 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ std::string const &AMateria::getType() const
 
 void AMateria::use(ICharacter& target)
 {
-	std::cout << "AMateria used " << this->getType() << " on " << target.getName() << std::endl;
+	std::cout << GREEN "AMateria used " << this->getType() << " on " << target.getName() << RESET << std::endl;
 }

@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:15:45 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/06 18:20:24 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/07 16:30:23 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ Ice::Ice(const Ice &rhs):AMateria(rhs)
 	{
 		this->_type = rhs.getType();
 	}
+	else if (this->getType().empty())
+		this->_type = rhs.getType();
 }
 
 Ice &Ice::operator=(const Ice &rhs)
@@ -51,5 +53,5 @@ AMateria* Ice::clone() const
 
 void Ice::use(ICharacter& target)
 {
-	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
+	std::cout << RED "* shoots an ice bolt at " << target.getName() << " *"  RESET << std::endl;
 }

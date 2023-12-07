@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:23:25 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/06 18:33:25 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/07 16:00:15 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void MateriaSource::learnMateria(AMateria* learn)
 			if (this->_inventory[index] == NULL)
 			{
 				this->_inventory[index] = learn;
+				std::cout << GREEN "Learned " << learn->getType() << " successfully" RESET << std::endl;
 				break;
 			}
 		}
@@ -54,6 +55,8 @@ AMateria* MateriaSource::createMateria(std::string const &type)
 			!_inventory[index]->getType().compare(type))
 			{
 				tmp = _inventory[index]->clone();
+				std::cout << GREEN "Created " << type << " successfully" RESET << std::endl;
+
 				break;
 			}
 		}

@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:45:52 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/06 18:53:48 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/07 16:12:46 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,21 +77,30 @@ void Character::equip(AMateria* materia)
 {
 	if (materia != NULL)
 	{
-		for (int i = 0; i < 4; i++)
+		for (int idx = 0; idx < 4; idx++)
 		{
-			if (this->_inventory[i] == NULL)
+			if (this->_inventory[idx] == NULL)
 			{
-				this->_inventory[i] = materia;
-					break;
+				this->_inventory[idx] = materia->clone();
+				std::cout << GREEN "Materia " << materia->getType() << " equipted successfully" RESET << std::endl;
+				return;
 			}
+			else if (idx == 3 && this->_inventory[idx] != NULL)
+				std::cout << RED "No empty slot to equip Materia" RESET << std::endl;
 		}
 	}
+	else
+		std::cout << RED "Materia can't be NULL" RESET << std::endl;
 }
 
 void Character::unequip(int idx)
 {
 	if (idx >=0 && idx < 4)
+	{
 		this->_inventory[idx] = NULL;
+		std::cout << GREEN "Materia " << _inventory[idx]->getType() << " unequipted successfully" RESET << std::endl;
+
+	}
 }
 
 void Character::use(int idx, ICharacter& target)
@@ -104,8 +113,8 @@ void Character::use(int idx, ICharacter& target)
 			return;
 		}
 		else
-			std::cout << "slot number " << idx << "is empty!" << std::endl;
+			std::cout << RED "Slot number " << idx << " is empty!" RESET << std::endl;
 	}
 	else
-		std::cout << "Wrong slot index number" << std::endl;
+		std::cout << RED "Wrong slot index number" RESET << std::endl;
 }

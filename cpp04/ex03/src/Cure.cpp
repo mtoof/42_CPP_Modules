@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:15:30 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/06 18:20:19 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/07 16:31:10 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ Cure::Cure(const Cure &rhs):AMateria(rhs)
 	{
 		*this = rhs;
 	}
+	else if (this->getType().empty())
+		this->_type = rhs.getType();
 }
 
 Cure &Cure::operator=(const Cure &rhs)
@@ -51,5 +53,5 @@ AMateria* Cure::clone() const
 
 void Cure::use(ICharacter& target)
 {
-	std::cout << "* heals " << target.getName() << "'s wounds *" << std::endl;
+	std::cout << GREEN "* heals " << target.getName() << "'s wounds *" RESET << std::endl;
 }
