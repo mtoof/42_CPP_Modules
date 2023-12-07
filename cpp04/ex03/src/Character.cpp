@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:45:52 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/07 16:12:46 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/07 17:53:50 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ Character &Character::operator=(const Character &rhs)
 		for (int index = 0; index < 4; ++index)
 		{
 			if (rhs._inventory[index] != NULL)
-				_inventory[index] = rhs._inventory[index]->clone();
+				this->_inventory[index] = rhs._inventory[index]->clone();
 			else
-				_inventory[index] = NULL;
+				this->_inventory[index] = NULL;
 		}
 	}
 	return (*this);
@@ -99,7 +99,6 @@ void Character::unequip(int idx)
 	{
 		this->_inventory[idx] = NULL;
 		std::cout << GREEN "Materia " << _inventory[idx]->getType() << " unequipted successfully" RESET << std::endl;
-
 	}
 }
 

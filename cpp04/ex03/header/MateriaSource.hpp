@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:38:28 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/07 15:54:28 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/07 17:52:35 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,7 @@
 class MateriaSource:public IMateriaSource
 {
 private:
-	static	const int	Max = 4;
-	int	_counter;
-	AMateria* _inventory[Max];
+	AMateria* _inventory[4];
 public:
 	MateriaSource();
 	MateriaSource(const MateriaSource &rhs);
