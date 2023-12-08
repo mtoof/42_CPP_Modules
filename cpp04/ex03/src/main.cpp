@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:46:40 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/08 11:23:51 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/08 14:09:07 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int main()
 	me->use(1, *bob);
 	me->unequip(0);
 	me->unequip(1);
-	me->pickup_item("ice");
+	tmp = me->pickup_item("ice");
+	me->equip(tmp);
 	me->unequip(2);
 	me->unequip(3);
 

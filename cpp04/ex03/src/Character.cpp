@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:45:52 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/08 11:25:05 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/08 14:07:49 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ void Character::use(int idx, ICharacter& target)
 		std::cout << RED "use: Wrong slot index number" RESET << std::endl;
 }
 
-void Character::pickup_item(const std::string item_name)
+AMateria* Character::pickup_item(const std::string item_name)
 {
 	AMateria* item = NULL;
 	if (!item_name.empty())
@@ -164,13 +164,13 @@ void Character::pickup_item(const std::string item_name)
 			!floor[index]->getType().compare(item_name))
 			{
 				item = floor[index];
-				std::cout << GREEN "Found "<< item_name << " Materia successfully" RESET << std::endl;
+				std::cout << GREEN "Picked up "<< item_name << " Materia successfully" RESET << std::endl;
 				floor[index] = NULL;
-				Character::equip(item);
 				break;
 			}
 			else if (index == FLIMIT - 1)
 				std::cout << RED "Coudn't find the item on the floor" RESET << std::endl;
 		}
 	}
+	return (item);
 }
