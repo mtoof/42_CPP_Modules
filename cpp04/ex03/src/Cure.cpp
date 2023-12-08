@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:15:30 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/07 16:31:10 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/08 10:44:25 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ Cure::Cure(const Cure &rhs):AMateria(rhs)
 	{
 		*this = rhs;
 	}
-	else if (this->getType().empty())
+	else if (this->getType().empty() && !rhs.getType().empty())
 		this->_type = rhs.getType();
 }
 
@@ -34,7 +34,7 @@ Cure &Cure::operator=(const Cure &rhs)
 {
 	std::cout << "Cure Copy Assignment operator called" << std::endl;
 
-	if (!rhs.getType().empty() && !this->getType().compare(rhs.getType()))
+	if (!rhs.getType().empty() && !this->getType().empty() && !this->getType().compare(rhs.getType()))
 	{
 		this->_type = rhs.getType();
 	}

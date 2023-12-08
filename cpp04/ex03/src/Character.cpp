@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:45:52 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/07 21:52:50 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/08 11:25:05 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "Ice.hpp"
 #include "Cure.hpp"
 
-Character::Character()
+Character::Character():_name("Default name")
 {
-	std::cout << "Character Constructor called" << std::endl;
+	std::cout << "Character Default Constructor called" << std::endl;
 	for (int i = 0; i < 4; ++i)
  		_inventory[i] = NULL;
-	for (int i = 0; i < 20; ++i)
+	for (int i = 0; i < FLIMIT; ++i)
  		floor[i] = NULL;
 }
 
@@ -28,7 +28,7 @@ Character::Character(std::string name): _name(name)
 	std::cout << "Character Argument Constructor called" << std::endl;
 	for (int i = 0; i < 4; ++i)
  		_inventory[i] = NULL;
-	for (int i = 0; i < 20; ++i)
+	for (int i = 0; i < FLIMIT; ++i)
  		floor[i] = NULL;
 }
 
@@ -51,7 +51,7 @@ Character &Character::operator=(const Character &rhs)
 				delete this->_inventory[index];
 		}
 		
-		for (int index = 0; index < 20; index++)
+		for (int index = 0; index < FLIMIT; index++)
 		{
 			if (this->floor[index] != NULL)
 				delete this->floor[index];
@@ -64,7 +64,7 @@ Character &Character::operator=(const Character &rhs)
 			else
 				this->_inventory[index] = NULL;
 		}
-		for (int index = 0; index < 20; ++index)
+		for (int index = 0; index < FLIMIT; ++index)
 		{
 			if (rhs.floor[index] != NULL)
 				this->floor[index] = rhs.floor[index]->clone();
@@ -83,7 +83,7 @@ Character::~Character()
 		if (this->_inventory[i] != NULL)
 			delete this->_inventory[i];
 	}
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < FLIMIT; i++)
 	{
 		if (this->floor[i] != NULL)
 			delete this->floor[i];
@@ -112,14 +112,14 @@ void Character::equip(AMateria* materia)
 		}
 	}
 	else
-		std::cout << RED "Materia can't be NULL" RESET << std::endl;
+		std::cout << RED "equip: Materia can't be NULL" RESET << std::endl;
 }
 
 void Character::unequip(int idx)
 {
-	if (idx >=0 && idx < 4)
+	if ((idx >=0 && idx < 4) && this->_inventory[idx])
 	{
-		for (int index = 0; index < 20; index++)
+		for (int index = 0; index < FLIMIT; index++)
 		{
 			if (floor[index] == NULL)
 			{
@@ -130,6 +130,11 @@ void Character::unequip(int idx)
 		std::cout << GREEN "Materia " << _inventory[idx]->getType() << " unequipted successfully" RESET << std::endl;
 		this->_inventory[idx] = NULL;
 	}
+	else if ((idx >=0 && idx < 4) && this->_inventory[idx] == NULL)
+		std::cout << RED "unequip: Can't unequip, Slot number " << idx << " is empty" RESET << std::endl;
+	else
+		std::cout << RED "unequip: Wrong index number" RESET << std::endl;
+		
 }
 
 void Character::use(int idx, ICharacter& target)
@@ -142,8 +147,30 @@ void Character::use(int idx, ICharacter& target)
 			return;
 		}
 		else
-			std::cout << RED "Slot number " << idx << " is empty!" RESET << std::endl;
+			std::cout << RED "use: Slot number " << idx << " is empty!" RESET << std::endl;
 	}
 	else
-		std::cout << RED "Wrong slot index number" RESET << std::endl;
+		std::cout << RED "use: Wrong slot index number" RESET << std::endl;
+}
+
+void Character::pickup_item(const std::string item_name)
+{
+	AMateria* item = NULL;
+	if (!item_name.empty())
+	{
+		for (int index = 0; index < FLIMIT; index++)
+		{
+			if (floor[index] != NULL && !floor[index]->getType().empty() && \
+			!floor[index]->getType().compare(item_name))
+			{
+				item = floor[index];
+				std::cout << GREEN "Found "<< item_name << " Materia successfully" RESET << std::endl;
+				floor[index] = NULL;
+				Character::equip(item);
+				break;
+			}
+			else if (index == FLIMIT - 1)
+				std::cout << RED "Coudn't find the item on the floor" RESET << std::endl;
+		}
+	}
 }

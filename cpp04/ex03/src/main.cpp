@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:46:40 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/07 21:50:40 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/08 11:23:51 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int main()
 	src->learnMateria(new Cure());
 	ICharacter* me = new Character("me");
 	AMateria* tmp;
+	tmp = src->createMateria("");
 	tmp = src->createMateria("ice");
 	me->equip(tmp);
 	tmp = src->createMateria("cure");
@@ -32,6 +33,10 @@ int main()
 	me->use(1, *bob);
 	me->unequip(0);
 	me->unequip(1);
+	me->pickup_item("ice");
+	me->unequip(2);
+	me->unequip(3);
+
 	delete bob;
 	delete me;
 	delete src;

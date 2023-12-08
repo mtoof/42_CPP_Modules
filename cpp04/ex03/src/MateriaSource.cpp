@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 16:23:25 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/07 17:53:09 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/08 10:32:53 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void MateriaSource::learnMateria(AMateria* learn)
 			}
 		}
 	}
+	else
+		std::cout << RED "LearnMateria: Materia is NULL" RESET << std::endl;
 }
 
 AMateria* MateriaSource::createMateria(std::string const &type)
@@ -87,5 +89,7 @@ AMateria* MateriaSource::createMateria(std::string const &type)
 			}
 		}
 	}
+	else
+		std::cout << RED "Materia type is empty the result is NULL" RESET << std::endl;
 	return (tmp);
 }
