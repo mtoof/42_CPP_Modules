@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 14:46:40 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/08 14:09:07 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/08 14:59:21 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,13 @@ int main()
 	tmp = src->createMateria("");
 	tmp = src->createMateria("ice");
 	me->equip(tmp);
+	tmp = NULL;
 	tmp = src->createMateria("cure");
 	me->equip(tmp);
+	tmp = NULL;
 	ICharacter* bob = new Character("bob");
+	bob->equip(tmp);
+	tmp = NULL;
 	me->use(0, *bob);
 	me->use(1, *bob);
 	me->unequip(0);

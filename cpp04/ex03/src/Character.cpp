@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:45:52 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/08 14:07:49 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/08 15:00:41 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,11 @@ void Character::equip(AMateria* materia)
 			if (this->_inventory[idx] == NULL)
 			{
 				this->_inventory[idx] = materia;
-				std::cout << GREEN "Materia " << materia->getType() << " equipted successfully" RESET << std::endl;
+				std::cout << GREEN "Materia " << materia->getType() << " equipted successfully by " << this->getName() << RESET << std::endl;
 				return;
 			}
 			else if (idx == 3 && this->_inventory[idx] != NULL)
-				std::cout << RED "No empty slot to equip Materia" RESET << std::endl;
+				std::cout << RED << this->getName() << " has no empty slot in inventory to equip Materia" RESET << std::endl;
 		}
 	}
 	else
@@ -127,11 +127,11 @@ void Character::unequip(int idx)
 				break;
 			}
 		}
-		std::cout << GREEN "Materia " << _inventory[idx]->getType() << " unequipted successfully" RESET << std::endl;
+		std::cout << GREEN "Materia " << _inventory[idx]->getType() << " unequipted successfully" << this->getName() << RESET << std::endl;
 		this->_inventory[idx] = NULL;
 	}
 	else if ((idx >=0 && idx < 4) && this->_inventory[idx] == NULL)
-		std::cout << RED "unequip: Can't unequip, Slot number " << idx << " is empty" RESET << std::endl;
+		std::cout << RED "unequip: " << this->getName() << " can't unequip, Slot number " << idx << " is empty" RESET << std::endl;
 	else
 		std::cout << RED "unequip: Wrong index number" RESET << std::endl;
 		
