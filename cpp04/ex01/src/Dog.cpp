@@ -14,14 +14,15 @@
 
 Dog::Dog()
 {
+	std::cout << "Dog Default Constructor Called." << std::endl;
 	_type = "Dog";
 	brain = new Brain();
-	std::cout << "Dog Default Constructor Called." << std::endl;
 }
 
 Dog::Dog(const Dog &rhs)
 {
 	std::cout << "Dog Copy Constructor Called." << std::endl;
+	this->brain = NULL;
 	*this = rhs;
 }
 
@@ -31,8 +32,11 @@ Dog &Dog::operator=(const Dog &rhs)
 	if (this != &rhs)
 	{
 		_type = rhs._type;
-		brain = new Brain();
-		brain = rhs.brain;
+		delete this->brain;
+		if (rhs.brain)
+			brain = new Brain(*rhs.brain);
+		else
+			brain = NULL;
 	}
 	return (*this);
 }

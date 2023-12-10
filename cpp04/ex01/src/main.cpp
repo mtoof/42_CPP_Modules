@@ -55,7 +55,8 @@ int main()
 	for (int index = 0; index < 10; index++)
 		std::cout << cat1.getAnIdea(index) << std::endl;
 
-	Cat cat2(cat1);
+	Cat cat2;
+	cat2 = cat1;
 
 	std::cout << "cat2 ideas" << std::endl;
 	cat2.getAllIdeas();

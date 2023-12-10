@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:27:01 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/16 17:05:18 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/10 14:34:45 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,13 @@ Brain &Brain::operator=(const Brain &rhs)
 {
 	std::cout << "Brain Copy Assignment operator Called." << std::endl;
 	if (this != &rhs)
+	{
 		for(unsigned int index = 0;index < 100;index++)
-			this->ideas[index] = rhs.ideas[index];
+		{
+			if (!rhs.ideas[index].empty())
+				this->ideas[index] = rhs.ideas[index];
+		}
+	}
 	return (*this);
 }
 

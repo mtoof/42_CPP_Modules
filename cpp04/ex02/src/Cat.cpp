@@ -14,14 +14,15 @@
 
 Cat::Cat()
 {
+	std::cout << "Cat Default Constructor Called." << std::endl;
 	_type = "Cat";
 	brain = new Brain();
-	std::cout << "Cat Default Constructor Called." << std::endl;
 }
 
 Cat::Cat(const Cat &rhs)
 {
 	std::cout << "Cat Copy Constructor Called." << std::endl;
+	this->brain = NULL;
 	*this = rhs;
 }
 
@@ -30,8 +31,12 @@ Cat &Cat::operator=(const Cat &rhs)
 	std::cout << "Cat Copy Assignment operator Called." << std::endl;
 	if (this != &rhs)
 	{
-		brain = new Brain(*rhs.brain);
 		_type = rhs._type;
+		delete this->brain;
+		if (rhs.brain != NULL)
+			brain = new Brain(*rhs.brain);
+		else
+			brain = NULL;
 	}
 	return (*this);
 }
