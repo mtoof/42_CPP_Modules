@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/05 17:45:52 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/08 15:00:41 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/10 13:47:18 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void Character::unequip(int idx)
 				break;
 			}
 		}
-		std::cout << GREEN "Materia " << _inventory[idx]->getType() << " unequipted successfully" << this->getName() << RESET << std::endl;
+		std::cout << GREEN "Materia " << _inventory[idx]->getType() << " unequipted successfully by " << this->getName() << RESET << std::endl;
 		this->_inventory[idx] = NULL;
 	}
 	else if ((idx >=0 && idx < 4) && this->_inventory[idx] == NULL)

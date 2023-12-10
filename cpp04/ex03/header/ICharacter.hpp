@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:05:42 by mtoof             #+#    #+#             */
-/*   Updated: 2023/12/08 14:08:27 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/10 13:40:06 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ public:
 	virtual void equip(AMateria* materia) = 0;
 	virtual void unequip(int idx) = 0;
 	virtual void use(int idx, ICharacter& target) = 0;
-	virtual AMateria* pickup_item(const std::string item_name) = 0;
 };
 
 #endif
