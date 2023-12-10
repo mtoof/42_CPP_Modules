@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 15:50:24 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/15 15:59:35 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/10 13:53:57 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ public:
 	WrongAnimal &operator=(const WrongAnimal &rhs);
 	virtual ~WrongAnimal(); 
 	std::string getType() const;
-	virtual void makeSound() const;
+	void makeSound() const;
 };
 
 

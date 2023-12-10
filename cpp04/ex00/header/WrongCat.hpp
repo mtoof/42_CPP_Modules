@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:00:34 by mtoof             #+#    #+#             */
-/*   Updated: 2023/11/15 16:13:30 by mtoof            ###   ########.fr       */
+/*   Updated: 2023/12/10 13:54:02 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ public:
 	WrongCat(const WrongCat &rhs);
 	WrongCat &operator=(const WrongCat &rhs);
 	virtual ~WrongCat();
-	virtual void makeSound() const;
+	void makeSound() const;
 };
 
 #endif
