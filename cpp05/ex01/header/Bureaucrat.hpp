@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:20 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/02 23:20:12 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/03 21:31:52 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ public:
 	int getGrade() const;
 	void incrementGrade();
 	void decrementGrade();
-	void signForm(Form &);
+	void signForm(Form &form);
 	
 	class GradeTooHighException: public std::exception
 	{

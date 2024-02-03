@@ -6,42 +6,37 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:37 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/02 21:27:49 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/03 21:23:06 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-
+#include "colour.hpp"
 
 int main()
 {
+	Bureaucrat bureaucrat_a("bureaucrat_a", 12);
+	Form form_a("form_a10", false, 10, 5);
 	try
 	{
-		Bureaucrat a("Br_a", 12);
-		std::cout << "br_a = " << a << std::endl;
-		Bureaucrat c(a);
-		c.incrementGrade();
-		std::cout << "br_c = "<< c << std::endl;
-		try
-		{
-			Bureaucrat b("Br_b", 155);
-			std::cout << b << std::endl;
-		}
-		catch (const Bureaucrat::GradeTooLowException& exp)
-		{
-			std::cout << exp.what() << std::endl;
-		}
-		Bureaucrat b = a;
-		std::cout << b << std::endl;
-		std::cout << "c = " << c << std::endl;
-		for (int i = 0; i < 12; i++)
-		{
-			a.incrementGrade();
-		}
+		form_a.beSigned(bureaucrat_a); // throw an exception
+		bureaucrat_a.signForm(form_a); // Skipped this line
 	}
-	catch (const Bureaucrat::GradeTooHighException& exp)
+	catch (Form::GradeTooLowException &excp)
 	{
-		std::cout << exp.what() << std::endl;
+		std::cout << excp.what() << std::endl;	
+	}
+	bureaucrat_a.signForm(form_a);
+	bureaucrat_a.incrementGrade();
+	bureaucrat_a.incrementGrade();
+	bureaucrat_a.signForm(form_a);
+	try
+	{
+		form_a.beSigned(bureaucrat_a);
+	}
+	catch (Form::GradeTooLowException &excp)
+	{
+		std::cout << excp.what() << std::endl;	
 	}
 	return 0;
 }

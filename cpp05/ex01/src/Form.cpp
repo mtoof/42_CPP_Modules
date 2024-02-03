@@ -6,14 +6,15 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:53:13 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/02 23:20:27 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/03 21:19:53 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
+#include "colour.hpp"
 
-Form::Form(): _name("No_name"), _signature(false), _grade_required_to_sign(MIN_GRADE_TO_SIGN), _grade_required_to_execute(MIN_GRADE_TO_EXECUTE)
+Form::Form(): _name("No_name"), _signature(false), _grade_required_to_sign(42), _grade_required_to_execute(42)
 {
 	std::cout << "Form Default constructor called" << std::endl;
 }
@@ -23,9 +24,9 @@ _name(name_val), _signature(sign_val), _grade_required_to_sign(grade_to_sign), _
 {
 	std::cout << "Form Default constructor called" << std::endl;
 	if (this->getGradeToSign() < HIGHEST_GRADE || this->getGradeToExecute() < HIGHEST_GRADE)
-		throw Bureaucrat::GradeTooHighException();
+		throw Form::GradeTooHighException();
 	else if (this->getGradeToSign() > LOWEST_GRADE || this->getGradeToExecute() > LOWEST_GRADE)
-		throw Bureaucrat::GradeTooLowException();
+		throw Form::GradeTooLowException();
 }
 
 Form::Form(Form const &rhs):
@@ -47,7 +48,7 @@ Form &Form::operator=(const Form &rhs)
 
 Form::~Form()
 {
-	std::cout << "Form Destructor called" << std::endl;
+	std::cout << "Form " GREEN << this->getName() << RESET " Destructor called" << std::endl;
 }
 
 std::string Form::getName() const
@@ -70,21 +71,33 @@ unsigned int Form::getGradeToExecute() const
 	return this->_grade_required_to_execute;
 }
 
-void Form::beSigned(Bureaucrat &rhs)
+void Form::beSigned(Bureaucrat &bureaucrate)
 {
 	if (this->_signature == false)
 	{
-		if (rhs.getGrade() > (int)this->getGradeToSign())
-			throw Bureaucrat::GradeTooLowException();
-		this->_signature = true;
-	}		
+		if (bureaucrate.getGrade() > (int)this->getGradeToSign())
+			throw Form::GradeTooLowException();
+		else
+			this->_signature = true;
+	}
 }
 
-std::ostream &operator<<(std::ostream &out, Form const &rhs)
+const char *Form::GradeTooHighException::what() const noexcept
 {
-	out << "Form name: " << rhs.getName()
-	<< " signature : " << std::boolalpha << rhs.getSignature()
-	<< " grade to be signed off: " << rhs.getGradeToSign()
-	<< " grade to be executed: " << rhs.getGradeToExecute();
+	return (RED "Grade is too high!" RESET);
+}
+
+const char *Form::GradeTooLowException::what() const noexcept
+{
+	return (RED "Grade is too low!" RESET);
+}
+
+
+std::ostream &operator<<(std::ostream &out, Form const &form)
+{
+	out << "Form name: " << form.getName()
+	<< " signature : " << std::boolalpha << form.getSignature()
+	<< " grade to be signed off: " << form.getGradeToSign()
+	<< " grade to be executed: " << form.getGradeToExecute();
 	return out;
 }

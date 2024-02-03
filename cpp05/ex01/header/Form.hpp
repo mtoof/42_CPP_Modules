@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:52:14 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/02 23:14:47 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/03 21:04:54 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 #include <string>
 #include <iostream>
-
-# define MIN_GRADE_TO_SIGN 20
-# define MIN_GRADE_TO_EXECUTE 15
 
 class Bureaucrat;
 
@@ -33,13 +30,23 @@ public:
 	Form();
 	Form(std::string name_val, bool sign_val, unsigned int grade_to_sign, unsigned int grade_to_execute);
 	Form(const Form &rhs);
-	Form &operator=(const Form &rhs);
-	void beSigned(Bureaucrat &rhs);
+	Form &operator=(const Form &form);
+	~Form();
+	void beSigned(Bureaucrat &bureaucrat);
 	std::string getName() const;
 	bool getSignature() const;
 	unsigned int getGradeToSign() const;
 	unsigned int getGradeToExecute() const;
-	~Form();
+	class GradeTooHighException: public std::exception
+	{
+		public:
+		virtual const char* what() const noexcept;
+	};
+	class GradeTooLowException: public std::exception
+	{
+		public:
+		virtual const char* what() const noexcept;
+	};
 };
 
 std::ostream & operator<<(std::ostream & o, Form const &input);

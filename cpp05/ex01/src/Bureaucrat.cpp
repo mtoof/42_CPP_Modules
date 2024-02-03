@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:35 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/02 23:19:48 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/03 21:21:23 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,14 @@ const char *Bureaucrat::GradeTooLowException::what() const noexcept
 
 void Bureaucrat::signForm(Form &form)
 {
-	if (form.getSignature() == true)
-		std::cout << this->getName() << " signed " << form.getName() << std::endl;
+	if (form.getSignature() != true)
+	{
+		std::cout << GREEN << this->getName() << " signed " << form.getName() << RESET << std::endl;
+	}
 	else
-		std::cout << this->getName() << "couldn't sign " << form.getName() << " Form, because "
-		<< this->getName() << " grade does not meet the minimum grade requirement."<< std::endl;
+		std::cout << BLUE << this->getName() << RED" couldn't sign " BLUE << form.getName() << RED " Form, because "
+		<< BLUE << this->getName() << RED " grade does not meet the minimum grade requirement. The Bureaucrat needs grade " 
+		<< BLUE <<form.getGradeToSign() << RED " or higher." <<RESET <<std::endl;
 }
 
 std::ostream &operator<<(std::ostream &out, Bureaucrat const &rhs)
