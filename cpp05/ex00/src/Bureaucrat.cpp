@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:35 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/02 21:32:24 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/03 20:28:17 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,46 @@ Bureaucrat::Bureaucrat(std::string name_val, int grade_val) : _name(name_val)
 {
 	std::cout << "Bureaucrat " << GREEN << this->getName() << RESET " argument constructor called" << std::endl;
 	if (grade_val > LOWEST_GRADE)
+	{
+		this->_grade = 42;
 		throw Bureaucrat::GradeTooLowException();
+	}
 	else if (grade_val < HIGHEST_GRADE)
+	{
+		this->_grade = 42;
 		throw Bureaucrat::GradeTooHighException();
+	}
 	_grade = grade_val;
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &rhs) : _name(rhs.getName()), _grade(rhs.getGrade())
 {
 	std::cout << "Bureaucrat " << GREEN << this->_name << RESET " copy constructor called" << std::endl;
+	if (this->getGrade() > LOWEST_GRADE)
+	{
+		this->_grade = 42;
+		throw Bureaucrat::GradeTooLowException();
+	}
+	else if (this->getGrade() < HIGHEST_GRADE)
+	{
+		this->_grade = 42;
+		throw Bureaucrat::GradeTooHighException();
+	}
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &rhs)
 {
 	if (this != &rhs)
-	{
 		this->_grade = rhs.getGrade();
+	if (this->getGrade() > LOWEST_GRADE)
+	{
+		this->_grade = 42;
+		throw Bureaucrat::GradeTooLowException();
+	}
+	else if (this->getGrade() < HIGHEST_GRADE)
+	{
+		this->_grade = 42;
+		throw Bureaucrat::GradeTooHighException();
 	}
 	std::cout << "Bureaucrat " << GREEN << this->getName() << RESET " copy assingment operator called" << std::endl;
 	return *this;
@@ -61,17 +85,17 @@ int Bureaucrat::getGrade() const
 void Bureaucrat::decrementGrade()
 {
 	std::cout << "Decrement called for " << GREEN << this->getName() << RESET << std::endl;
-	this->_grade += 1;
-	if (this->_grade > LOWEST_GRADE)
+	if (this->_grade + 1 > LOWEST_GRADE)
 		throw Bureaucrat::GradeTooLowException();
+	this->_grade += 1;
 }
 
 void Bureaucrat::incrementGrade()
 {
 	std::cout << "Increment called for " << GREEN << this->getName() << RESET << std::endl;
-	this->_grade -= 1;
-	if (this->_grade < HIGHEST_GRADE)
+	if (this->_grade - 1 < HIGHEST_GRADE)
 		throw Bureaucrat::GradeTooHighException();
+	this->_grade -= 1;
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const noexcept

@@ -6,42 +6,40 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:37 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/02 21:27:49 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/03 20:34:42 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-
+#include "colour.hpp"
 
 int main()
 {
+	Bureaucrat bureaucrat_a("br_a", 1);
+	Bureaucrat bureaucrat_b("br_b", 150);
+	// Grade is too high for bureaucrat_a
 	try
 	{
-		Bureaucrat a("Br_a", 12);
-		std::cout << "br_a = " << a << std::endl;
-		Bureaucrat c(a);
-		c.incrementGrade();
-		std::cout << "br_c = "<< c << std::endl;
-		try
-		{
-			Bureaucrat b("Br_b", 155);
-			std::cout << b << std::endl;
-		}
-		catch (const Bureaucrat::GradeTooLowException& exp)
-		{
-			std::cout << exp.what() << std::endl;
-		}
-		Bureaucrat b = a;
-		std::cout << b << std::endl;
-		std::cout << "c = " << c << std::endl;
-		for (int i = 0; i < 12; i++)
-		{
-			a.incrementGrade();
-		}
+		bureaucrat_a.incrementGrade();
 	}
-	catch (const Bureaucrat::GradeTooHighException& exp)
+	catch (Bureaucrat::GradeTooHighException &exc) 
 	{
-		std::cout << exp.what() << std::endl;
+		std::cout << exc.what() << std::endl;
 	}
+	// Grade is too low for bureaucrat_b
+	try
+	{
+		bureaucrat_b.decrementGrade();
+	}
+	catch (Bureaucrat::GradeTooLowException &exc) 
+	{
+		std::cout << exc.what() << std::endl;
+	}
+	//copy assignment operator
+	bureaucrat_a = bureaucrat_b;
+	std::cout << BLUE "print bureaucrat_a details, name= " << bureaucrat_a.getName() << " grade= " << bureaucrat_a.getGrade() << RESET << std::endl;
+	//copy constructor
+	Bureaucrat bureaucrat_c(bureaucrat_a);
+	std::cout << BLUE "print bureaucrat_c details, name= " << bureaucrat_c.getName() << " grade= " << bureaucrat_c.getGrade() << RESET << std::endl;
 	return 0;
 }
