@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:37 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/03 21:23:06 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/04 14:15:15 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main()
 	}
 	catch (Form::GradeTooLowException &excp)
 	{
-		std::cout << excp.what() << std::endl;	
+		std::cerr << excp.what() << std::endl;	
 	}
 	bureaucrat_a.signForm(form_a);
 	bureaucrat_a.incrementGrade();
@@ -36,7 +36,7 @@ int main()
 	}
 	catch (Form::GradeTooLowException &excp)
 	{
-		std::cout << excp.what() << std::endl;	
+		std::cerr << excp.what() << std::endl;	
 	}
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:52:14 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/03 21:04:54 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/03 22:22:20 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ public:
 	Form(const Form &rhs);
 	Form &operator=(const Form &form);
 	~Form();
-	void beSigned(Bureaucrat &bureaucrat);
 	std::string getName() const;
 	bool getSignature() const;
 	unsigned int getGradeToSign() const;
 	unsigned int getGradeToExecute() const;
+	void beSigned(Bureaucrat &bureaucrat);
 	class GradeTooHighException: public std::exception
 	{
 		public:

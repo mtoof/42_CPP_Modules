@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:35 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/03 21:21:23 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/04 20:58:11 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,9 @@ Bureaucrat::Bureaucrat(const Bureaucrat &rhs) : _name(rhs.getName()), _grade(rhs
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &rhs)
 {
-	if (this != &rhs)
-	{
-		this->_grade = rhs.getGrade();
-	}
 	std::cout << "Bureaucrat " << GREEN << this->getName() << RESET " copy assingment operator called" << std::endl;
+	if (this != &rhs)
+		this->_grade = rhs.getGrade();
 	return *this;
 }
 
@@ -60,7 +58,7 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::decrementGrade()
 {
-	std::cout << "Decrement called for " << GREEN << this->getName() << RESET << std::endl;
+	std::cout << "Decrement grade called for " << GREEN << this->getName() << RESET << std::endl;
 	this->_grade += 1;
 	if (this->_grade > LOWEST_GRADE)
 		throw Bureaucrat::GradeTooLowException();
@@ -68,7 +66,7 @@ void Bureaucrat::decrementGrade()
 
 void Bureaucrat::incrementGrade()
 {
-	std::cout << "Increment called for " << GREEN << this->getName() << RESET << std::endl;
+	std::cout << "Increment grade called for " << GREEN << this->getName() << RESET << std::endl;
 	this->_grade -= 1;
 	if (this->_grade < HIGHEST_GRADE)
 		throw Bureaucrat::GradeTooHighException();

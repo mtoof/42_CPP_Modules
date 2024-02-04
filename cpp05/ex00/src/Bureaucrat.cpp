@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:35 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/03 20:28:17 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/04 14:13:55 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int Bureaucrat::getGrade() const
 
 void Bureaucrat::decrementGrade()
 {
-	std::cout << "Decrement called for " << GREEN << this->getName() << RESET << std::endl;
+	std::cout << "Decrement grade called for " << GREEN << this->getName() << RESET << std::endl;
 	if (this->_grade + 1 > LOWEST_GRADE)
 		throw Bureaucrat::GradeTooLowException();
 	this->_grade += 1;
@@ -92,7 +92,7 @@ void Bureaucrat::decrementGrade()
 
 void Bureaucrat::incrementGrade()
 {
-	std::cout << "Increment called for " << GREEN << this->getName() << RESET << std::endl;
+	std::cout << "Increment grade called for " << GREEN << this->getName() << RESET << std::endl;
 	if (this->_grade - 1 < HIGHEST_GRADE)
 		throw Bureaucrat::GradeTooHighException();
 	this->_grade -= 1;

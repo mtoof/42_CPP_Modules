@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:37 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/03 20:34:42 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/04 14:13:03 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int main()
 	}
 	catch (Bureaucrat::GradeTooHighException &exc) 
 	{
-		std::cout << exc.what() << std::endl;
+		std::cerr << exc.what() << std::endl;
 	}
 	// Grade is too low for bureaucrat_b
 	try
@@ -33,7 +33,7 @@ int main()
 	}
 	catch (Bureaucrat::GradeTooLowException &exc) 
 	{
-		std::cout << exc.what() << std::endl;
+		std::cerr << exc.what() << std::endl;
 	}
 	//copy assignment operator
 	bureaucrat_a = bureaucrat_b;
