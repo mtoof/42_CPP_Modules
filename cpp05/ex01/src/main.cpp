@@ -6,11 +6,12 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:37 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/04 14:15:15 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/05 14:58:53 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
+#include "../header/Bureaucrat.hpp"
+#include "../header/Form.hpp"
 #include "colour.hpp"
 
 int main()
