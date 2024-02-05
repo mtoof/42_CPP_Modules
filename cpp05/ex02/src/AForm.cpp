@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:53:13 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/04 18:12:40 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/05 15:07:33 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 
 AForm::AForm(): _name("No_name"), _signature(false), _grade_required_to_sign(42), _grade_required_to_execute(42)
 {
-	std::cout << "AForm Default constructor called" << std::endl;
+	std::cout << RED "AForm Default constructor called" RESET << std::endl;
 }
 
 AForm::AForm(std::string name_val, bool sign_val, unsigned int grade_to_sign, unsigned int grade_to_execute): 
 _name(name_val), _signature(sign_val), _grade_required_to_sign(grade_to_sign), _grade_required_to_execute(grade_to_execute)
 {
-	std::cout << "AForm Default constructor called" << std::endl;
+	std::cout << RED "AForm Default constructor called" RESET << std::endl;
 	if (this->getGradeToSign() < HIGHEST_GRADE || this->getGradeToExecute() < HIGHEST_GRADE)
 		throw AForm::GradeTooHighException();
 	else if (this->getGradeToSign() > LOWEST_GRADE || this->getGradeToExecute() > LOWEST_GRADE)
@@ -34,11 +34,11 @@ _name(rhs._name), _signature(rhs._signature)
 , _grade_required_to_sign(rhs._grade_required_to_sign)
 , _grade_required_to_execute(rhs._grade_required_to_execute)
 {
-	std::cout << "AForm Copy constructor called" << std::endl;
+	std::cout << RED "AForm Copy constructor called" RESET << std::endl;
 }
 AForm &AForm::operator=(const AForm &rhs)
 {
-	std::cout << "AForm Copy assignment constructor called" << std::endl;
+	std::cout << RED "AForm Copy assignment constructor called" RESET << std::endl;
 	if (this != &rhs)
 	{
 		this->_signature = rhs.getSignature();
@@ -78,7 +78,10 @@ void AForm::beSigned(Bureaucrat &bureaucrate)
 		if (bureaucrate.getGrade() > (int)this->getGradeToSign())
 			throw AForm::GradeTooLowException();
 		else
+		{
+			std::cout << GREEN << bureaucrate.getName() << " signed " << this->getName() << " form." RESET << std::endl;
 			this->_signature = true;
+		}
 	}
 }
 

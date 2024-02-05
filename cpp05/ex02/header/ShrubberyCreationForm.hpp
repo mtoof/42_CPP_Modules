@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:21:04 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/04 19:15:55 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/05 13:14:49 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include "colour.hpp"
+#include <sstream>
+#include <fstream>
 
 class ShrubberyCreationForm: public AForm
 {

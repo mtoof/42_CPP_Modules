@@ -6,13 +6,13 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 15:49:42 by mtoof             #+#    #+#              #
-#    Updated: 2024/02/04 19:36:35 by mtoof            ###   ########.fr        #
+#    Updated: 2024/02/05 14:40:24 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =  No_you_need_form_28B
 
-SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp
+SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp
 SRC_DIR = src/
 HEADER = header/
 FLAG =  -Wall -Wextra -Werror -std=c++14

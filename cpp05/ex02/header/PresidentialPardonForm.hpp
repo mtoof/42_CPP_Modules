@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:20:58 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/04 19:00:40 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/05 13:15:57 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include "colour.hpp"
 
 class PresidentialPardonForm : public AForm
 {
 private:
-	std::string target;
+	std::string _target;
 public:
 	PresidentialPardonForm();
 	PresidentialPardonForm(std::string const target);

@@ -6,14 +6,11 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:30:32 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/04 19:39:40 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/05 14:27:46 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ShrubberyCreationForm.hpp"
-#include "colour.hpp"
-#include <sstream>
-#include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm(): AForm("No_name", false, 145, 137),_target("No_location")
 {
@@ -22,7 +19,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(): AForm("No_name", false, 145, 137
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const target): AForm("ShrubberyCreationForm", false, 145, 137), _target(target)
 {
-	std::cout << "ShrubberyCreationForm default constructor called" << std::endl;
+	std::cout << "ShrubberyCreationForm argument constructor called" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &rhs): AForm(rhs), _target(rhs._target)
@@ -40,6 +37,7 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm co
 
 void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 {
+	std::cout << GREEN "ShrubberyCreationForm execute called" RESET << std::endl;
 	if (this->getSignature() == true)
 	{
 		if (executor.getGrade() <= (int)this->getGradeToExecute())

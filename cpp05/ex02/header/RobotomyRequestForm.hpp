@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:21:01 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/04 19:00:36 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/05 13:15:53 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
+#include "colour.hpp"
 
 class RobotomyRequestForm : public AForm
 {
 private:
-	std::string target;
+	std::string _target;
 public:
 	RobotomyRequestForm();
 	RobotomyRequestForm(std::string const target);
