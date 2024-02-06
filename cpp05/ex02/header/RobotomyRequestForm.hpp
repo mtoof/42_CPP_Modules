@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:21:01 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/05 13:15:53 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/06 17:35:31 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ public:
 	RobotomyRequestForm(std::string const target);
 	RobotomyRequestForm(RobotomyRequestForm const &rhs);
 	RobotomyRequestForm &operator=(RobotomyRequestForm const &rhs);
-	~RobotomyRequestForm();
+	virtual ~RobotomyRequestForm();
 	virtual void execute(const Bureaucrat &executor) const override;
 };
 

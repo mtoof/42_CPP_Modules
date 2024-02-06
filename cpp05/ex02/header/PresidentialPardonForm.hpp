@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:20:58 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/05 13:15:57 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/06 17:35:24 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ public:
 	PresidentialPardonForm(std::string const target);
 	PresidentialPardonForm(PresidentialPardonForm const &rhs);
 	PresidentialPardonForm &operator=(PresidentialPardonForm const &rhs);
-	~PresidentialPardonForm();
+	virtual ~PresidentialPardonForm();
 	virtual void execute(const Bureaucrat &executor) const override;
 };
 
