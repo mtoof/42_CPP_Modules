@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:37 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/05 15:28:44 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/06 11:04:43 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ int main()
 	try
 	{
 		Bureaucrat Jane("Jane", 25);
-		PresidentialPardonForm alex("Alex");
-		alex.execute(Jane);
-		alex.beSigned(Jane);
+		PresidentialPardonForm form_x1("Alex");
+		form_x1.execute(Jane);
+		form_x1.beSigned(Jane);
 		Bureaucrat James("James", 5);
-		alex.execute(Jane);
+		form_x1.execute(Jane);
 		// alex.execute(James);
 	}
 	catch(const std::exception &e)
@@ -74,22 +74,8 @@ int main()
 		office_lawn.beSigned(Jane);
 		Bureaucrat James("James", 46);
 		Bureaucrat tommy("Tommy", 42);
-		try
-		{
-			office_lawn.execute(Jane);
-		}
-		catch(const std::exception &e)
-		{
-			std::cerr << e.what() << '\n';
-		}
-		try
-		{
-			office_lawn.execute(tommy);
-		}
-		catch(const std::exception &e)
-		{
-			std::cerr << e.what() << '\n';
-		}
+		office_lawn.execute(Jane);
+		office_lawn.execute(tommy);
 		office_lawn.execute(James);
 	}
 	catch(const std::exception &e)

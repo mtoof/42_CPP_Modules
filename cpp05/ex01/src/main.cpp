@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:37 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/05 14:58:53 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/06 10:57:44 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 int main()
 {
-	Bureaucrat bureaucrat_a("bureaucrat_a", 12);
-	Form form_a("form_a10", false, 10, 5);
 	try
 	{
+		Bureaucrat bureaucrat_a("bureaucrat_a", 12);
+		Form form_a("form_a10", false, 10, 5);
 		form_a.beSigned(bureaucrat_a); // throw an exception
 		bureaucrat_a.signForm(form_a); // Skipped this line
 	}
@@ -27,12 +27,14 @@ int main()
 	{
 		std::cerr << excp.what() << std::endl;	
 	}
-	bureaucrat_a.signForm(form_a);
-	bureaucrat_a.incrementGrade();
-	bureaucrat_a.incrementGrade();
-	bureaucrat_a.signForm(form_a);
 	try
 	{
+		Bureaucrat bureaucrat_a("bureaucrat_a", 12);
+		Form form_a("form_a10", false, 10, 5);
+		bureaucrat_a.signForm(form_a);
+		bureaucrat_a.incrementGrade();
+		bureaucrat_a.incrementGrade();
+		bureaucrat_a.signForm(form_a);
 		form_a.beSigned(bureaucrat_a);
 	}
 	catch (Form::GradeTooLowException &excp)
