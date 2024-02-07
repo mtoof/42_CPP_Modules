@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:29:31 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/05 15:14:45 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/07 09:56:25 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 #include "PresidentialPardonForm.hpp"
 
 
-PresidentialPardonForm::PresidentialPardonForm(): AForm("No_name", false, 25, 5),_target("No_location")
+PresidentialPardonForm::PresidentialPardonForm(): AForm("No_name", 25, 5),_target("No_location")
 {
 	std::cout << "PresidentialPardonForm default constructor called" << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string target): AForm("PresidentialPardonForm", false, 25, 5),_target(target)
+PresidentialPardonForm::PresidentialPardonForm(std::string target): AForm("PresidentialPardonForm", 25, 5),_target(target)
 {
 	std::cout << "PresidentialPardonForm argument constructor called" << std::endl;
 }

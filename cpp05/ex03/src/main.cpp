@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:37 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/06 17:36:01 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/07 10:01:40 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int main()
 	try
 	{
 		Intern jimmy;
-		std::shared_ptr<AForm> ptr = jimmy.makeForm("test", "test2");
+		std::shared_ptr<AForm> test_form = jimmy.makeForm("test", "test2");
+		Bureaucrat tony("Tony", 12);
+		std::shared_ptr<AForm> tommy_pardon = jimmy.makeForm("presidential pardon", "Tommy");
+		tommy_pardon->beSigned(tony);
 	}
 	catch(const std::exception& e)
 	{

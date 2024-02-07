@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:52:14 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/04 18:12:49 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/07 09:37:05 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ private:
 
 public:
 	AForm();
-	AForm(std::string name_val, bool sign_val, unsigned int grade_to_sign, unsigned int grade_to_execute);
+	AForm(std::string name_val, unsigned int grade_to_sign, unsigned int grade_to_execute);
 	AForm(const AForm &rhs);
 	AForm &operator=(const AForm &form);
 	virtual ~AForm();
