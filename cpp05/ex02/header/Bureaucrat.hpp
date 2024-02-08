@@ -6,16 +6,16 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:20 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/03 21:43:20 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/08 12:29:12 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 #define BUREAUCRAT_HPP
 
+#include "../header/AForm.hpp"
 #include <string>
 #include <iostream>
-#include "AForm.hpp"
 
 #define LOWEST_GRADE 150
 #define HIGHEST_GRADE 1

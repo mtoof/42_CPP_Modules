@@ -6,16 +6,15 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:21:04 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/06 17:35:34 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/08 12:29:03 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHRUBERRYCREATIONFORM_HPP
 #define SHRUBERRYCREATIONFORM_HPP
 
-#include "AForm.hpp"
-#include "Bureaucrat.hpp"
-#include "colour.hpp"
+#include "../header/AForm.hpp"
+#include "../header/Bureaucrat.hpp"
 #include <sstream>
 #include <fstream>
 

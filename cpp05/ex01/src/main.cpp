@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:37 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/06 10:57:44 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/08 11:38:17 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main()
 	try
 	{
 		Bureaucrat bureaucrat_a("bureaucrat_a", 12);
-		Form form_a("form_a10", false, 10, 5);
+		Form form_a("form_a10", 10, 5);
 		form_a.beSigned(bureaucrat_a); // throw an exception
 		bureaucrat_a.signForm(form_a); // Skipped this line
 	}
@@ -30,7 +30,7 @@ int main()
 	try
 	{
 		Bureaucrat bureaucrat_a("bureaucrat_a", 12);
-		Form form_a("form_a10", false, 10, 5);
+		Form form_a("form_a10", 10, 5);
 		bureaucrat_a.signForm(form_a);
 		bureaucrat_a.incrementGrade();
 		bureaucrat_a.incrementGrade();
