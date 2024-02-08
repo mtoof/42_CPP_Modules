@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:52:14 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/07 09:37:05 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/08 12:30:12 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include <string>
 #include <iostream>
-
+#include "../header/colour.hpp"
 class Bureaucrat;
 
 class AForm

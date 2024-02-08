@@ -6,12 +6,11 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:35 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/04 19:35:46 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/08 12:31:07 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/Bureaucrat.hpp"
-#include "colour.hpp"
 
 Bureaucrat::Bureaucrat() : _name("no name"), _grade(150)
 {

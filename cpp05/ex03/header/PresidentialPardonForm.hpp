@@ -6,16 +6,15 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:20:58 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/06 17:35:40 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/08 12:30:28 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PRESIDENTIALPARDONFORM_HPP
 #define PRESIDENTIALPARDONFORM_HPP
 
-#include "AForm.hpp"
-#include "Bureaucrat.hpp"
-#include "colour.hpp"
+#include "../header/AForm.hpp"
+#include "../header/Bureaucrat.hpp"
 
 class PresidentialPardonForm : public AForm
 {

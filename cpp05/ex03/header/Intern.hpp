@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:08:17 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/06 17:22:59 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/08 12:29:56 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@
 #include "../header/PresidentialPardonForm.hpp"
 #include "../header/RobotomyRequestForm.hpp"
 #include <memory>
-#include "colour.hpp"
 
 class Intern
 {
 private:
-	using Aform_function = std::shared_ptr<AForm> (*)(std::string const target);
+	
 public:
 	Intern();
 	Intern(Intern const &rhs);

@@ -6,16 +6,15 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:21:01 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/06 17:35:43 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/08 12:30:35 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ROBOTOMYREQUESTFORM_HPP
 #define ROBOTOMYREQUESTFORM_HPP
 
-#include "AForm.hpp"
-#include "Bureaucrat.hpp"
-#include "colour.hpp"
+#include "../header/AForm.hpp"
+#include "../header/Bureaucrat.hpp"
 
 class RobotomyRequestForm : public AForm
 {
