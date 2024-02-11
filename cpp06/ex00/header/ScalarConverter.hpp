@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:57:31 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/10 16:06:31 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/11 17:15:35 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 typedef enum e_inputtype
 {
-	CHAR_TYPE,
+	CHAR_TYPE = 1,
 	INT_TYPE,
 	FLOAT_TYPE,
 	DOUBLE_TYPE,
@@ -38,10 +38,25 @@ private:
 	ScalarConverter &operator=(ScalarConverter const &rhs);
 	~ScalarConverter();
 
-	static void getType(std::string str);
+	static void getType(std::string str, int index);
+	static void isSign(std::string str, int &index);
+	static bool isChar(std::string str);
+	static bool isInt(std::string str, int &index);
+	static bool isFloat(std::string str);
+	static bool isDouble(std::string str);
+	static int isLiteral(std::string str);
+	static void	printout(std::string str);
+	static void castFromChar(char);
+	static void castFromInt(std::string str);
+	static void castFromFloat(std::string str);
+	static void castFromDouble(std::string str);
 
 	static short _type;
 	static char	_sign;
+	static bool _char_possible;
+	static bool _int_possible;
+	static bool _float_possible;
+	static bool _double_possible;
 	
 public:
 	static void converter(std::string str);

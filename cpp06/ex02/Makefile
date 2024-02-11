@@ -6,7 +6,7 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 14:53:08 by mtoof             #+#    #+#              #
-#    Updated: 2024/02/09 14:53:12 by mtoof            ###   ########.fr        #
+#    Updated: 2024/02/11 11:25:18 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,11 +32,11 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "$(YELLOW)$(BOLD)Make outfiles...$(NC)"
-	@g++ $(FLAG) $(OBJS) -o $(NAME)
+	@c++ $(FLAG) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)%.o: %.cpp
 	@mkdir -p $(OBJ_DIR)
-	@g++ $(FLAG) -I$(HEADER) -c $< -o $@
+	@c++ $(FLAG) -I$(HEADER) -c $< -o $@
 
 clean:
 	@echo "$(CYAN)$(BOLD)Cleaning object files...$(NC)"
