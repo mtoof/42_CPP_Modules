@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:57:31 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/11 17:15:35 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/11 22:12:41 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ private:
 	static void isSign(std::string str, int &index);
 	static bool isChar(std::string str);
 	static bool isInt(std::string str, int &index);
-	static bool isFloat(std::string str);
-	static bool isDouble(std::string str);
+	static bool isFloat(std::string str, int &index);
+	static bool isDouble(std::string str, int &index);
 	static int isLiteral(std::string str);
 	static void	printout(std::string str);
 	static void castFromChar(char);
@@ -53,6 +53,7 @@ private:
 
 	static short _type;
 	static char	_sign;
+	static bool _found_dot;
 	static bool _char_possible;
 	static bool _int_possible;
 	static bool _float_possible;

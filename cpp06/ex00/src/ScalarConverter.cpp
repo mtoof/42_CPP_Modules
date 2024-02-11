@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:57:21 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/11 17:28:51 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/11 22:15:37 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ bool ScalarConverter::_char_possible = true;
 bool ScalarConverter::_int_possible = true;
 bool ScalarConverter::_float_possible = true;
 bool ScalarConverter::_double_possible = true;
+bool ScalarConverter::_found_dot = false;
 
 ScalarConverter::ScalarConverter(void){}
 
@@ -38,11 +39,13 @@ void ScalarConverter::converter(std::string str)
 	int index = 0;
 	isSign(str, index);
 	getType(str, index);
+	std::cout << _type << " " << str << std::endl;
 }
 
 void ScalarConverter::getType(std::string str, int index)
 {
 	_type = isLiteral(str);
+	std::cout << _type;
 	if (_type)
 	{
 		_char_possible = false;
@@ -52,8 +55,8 @@ void ScalarConverter::getType(std::string str, int index)
 	{
 		if (isChar(str)) _type = CHAR_TYPE;
 		if (isInt(str, index))	_type = INT_TYPE;
-		if (isFloat(str))	_type = FLOAT_TYPE;
-		if (isDouble(str)) _type = DOUBLE_TYPE;
+		if (isFloat(str, index))	_type = FLOAT_TYPE;
+		if (isDouble(str, index)) _type = DOUBLE_TYPE;
 	}
 	
 }
@@ -87,7 +90,6 @@ bool ScalarConverter::isChar(std::string str)
 
 bool ScalarConverter::isInt(std::string str, int &index)
 {
-	
 	while (str[index])
 	{
 		if (std::isdigit(str[index]))
@@ -98,16 +100,47 @@ bool ScalarConverter::isInt(std::string str, int &index)
 	return true;
 }
 
-bool ScalarConverter::isFloat(std::string str)
+bool ScalarConverter::isFloat(std::string str, int &index)
 {
-	(void)str;
-	return false;	
+	if (str[index] == '.')
+	{
+		_found_dot = true;
+		index++;
+	}
+	while (str[index])
+	{
+		if (std::isdigit(str[index]))
+			index++;
+		else if (str[index] == 'f' && str[index + 1] == '\0' && std::isdigit(str[index - 1]))
+			return true;
+		else
+			return false;
+	}
+	return false;
 }
 
-bool ScalarConverter::isDouble(std::string str)
+bool ScalarConverter::isDouble(std::string str, int &index)
 {
-	(void)str;
-	return false;
+
+	while (str[index])
+	{
+		if (std::isdigit(str[index]))
+			index++;
+		else if (str[index] == '.')
+		{
+			std::cout << std::boolalpha << _found_dot << std::endl;
+			if (_found_dot == false)
+			{
+				_found_dot = true;
+				index++;
+			}
+			else if (_found_dot == true)
+				return false;
+		}
+		else
+			return false;
+	}
+	return true;
 }
 
 void ScalarConverter::printout(std::string str)
@@ -118,5 +151,4 @@ void ScalarConverter::printout(std::string str)
 		std::cout << "Non displayable" << std::endl;
 	if (!_int_possible)
 		std::cout << "impossible" << std::endl;
-		
 }
