@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:57:21 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/12 17:21:46 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/12 22:58:15 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ bool ScalarConverter::_float_possible = true;
 bool ScalarConverter::_double_possible = true;
 bool ScalarConverter::_found_dot = false;
 bool ScalarConverter::_found_scientific_notation = false;
+bool ScalarConverter::_char_invalid = false;
+bool ScalarConverter::_int_invalid = false;
+bool ScalarConverter::_float_invalid = false;
+bool ScalarConverter::_double_invalid = false;
 
 ScalarConverter::ScalarConverter(void){}
 
@@ -44,10 +48,11 @@ void ScalarConverter::converter(std::string str)
 	int index = 0;
 	isSign(str, index);
 	getType(str, index);
+	// check_limits(str);
 	castToChar(str);
 	castToInt(str);
 	castToFloat(str);
-	castToDouble(str);		
+	castToDouble(str);
 }
 
 void ScalarConverter::getType(std::string str, int index)
@@ -62,14 +67,10 @@ void ScalarConverter::getType(std::string str, int index)
 	{
 		if (isChar(str)) _type = CHAR_TYPE;
 		if (isInt(str, index))	_type = INT_TYPE;
-		if (isFloat(str, index))	_type = FLOAT_TYPE;
-		if (isDouble(str, index)) _type = DOUBLE_TYPE;
+		isFloatOrDouble(str, index);
 		if (!_type)
 		{
-			_char_possible = false;
-			_int_possible = false;
-			_float_possible = false;
-			_double_possible = false;
+			//Change it to invalid
 		}
 	}
 }
@@ -83,14 +84,33 @@ void ScalarConverter::isSign(std::string str, int &index)
 	}
 }
 
-int ScalarConverter::isLiteral(std::string str)
+int ScalarConverter::isLiteral(std::string &str)
 {
-	if (!str.compare("inff") || !str.compare("+inff") || !str.compare("-inff"))
+	if (!str.compare("inff") || !str.compare("+inff"))
+	{
+		str = std::numeric_limits<float>::max();
 		return inff;
-	if (!str.compare("inf") || !str.compare("+inf") || !str.compare("-inf"))
+	}
+	else if (!str.compare("-inff"))
+	{
+		str = std::numeric_limits<float>::min();
+		return inff;
+	}
+	if (!str.compare("inf") || !str.compare("+inf"))
+	{
+		str = std::numeric_limits<double>::max();
 		return inf;
+	}
+	else if (!str.compare("-inf"))
+	{
+		str = std::numeric_limits<double>::max();
+		return inf;
+	}
 	if (!str.compare("nan"))
+	{
+		str = std::numeric_limits<double>::quiet_NaN();
 		return nand;
+	}
 	return 0;
 }
 
@@ -115,54 +135,70 @@ bool ScalarConverter::isInt(std::string str, int &index)
 	return true;
 }
 
-bool ScalarConverter::isFloat(std::string str, int &index)
+bool ScalarConverter::isFloatOrDouble(std::string str, int &index)
 {
-	if (str[index] == '.')
+	if (str.find('.') != std::string::npos)
 	{
-		_found_dot = true;
-		index++;
-	}
-	while (str[index])
-	{
-		if (std::isdigit(str[index]))
-			index++;
-		else if (_found_dot && str[index] == 'e' && !_found_scientific_notation)
+		if (str[index] == '.')
 		{
-			_found_scientific_notation = true;	
+			_found_dot = true;
 			index++;
-			if (str[index] == '+' || str[index] == '-')
-				index++;
 		}
-		else if (str[index] == 'f' && str[index + 1] == '\0' && std::isdigit(str[index - 1]))
-			return true;
-		else
-			return false;
+		while (str[index])
+		{
+			if (std::isdigit(str[index]))
+				index++;
+			else if (_found_dot && str[index] == 'e' && !_found_scientific_notation)
+			{
+				_found_scientific_notation = true;	
+				index++;
+				if (str[index] == '+' || str[index] == '-')
+					index++;
+			}
+			else if (str[index] == 'f' && str[index + 1] == '\0' && std::isdigit(str[index - 1]))
+			{
+				_type = FLOAT_TYPE;
+				return true;
+			}
+			else if (str[index + 1] == '\0')
+			{
+				_type = DOUBLE_TYPE;
+				return true;
+			}
+			else
+				return false;
+		}
 	}
 	return false;
 }
 
-bool ScalarConverter::isDouble(std::string str, int &index)
-{
+// bool ScalarConverter::isDouble(std::string str, int &index)
+// {
 
-	while (str[index])
-	{
-		if (std::isdigit(str[index]))
-			index++;
-		else if (str[index] == '.')
-		{
-			if (_found_dot == false)
-			{
-				_found_dot = true;
-				index++;
-			}
-			else if (_found_dot == true)
-				return false;
-		}
-		else
-			return false;
-	}
-	return true;
-}
+// 	while (str[index])
+// 	{
+// 		if (std::isdigit(str[index]))
+// 			index++;
+// 		else if (str[index] == '.')
+// 		{
+// 			if (_found_dot == false)
+// 			{
+// 				_found_dot = true;
+// 				index++;
+// 			}
+// 			else if (_found_dot == true)
+// 				return false;
+// 		}
+// 		else
+// 			return false;
+// 	}
+// 	return true;
+// }
+
+// void ScalarConverter::check_limits(std::string str)
+// {
+
+// }
 
 void	ScalarConverter::castToChar(std::string str)
 {
@@ -221,7 +257,7 @@ void	ScalarConverter::castToDouble(std::string str)
 	{
 		double result = std::stod(str);
 		// Check for overflow or underflow
-		if (result >= DBL_MAX || result <= DBL_MIN)
+		if (_type != inf && (result >= DBL_MAX || result <= DBL_MIN))
 		{
 			throw std::out_of_range("Overflow");
 		}
@@ -229,7 +265,7 @@ void	ScalarConverter::castToDouble(std::string str)
 	}
 	catch(std::exception &e)
 	{
-		std::cout << "Invalid input: " << e.what() << std::endl;
+		std::cout << "Out of range" << std::endl;
 	}
 	}
 	if (!_double_possible)
