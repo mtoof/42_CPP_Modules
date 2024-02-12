@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:57:31 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/11 22:12:41 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/12 17:18:53 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef enum e_inputtype
 	DOUBLE_TYPE,
 	inff,
 	inf,
-	nan,
+	nand,
 } t_inputtype;
 
 class ScalarConverter
@@ -45,15 +45,16 @@ private:
 	static bool isFloat(std::string str, int &index);
 	static bool isDouble(std::string str, int &index);
 	static int isLiteral(std::string str);
-	static void	printout(std::string str);
-	static void castFromChar(char);
-	static void castFromInt(std::string str);
-	static void castFromFloat(std::string str);
-	static void castFromDouble(std::string str);
+	
+	static void castToChar(std::string str);
+	static void castToInt(std::string str);
+	static void castToFloat(std::string str);
+	static void castToDouble(std::string str);
 
 	static short _type;
 	static char	_sign;
 	static bool _found_dot;
+	static bool _found_scientific_notation;
 	static bool _char_possible;
 	static bool _int_possible;
 	static bool _float_possible;
