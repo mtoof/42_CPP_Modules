@@ -6,13 +6,13 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 14:53:08 by mtoof             #+#    #+#              #
-#    Updated: 2024/02/11 11:25:18 by mtoof            ###   ########.fr        #
+#    Updated: 2024/02/13 16:36:39 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =  
+NAME = identify
 
-SRC = main.cpp
+SRC = main.cpp Base.cpp
 SRC_DIR = src/
 HEADER = header/
 FLAG =  -Wall -Wextra -Werror -std=c++14
