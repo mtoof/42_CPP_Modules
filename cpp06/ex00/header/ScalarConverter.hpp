@@ -51,7 +51,7 @@ private:
 	static void castToFloat(std::string str);
 	static void castToDouble(std::string str);
 
-	// static void check_limits(std::string str);
+	static void check_limits(std::string str);
 
 	static short _type;
 	static char	_sign;

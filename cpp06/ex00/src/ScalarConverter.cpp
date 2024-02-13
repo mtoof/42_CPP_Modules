@@ -48,7 +48,7 @@ void ScalarConverter::converter(std::string str)
 	int index = 0;
 	isSign(str, index);
 	getType(str, index);
-	// check_limits(str);
+	check_limits(str);
 	castToChar(str);
 	castToInt(str);
 	castToFloat(str);
@@ -58,19 +58,18 @@ void ScalarConverter::converter(std::string str)
 void ScalarConverter::getType(std::string str, int index)
 {
 	_type = isLiteral(str);
-	if (_type)
-	{
-		_char_possible = false;
-		_int_possible = false;
-	}
 	if (!_type)
 	{
 		if (isChar(str)) _type = CHAR_TYPE;
 		if (isInt(str, index))	_type = INT_TYPE;
 		isFloatOrDouble(str, index);
+
 		if (!_type)
 		{
-			//Change it to invalid
+			_char_invalid = true;
+			_int_invalid = true;
+			_float_invalid = true;
+			_double_invalid = true;
 		}
 	}
 }
@@ -86,31 +85,12 @@ void ScalarConverter::isSign(std::string str, int &index)
 
 int ScalarConverter::isLiteral(std::string &str)
 {
-	if (!str.compare("inff") || !str.compare("+inff"))
-	{
-		str = std::numeric_limits<float>::max();
+	if (!str.compare("inff") || !str.compare("+inff") || !str.compare("-inff"))
 		return inff;
-	}
-	else if (!str.compare("-inff"))
-	{
-		str = std::numeric_limits<float>::min();
-		return inff;
-	}
-	if (!str.compare("inf") || !str.compare("+inf"))
-	{
-		str = std::numeric_limits<double>::max();
+	if (!str.compare("inf") || !str.compare("+inf") || !str.compare("-inf"))
 		return inf;
-	}
-	else if (!str.compare("-inf"))
-	{
-		str = std::numeric_limits<double>::max();
-		return inf;
-	}
 	if (!str.compare("nan"))
-	{
-		str = std::numeric_limits<double>::quiet_NaN();
 		return nand;
-	}
 	return 0;
 }
 
@@ -148,61 +128,89 @@ bool ScalarConverter::isFloatOrDouble(std::string str, int &index)
 		{
 			if (std::isdigit(str[index]))
 				index++;
-			else if (_found_dot && str[index] == 'e' && !_found_scientific_notation)
+			if (_found_dot && str[index] == 'e' && !_found_scientific_notation)
 			{
 				_found_scientific_notation = true;	
 				index++;
+				if (str[index + 1] == '\0')
+					return false;
 				if (str[index] == '+' || str[index] == '-')
 					index++;
 			}
-			else if (str[index] == 'f' && str[index + 1] == '\0' && std::isdigit(str[index - 1]))
+			if (str[index] == 'f' && str[index + 1] == '\0' && std::isdigit(str[index - 1]))
 			{
 				_type = FLOAT_TYPE;
 				return true;
 			}
-			else if (str[index + 1] == '\0')
+			if (str[index] == '\0')
 			{
 				_type = DOUBLE_TYPE;
 				return true;
 			}
-			else
+			if(!std::isdigit(str[index]))
 				return false;
 		}
 	}
 	return false;
 }
 
-// bool ScalarConverter::isDouble(std::string str, int &index)
-// {
+void	ScalarConverter::check_limits(std::string str)
+{
+	switch(_type)
+	{
+		case CHAR_TYPE:
+			if (str.length() == 1 && isprint(str.at(0)) && isalpha(str.at(0)))
+				_char_possible = true;
+			else
+				_char_possible = false;
+			break;
+		case INT_TYPE:
+		case FLOAT_TYPE:
+		case DOUBLE_TYPE:
+		{
+			try
+			{
+				double result = std::stod(str);
+				if (result >= DBL_MAX || result <= DBL_MIN)
+				{
+					_char_invalid = false;
+					_int_invalid = false;
+					_float_invalid = false;
+					_double_invalid = false;
+				}
+				if (result < INT_MIN || result > INT_MAX)
+					_int_invalid = false;
+				if (result < FLT_MIN || result > FLT_MAX)
+					_float_invalid = false;
+				_char_possible = false;
+			}
+			catch(const std::exception& e)
+			{
+				std::cerr << "Out of range value" << std::endl;
+				_char_invalid = true;
+				_int_invalid = true;
+				_float_invalid = true;
+				_double_invalid = true;
+			}
+			break;
+		}
+		case inff:
+		case inf:
+		case nand:
+			_char_possible = false;
+			_int_possible = false;
+			break;
 
-// 	while (str[index])
-// 	{
-// 		if (std::isdigit(str[index]))
-// 			index++;
-// 		else if (str[index] == '.')
-// 		{
-// 			if (_found_dot == false)
-// 			{
-// 				_found_dot = true;
-// 				index++;
-// 			}
-// 			else if (_found_dot == true)
-// 				return false;
-// 		}
-// 		else
-// 			return false;
-// 	}
-// 	return true;
-// }
-
-// void ScalarConverter::check_limits(std::string str)
-// {
-
-// }
-
+	}
+}
 void	ScalarConverter::castToChar(std::string str)
 {
 	std::cout << "char: ";
+	if (_char_invalid)
+	{
+		std::cout << "Invalid input" << std::endl;
+		return;
+	}
 	if (!_char_possible && !isprint(str.at(0)))
 		std::cout << "Non displayable" << std::endl;
 	else if (_char_possible && !isprint(str.at(0)))
@@ -210,18 +218,33 @@ void	ScalarConverter::castToChar(std::string str)
 	else if (!_char_possible || str.length() > 1)
 		std::cout << "impossible" << std::endl;
 	if (str.length() == 1 && _char_possible)
+	try
+	{
 		std::cout << (static_cast <char>(str.at(0))) << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << "Invalid input" << std::endl;
+	}
 }
 
 void	ScalarConverter::castToInt(std::string str)
 {
 	std::cout << "int: ";
+	if (_int_invalid)
+	{
+		std::cout << "Invalid input" << std::endl;
+		return;
+	}
 	if (!_int_possible)
 		std::cout << "impossible" << std::endl;
 	if (_int_possible)
 	try
 	{
-		std::cout << (static_cast <int> (std::stoi(str.c_str()))) << std::endl;
+		if (_type == CHAR_TYPE)
+			std::cout << (static_cast <int> (str.at(0))) << std::endl;
+		else
+			std::cout << (static_cast <int> (std::stoi(str))) << std::endl;
 	}
 	catch (std::exception &e)
 	{
@@ -232,11 +255,19 @@ void	ScalarConverter::castToInt(std::string str)
 void	ScalarConverter::castToFloat(std::string str)
 {
 	std::cout <<  "float: ";
+	if (_float_invalid)
+	{
+		std::cout << "Invalid input" << std::endl;
+		return ;
+	}
 	if (_float_possible)
 	{
 		try
 		{
-			std::cout << (static_cast <float> (std::stof(str.c_str())));
+			if (_type == CHAR_TYPE)
+				std::cout << (static_cast <float> (str.at(0)));
+			else
+				std::cout << (static_cast <float> (std::stof(str.c_str())));
 			std::cout << "f" << std::endl;
 		}
 		catch(std::exception &e)
@@ -251,17 +282,22 @@ void	ScalarConverter::castToFloat(std::string str)
 void	ScalarConverter::castToDouble(std::string str)
 {
 	std::cout <<  "double: ";
+	if (_double_invalid)
+	{
+		std::cout << "Invalid input" << std::endl;
+		return ;
+	}
 	if (_double_possible)
 	{
 	try
 	{
-		double result = std::stod(str);
-		// Check for overflow or underflow
-		if (_type != inf && (result >= DBL_MAX || result <= DBL_MIN))
+		if (_type == CHAR_TYPE)
+			std::cout << (static_cast<double>(str.at(0))) << std::endl;
+		else
 		{
-			throw std::out_of_range("Overflow");
+			double result = std::stod(str);
+			std::cout << static_cast<double>(result) << std::endl;
 		}
-		std::cout << static_cast<double>(result) << std::endl;
 	}
 	catch(std::exception &e)
 	{
