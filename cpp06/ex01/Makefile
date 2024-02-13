@@ -12,9 +12,9 @@
 
 
 
-NAME = 
+NAME = serialization
 
-SRC = main.cpp
+SRC = main.cpp Serializer.cpp
 SRC_DIR = src/
 HEADER = header/
 FLAG =  -Wall -Wextra -Werror -std=c++14
