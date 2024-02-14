@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:57:31 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/12 22:58:07 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/14 13:40:52 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@
 #include <iomanip>
 #include <string>
 #include <sstream>
-#include <limits>
+#include <climits>
+#include <cfloat>
+#include <cmath>
+#include <stdexcept>
+#include <sstream>
 
 typedef enum e_inputtype
 {

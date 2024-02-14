@@ -6,15 +6,11 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:57:21 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/12 22:58:15 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/14 13:44:59 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
-#include <cfloat>
-#include <cmath>
-#include <stdexcept>
-#include <sstream>
 
 short ScalarConverter::_type = 0;
 char ScalarConverter::_sign = '\0';
@@ -211,7 +207,7 @@ void	ScalarConverter::castToChar(std::string str)
 		std::cout << "Invalid input" << std::endl;
 		return;
 	}
-	if (!_char_possible && !isprint(str.at(0)))
+	if (_type != CHAR_TYPE)
 		std::cout << "Non displayable" << std::endl;
 	else if (_char_possible && !isprint(str.at(0)))
 		std::cout << "Non displayable" << std::endl;
