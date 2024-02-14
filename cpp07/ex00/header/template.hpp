@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Template.hpp                                       :+:      :+:    :+:   */
+/*   template.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:54:58 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/14 14:32:09 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/14 15:55:05 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ void swap(T &a, T &b)
 
 
 template <typename T>
-T min(T a, T b)
+const T &min(const T &a, const T &b)
 {
 	return a < b ? a: b;
 }
 
 template <typename T>
-T max(T a, T b)
+const T &max(const T &a, const T &b)
 {
 	return a > b ? a: b;
 }

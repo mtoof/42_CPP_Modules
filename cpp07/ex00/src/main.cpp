@@ -6,11 +6,11 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:56:19 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/14 13:56:32 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/14 15:51:49 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Template.hpp"
+#include "template.hpp"
 
 int main( void ) {
 	int a = 2;
