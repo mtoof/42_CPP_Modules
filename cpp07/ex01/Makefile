@@ -6,11 +6,11 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 14:53:26 by mtoof             #+#    #+#              #
-#    Updated: 2024/02/14 16:20:11 by mtoof            ###   ########.fr        #
+#    Updated: 2024/02/15 14:21:04 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = template_ex01
+NAME = iter
 
 SRC = main.cpp
 SRC_DIR = src/
