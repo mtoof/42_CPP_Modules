@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 15:40:45 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/13 17:57:56 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/15 17:42:11 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 #include "B.hpp"
 #include "C.hpp"
 
-Base::~Base(){}
+Base::~Base() {}
 
-Base	*Base::generate(void)
+Base *Base::generate(void)
 {
 	std::random_device rd;
 	std::mt19937 generator(rd());
@@ -25,35 +25,56 @@ Base	*Base::generate(void)
 	Base *ptr = nullptr;
 	switch (distributor(generator))
 	{
-		case 1:
-			ptr = new A();
-			break;
-		case 2:
-			ptr = new B();
-			break;
-		case 3:
-			ptr = new C();
-			break;
+	case 1:
+		ptr = new A();
+		break;
+	case 2:
+		ptr = new B();
+		break;
+	case 3:
+		ptr = new C();
+		break;
 	}
 	return (ptr);
 }
 
-void	Base::identify(Base* p)
+void Base::identify(Base *p)
 {
 	if (p)
 	{
-		if (dynamic_cast<A*>(p))
-			std::cout << "A" <<std::endl;
-		else if (dynamic_cast<B*>(p))
-			std::cout << "B" <<std::endl;
-		else if (dynamic_cast<C*>(p))
-			std::cout << "C" <<std::endl;
+		if (dynamic_cast<A *>(p))
+			std::cout << "A" << std::endl;
+		else if (dynamic_cast<B *>(p))
+			std::cout << "B" << std::endl;
+		else if (dynamic_cast<C *>(p))
+			std::cout << "C" << std::endl;
 	}
 }
 
-void	Base::identify(Base& p)
+void Base::identify(Base &p)
 {
-	try{(void)dynamic_cast<A&>(p);std::cout << "A" << std::endl;}catch(std::exception &e){};
-	try{(void)dynamic_cast<B&>(p);std::cout << "B" << std::endl;}catch(std::exception &e){};
-	try{(void)dynamic_cast<C&>(p);std::cout << "C" << std::endl;}catch(std::exception &e){};
+	try
+	{
+		(void)dynamic_cast<A &>(p);
+		std::cout << "A" << std::endl;
+	}
+	catch (std::exception &e)
+	{
+	};
+	try
+	{
+		(void)dynamic_cast<B &>(p);
+		std::cout << "B" << std::endl;
+	}
+	catch (std::exception &e)
+	{
+	};
+	try
+	{
+		(void)dynamic_cast<C &>(p);
+		std::cout << "C" << std::endl;
+	}
+	catch (std::exception &e)
+	{
+	};
 }

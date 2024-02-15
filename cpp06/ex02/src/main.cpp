@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 16:23:02 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/14 13:49:30 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/15 17:42:39 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int main()
 	ptr.identify(&b);
 	std::cout << "c = ";
 	ptr.identify(&c);
-	std::cout << "\n" << std::endl;
+	std::cout << "\n"
+			  << std::endl;
 	ptr1->identify(ptr1);
 
 	delete ptr1;

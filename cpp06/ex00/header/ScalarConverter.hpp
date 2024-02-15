@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/09 14:57:31 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/14 13:40:52 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/15 17:43:28 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ private:
 	static bool isInt(std::string str, int &index);
 	static bool isFloatOrDouble(std::string str, int &index);
 	// static bool isDouble(std::string str, int &index);
-	static int 	isLiteral(std::string &str);
-	
+	static int isLiteral(std::string &str);
+
 	static void castToChar(std::string str);
 	static void castToInt(std::string str);
 	static void castToFloat(std::string str);
@@ -58,7 +58,7 @@ private:
 	static void check_limits(std::string str);
 
 	static short _type;
-	static char	_sign;
+	static char _sign;
 	static bool _found_dot;
 	static bool _found_scientific_notation;
 	static bool _char_possible;
@@ -69,7 +69,7 @@ private:
 	static bool _int_invalid;
 	static bool _float_invalid;
 	static bool _double_invalid;
-	
+
 public:
 	static void converter(std::string str);
 };

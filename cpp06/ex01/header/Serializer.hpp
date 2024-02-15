@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 13:44:50 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/13 14:06:16 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/15 17:43:09 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ private:
 	Serializer(Serializer const &rhs);
 	Serializer &operator=(Serializer const &rhs);
 	~Serializer();
+
 public:
-	static uintptr_t serialize(Data* ptr);
-	static Data* deserialize(uintptr_t raw);
+	static uintptr_t serialize(Data *ptr);
+	static Data *deserialize(uintptr_t raw);
 };
 
 #endif
