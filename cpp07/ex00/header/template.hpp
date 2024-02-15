@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 13:54:58 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/14 15:55:05 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/15 17:41:53 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,26 @@
 
 #include <iostream>
 
-
-
-template <typename T> 
+template <typename T>
 void swap(T &a, T &b)
 {
 	T tmp;
-	
+
 	tmp = a;
 	a = b;
 	b = tmp;
-} 
-
+}
 
 template <typename T>
 const T &min(const T &a, const T &b)
 {
-	return a < b ? a: b;
+	return a < b ? a : b;
 }
 
 template <typename T>
 const T &max(const T &a, const T &b)
 {
-	return a > b ? a: b;
+	return a > b ? a : b;
 }
 
 #endif
