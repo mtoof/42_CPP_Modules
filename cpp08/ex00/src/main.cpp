@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 19:01:20 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/15 20:02:57 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/16 17:13:56 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@ int main()
 	std::uniform_int_distribution<int> dis(1, 100);
 	
 	std::vector<int> vec1;
+	int random_nb;
 	for (int index = 0; index < 10; index++)
 	{
-		vec1.push_back(dis(genetrator));
+		random_nb = dis(genetrator);
+		vec1.push_back(random_nb);
 	}
+	std::cout << "last random number was :" << random_nb << std::endl;
 	try
 	{
-		::easyfind(vec1, 10);
+		::easyfind(vec1, random_nb);
 	}
 	catch(const std::exception& e)
 	{
