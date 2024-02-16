@@ -6,13 +6,13 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 14:53:26 by mtoof             #+#    #+#              #
-#    Updated: 2024/02/15 18:05:55 by mtoof            ###   ########.fr        #
+#    Updated: 2024/02/16 12:21:28 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 
+NAME = span
 
-SRC = main.cpp
+SRC = main.cpp Span.cpp
 SRC_DIR = src/
 HEADER = header/
 FLAG =  -Wall -Wextra -Werror -std=c++14
