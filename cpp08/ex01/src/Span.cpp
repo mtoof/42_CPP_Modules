@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:12:26 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/19 17:49:32 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/19 18:00:08 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ std::vector<int>::const_iterator Span::getEnd() const
 
 std::vector<int>::const_iterator Span::getPos(unsigned int position) const
 {
-	if (this->_vec.begin() + position != this->_vec.end())
+	if (this->_vec.begin() + position < this->_vec.end())
 		return (this->_vec.begin() + position);
 	else
 		throw InvalidIndexException();	
