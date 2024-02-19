@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:19:11 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/19 18:01:30 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/19 18:39:24 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ int main()
 	Span sp3(3);
 	sp3.addNumber(14);
 	sp3.addNumber(15);
-	sp3.addNumber(16);
+	// sp3.addNumber(16);
 	try
 	{
-		sp2.addNumber(sp2.getPos(1), sp3.getBegin(), sp3.getEnd());
+		sp2.addNumber(sp2.getPos(2), sp3.getBegin(), sp3.getEnd());
 		// sp2.addNumber(sp2.getPos(1), sp3.getBegin(), sp3.getEnd() - 1);
 	}
 	catch(const std::exception &e)

@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:12:26 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/19 18:00:08 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/19 18:39:43 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,9 @@ void Span::addNumber(int number)
 
 void Span::addNumber(std::vector<int>::const_iterator position, std::vector<int>::const_iterator begin, std::vector<int>::const_iterator end)
 {
-	if (position >= this->_vec.end())
-		throw InvalidIndexException();
 	ptrdiff_t dis = std::distance(begin, end);
 	if (dis + this->_vec.size() <= this->_size)
-	{
 		_vec.insert(position, begin, end);
-	}
 	else
 		throw SizeExpection();
 }
@@ -131,7 +127,7 @@ std::vector<int>::const_iterator Span::getEnd() const
 
 std::vector<int>::const_iterator Span::getPos(unsigned int position) const
 {
-	if (this->_vec.begin() + position < this->_vec.end())
+	if (this->_vec.begin() + position <= this->_vec.end())
 		return (this->_vec.begin() + position);
 	else
 		throw InvalidIndexException();	
