@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:19:11 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/16 17:08:51 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/19 17:47:42 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int main()
 {
-
 	std::cout << "First test\n" << std::endl;
 	Span sp = Span(5);
 	try
@@ -46,13 +45,34 @@ int main()
 	Span sp1 = Span(1);
 	try
 	{
-		sp.addNumber(11);
-		sp.addNumber(25);
+		sp1.addNumber(11);
+		sp1.addNumber(25);
 	}
 	catch(const std::exception &e)
 	{
 		std::cerr << e.what() << '\n';
 	}
+	sp1.print();
+
 	std::cout << "=======================================" << std::endl;
+	std::cout << "Forth test\n" << std::endl;
+	Span sp2(4);
+	sp2.addNumber(12);
+	sp2.addNumber(13);
+
+	Span sp3(3);
+	sp3.addNumber(14);
+	sp3.addNumber(15);
+	sp3.addNumber(16);
+	try
+	{
+		sp2.addNumber(sp2.getPos(1), sp3.getBegin(), sp3.getEnd());
+	}
+	catch(const std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	sp2.print();
+		
 	return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 20:12:26 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/16 17:02:06 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/19 17:49:32 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Span::Span()
 Span::Span(unsigned int N)
 {
 	_size = N;
-	_vec.reserve(N);
+	
 }
 
 Span::Span(Span const &rhs)
@@ -50,7 +50,7 @@ Span::~Span()
 
 int &Span::operator[](unsigned int index)
 {
-	if (index < _size)
+	if (_vec.begin()+index != _vec.end())
 		return _vec.at(index);
 	else
 		throw InvalidIndexException();
@@ -58,8 +58,21 @@ int &Span::operator[](unsigned int index)
 
 void Span::addNumber(int number)
 {
-	if (this->_vec.size() < this->_size)
+	if (_vec.size() < _size)
 		_vec.push_back(number);
+	else
+		throw SizeExpection();
+}
+
+void Span::addNumber(std::vector<int>::const_iterator position, std::vector<int>::const_iterator begin, std::vector<int>::const_iterator end)
+{
+	if (position >= this->_vec.end())
+		throw InvalidIndexException();
+	ptrdiff_t dis = std::distance(begin, end);
+	if (dis + this->_vec.size() <= this->_size)
+	{
+		_vec.insert(position, begin, end);
+	}
 	else
 		throw SizeExpection();
 }
@@ -93,9 +106,40 @@ int Span::longestSpan()
 	return (tmp.back() - tmp.front());
 }
 
+unsigned int Span::getSize() const
+{
+	return _size;
+}
+
+void Span::print() const
+{
+	std::vector<int>::const_iterator it;
+	for (it = _vec.begin() ; it != _vec.end(); it++)
+		std::cout << *it << ' ';
+	std::cout << std::endl;
+}
+
+std::vector<int>::const_iterator Span::getBegin() const
+{
+	return (this->_vec.begin());
+}
+
+std::vector<int>::const_iterator Span::getEnd() const
+{
+	return (this->_vec.end());
+}
+
+std::vector<int>::const_iterator Span::getPos(unsigned int position) const
+{
+	if (this->_vec.begin() + position != this->_vec.end())
+		return (this->_vec.begin() + position);
+	else
+		throw InvalidIndexException();	
+}
+
 const char *Span::InvalidIndexException::what() const noexcept
 {
-	return ("Invalid index");
+	return ("***Invalid index***");
 }
 
 const char *Span::NotEnoughItemException::what() const noexcept
@@ -105,10 +149,10 @@ const char *Span::NotEnoughItemException::what() const noexcept
 
 const char *Span::SizeExpection::what() const noexcept
 {
-	return ("No empty space in the Container");
+	return ("The Container does not have enough space!!!");
 }
 
 const char *Span::InvalidInputException::what() const noexcept
 {
-	return ("Invalid Input");
+	return ("Invalid Input!!!");
 }
