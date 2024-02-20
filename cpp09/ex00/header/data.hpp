@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   data.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 18:43:14 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/20 23:14:06 by mtoof            ###   ########.fr       */
+/*   Created: 2024/02/20 20:56:08 by mtoof             #+#    #+#             */
+/*   Updated: 2024/02/20 23:13:28 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "data.hpp"
+#ifndef DATA_HPP
+#define DATA_HPP
 
-int main(int ac, char **av)
-{
-	if (ac != 2)
-	{
-		std::cout << "<input file> is missing" << std::endl;
-		std::cout << av[0] << " <input file>" << std::endl;
-		return -1;
-	}
-	std::map<std::string, std::string> map;
-	dataBase();
-	// extract_data(av[1]);
-	return (0);
-}
+#include <string>
+#include <sstream>
+#include <iostream>
+#include <map>
+#include <fstream>
+#include <utility>
+
+std::stringstream dataBase();
+
+#endif
