@@ -6,11 +6,11 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 14:53:26 by mtoof             #+#    #+#              #
-#    Updated: 2024/02/15 18:05:58 by mtoof            ###   ########.fr        #
+#    Updated: 2024/02/20 11:40:05 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 
+NAME = mutantstack
 
 SRC = main.cpp
 SRC_DIR = src/
