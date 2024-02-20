@@ -6,7 +6,7 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 15:49:42 by mtoof             #+#    #+#              #
-#    Updated: 2024/02/12 12:03:09 by mtoof            ###   ########.fr        #
+#    Updated: 2024/02/20 16:51:59 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME =  intern
 SRC = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp Intern.cpp
 SRC_DIR = src/
 HEADER = header/
-FLAG =  -Wall -Wextra -Werror -std=c++14
+FLAG =  -Wall -Wextra -Werror -std=c++17
 OBJ_DIR = obj/
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 OBJS = $(SRCS:$(SRC_DIR)%.cpp=$(OBJ_DIR)%.o)

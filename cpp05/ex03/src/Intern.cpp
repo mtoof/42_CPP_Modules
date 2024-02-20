@@ -6,12 +6,12 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:12:42 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/08 12:23:23 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/20 17:23:37 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/Intern.hpp"
-#include <unordered_map>
+#include <functional>
 
 Intern::Intern()
 {
@@ -24,22 +24,32 @@ Intern::Intern(Intern const &rhs)
 	*this = rhs;
 }
 
-Intern	&Intern::operator=(Intern const &rhs)
+Intern &Intern::operator=(Intern const &rhs)
 {
 	std::cout << "Intern copy assignment operator called" << std::endl;
 	(void)rhs;
 	return (*this);
 }
 
-
 Intern::~Intern()
 {
 	std::cout << "Intern destructor called" << std::endl;
 }
 
+using FormCreatorFunction = std::function<std::shared_ptr<AForm>(std::string)>;
 
-#define MAKE_FORM(Name) \
-    [](const std::string& target) -> std::shared_ptr<AForm> { return std::make_shared<Name>(target); }
+static std::shared_ptr<AForm> create_shrubbery(std::string form_name)
+{
+	return std::make_shared<ShrubberyCreationForm>(form_name);
+}
+static std::shared_ptr<AForm> create_roboto(std::string form_name)
+{
+	return std::make_shared<RobotomyRequestForm>(form_name);
+}
+static std::shared_ptr<AForm> create_presidential(std::string form_name)
+{
+	 return std::make_shared<PresidentialPardonForm>(form_name);
+}
 
 std::shared_ptr<AForm> Intern::makeForm(std::string form_name, std::string target)
 {
@@ -48,18 +58,26 @@ std::shared_ptr<AForm> Intern::makeForm(std::string form_name, std::string targe
 		std::cout << RED "The Intern can't make any Forms without having names for Form and target" RESET << std::endl;
 		return nullptr;
 	}
-	
-    static std::unordered_map<std::string, std::function<std::shared_ptr<AForm>(const std::string&)>> formFactories = {
-        {"shrubbery creation", MAKE_FORM(ShrubberyCreationForm)},
-        {"robotomy request", MAKE_FORM(RobotomyRequestForm)},
-        {"presidential pardon", MAKE_FORM(PresidentialPardonForm)}
-    };
-	
-	auto item = formFactories.find(form_name);
-	if (item != formFactories.end())
+
+	FormCreatorFunction formCreators[] = {
+		create_shrubbery,
+		create_roboto,
+		create_presidential
+	};
+
+	std::string forms[] = {
+		"shrubbery creation",
+		"robotomy request",
+		"presidential pardon",
+	};
+
+	for (int index = 0; index < 3; index++)
 	{
-		std::cout << GREEN "Intern creates " << BLUE << form_name << GREEN " for " BLUE << target <<RESET << std::endl;
-		return item->second(target);
+		if (form_name == forms[index])
+		{
+			std::cout << GREEN "Intern creates " << BLUE << form_name << GREEN " for " BLUE << target << RESET << std::endl;
+			return formCreators[index](target);
+		}
 	}
 	std::cout << RED "Intern couldn't create the " << BLUE << form_name << RED " because the form is undefined and not exist." RESET << std::endl;
 	return (nullptr);
