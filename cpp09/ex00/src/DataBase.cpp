@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:01:00 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/21 14:34:00 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/21 14:38:18 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ void DataBase::readDataFile()
 		getline(data, value, '\n');
 		if (counter == 1 && key == "date")
 			continue;
-		std::cout << value << std::endl;
-		if (!key.empty() && !value.empty())
+		if (key.empty() || value.empty())
+			throw InvalidDataException();
+		else if (!key.empty() && !value.empty())
 			_btc_database.insert(std::pair<std::string, std::string>(key, value));
 	}
 	checkData();
