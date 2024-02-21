@@ -6,11 +6,11 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:43:14 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/20 23:14:06 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/21 12:17:06 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "data.hpp"
+#include "DataBase.hpp"
 
 int main(int ac, char **av)
 {
@@ -20,8 +20,14 @@ int main(int ac, char **av)
 		std::cout << av[0] << " <input file>" << std::endl;
 		return -1;
 	}
-	std::map<std::string, std::string> map;
-	dataBase();
-	// extract_data(av[1]);
+	DataBase database;
+	try
+	{
+		database.readDataFile();
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 	return (0);
 }
