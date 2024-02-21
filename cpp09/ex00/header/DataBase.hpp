@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:56:22 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/21 14:09:08 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/21 16:59:20 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 #include <iostream>
 #include <map>
 #include <fstream>
-#include <time.h>
+#include <ctime>
 #include <exception>
 #include <utility>
+#include <regex>
 
 class DataBase
 {
@@ -46,6 +47,8 @@ public:
 		public:
 			const char* what() const noexcept;
 	};
+	void getDataBase() const;
+	void printDataBase() const;
 };
 
 #endif

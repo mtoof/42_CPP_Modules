@@ -6,11 +6,11 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:43:14 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/21 12:17:06 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/21 17:16:15 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "DataBase.hpp"
+#include "../header/DataBase.hpp"
 
 int main(int ac, char **av)
 {
@@ -29,5 +29,6 @@ int main(int ac, char **av)
 	{
 		std::cout << e.what() << std::endl;
 	}
+
 	return (0);
 }
