@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:01:00 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/22 18:30:43 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/22 23:41:53 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,22 @@ void DataBase::readDataFile()
 	}
 	std::stringstream data;
 	data << fd.rdbuf();
-	std::string key;
-	std::string value;
+	std::string key, value;
+
 	int counter = 0;
 	while (!data.eof())
 	{
 		counter++;
-		std::string line;
-		getline(data, line);
-		std::regex regex_format("^\\d{4}-\\d{2}-\\d{2},\\d+(\\.\\d+)?$"); // need to separate it to two expression one for key and another one for the value
-		std::smatch match;
 		// check format
-		if (counter != 1 && std::regex_match(line, match, regex_format) == false)
-		{
-			std::cout << line << std::endl;
-			throw InvalidDataException();
-		}
-		getline(data, key, ',');
-		getline(data, value, '\n');
+		std::istream& key_result = getline(data, key, ',');
+		std::istream& value_result = getline(data, value, '\n');
 		if (counter == 1 && key == "date")
 			continue;
+		if (key_result.fail() || value_result.fail())
+		{
+			std::cerr << key << " => at line " << counter << std::endl;
+			throw InvalidDataException();
+		}
 		if (key.empty() || value.empty())
 			throw InvalidDataException();
 		else if (!key.empty() && !value.empty())
@@ -199,7 +195,7 @@ void DataBase::checkRateValue(std::string str)
 
 const char *DataBase::InvalidDataException::what() const noexcept
 {
-	return ("Invalid database file, Found an unusual character!!!");
+	return ("Invalid database file, Found an unusual character(s)!!!");
 }
 
 const char *DataBase::FileNotExistException::what() const noexcept
