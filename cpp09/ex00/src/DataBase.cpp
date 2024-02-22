@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:01:00 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/21 17:27:14 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/22 13:00:32 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,12 @@ void DataBase::readDataFile()
 		if (key.empty() || value.empty())
 			throw InvalidDataException();
 		else if (!key.empty() && !value.empty())
+		{
+			//Check for duplication before insert the pair
+			if (_btc_database.find(key) != _btc_database.end())
+				throw DuplicatedkeyException();
 			_btc_database.insert(std::pair<std::string, std::string>(key, value));
+		}
 	}
 	checkData();
 }
@@ -76,19 +81,6 @@ void DataBase::checkDateValue(std::string str)
 		throw InvalidDataException();
 	if (std::regex_match(str, match, regex_format) == false)
 		throw InvalidDataException();
-	int day = 0;
-	try
-	{
-		// int year = std::stoi(match[0]);
-		// int month = std::stoi(match[1]);
-		day = atoi(match[2].str().c_str());
-		if (day > 31)
-			throw InvalidDataException();
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
 }
 
 void DataBase::checkRateValue(std::string str)
@@ -125,6 +117,11 @@ const char* DataBase::InvalidDataException::what() const noexcept
 const char* DataBase::FileNotExistException::what() const noexcept
 {
 	return ("data.csv File does not exist!!!");
+}
+
+const char* DataBase::DuplicatedkeyException::what() const noexcept
+{
+	return ("Found duplicated key!!!");
 }
 
 void DataBase::printDataBase() const
