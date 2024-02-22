@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:01:00 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/22 13:00:32 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/22 13:07:34 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,15 @@ void DataBase::checkDateValue(std::string str)
 	std::regex regex_format("^\\d{4}-\\d{1,2}-\\d{1,2}$");
 	std::smatch match;
 	if (strptime(str.c_str(), format, &date) == NULL)
-		throw InvalidDataException();
+	{
+		std::cout << str << std::endl;
+		throw InvalidDateValueException();
+	}
 	if (std::regex_match(str, match, regex_format) == false)
-		throw InvalidDataException();
+	{
+		std::cout << str << std::endl;
+		throw InvalidDateValueException();
+	}
 }
 
 void DataBase::checkRateValue(std::string str)
@@ -122,6 +128,11 @@ const char* DataBase::FileNotExistException::what() const noexcept
 const char* DataBase::DuplicatedkeyException::what() const noexcept
 {
 	return ("Found duplicated key!!!");
+}
+
+const char* DataBase::InvalidDateValueException::what() const noexcept
+{
+	return ("Found Invalid date value!!!");
 }
 
 void DataBase::printDataBase() const

@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:56:22 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/22 12:58:13 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/22 13:03:44 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ public:
 			const char* what() const noexcept;
 	};
 	class DuplicatedkeyException: public std::exception
+	{
+		public:
+			const char* what() const noexcept;
+	};
+	class InvalidDateValueException: public std::exception
 	{
 		public:
 			const char* what() const noexcept;
