@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:56:22 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/22 15:41:49 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/22 18:22:52 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ private:
 	void checkDateValue(std::string str);
 	void checkDateValueInDetail(std::string str);
 	void checkRateValue(std::string str);
+	void checkLineFormat(std::stringstream &data, int &counter);
 
 public:
 	DataBase();

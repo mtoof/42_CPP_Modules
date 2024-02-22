@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:01:00 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/22 17:56:16 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/22 18:30:43 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void DataBase::readDataFile()
 		counter++;
 		std::string line;
 		getline(data, line);
-		std::regex regex_format("^\\d{4}-\\d{2}-\\d{2},\\d+(\\.\\d+)?$");
+		std::regex regex_format("^\\d{4}-\\d{2}-\\d{2},\\d+(\\.\\d+)?$"); // need to separate it to two expression one for key and another one for the value
 		std::smatch match;
 		// check format
 		if (counter != 1 && std::regex_match(line, match, regex_format) == false)
@@ -62,8 +62,6 @@ void DataBase::readDataFile()
 			std::cout << line << std::endl;
 			throw InvalidDataException();
 		}
-		else
-			data.seekg(-line.length() - 1, std::ios::cur);
 		getline(data, key, ',');
 		getline(data, value, '\n');
 		if (counter == 1 && key == "date")
