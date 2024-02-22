@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:56:22 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/22 13:03:44 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/22 15:41:49 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ class DataBase
 {
 private:
 	std::map <std::string, std::string> _btc_database;
-	static void checkDateValue(std::string str);
-	static void checkRateValue(std::string str);
+	void checkDateValue(std::string str);
+	void checkDateValueInDetail(std::string str);
+	void checkRateValue(std::string str);
 
 public:
 	DataBase();
@@ -53,6 +54,11 @@ public:
 			const char* what() const noexcept;
 	};
 	class InvalidDateValueException: public std::exception
+	{
+		public:
+			const char* what() const noexcept;
+	};
+	class InvalidRateValueException: public std::exception
 	{
 		public:
 			const char* what() const noexcept;
