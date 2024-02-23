@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:43:14 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/23 14:02:36 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/24 00:41:50 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ int main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		std::cout << "<input file> is missing" << std::endl;
+		std::cout << "Error: could not open file." << std::endl;
 		std::cout << av[0] << " <input file>" << std::endl;
 		return -1;
 	}
 	try
 	{
 		database.readDataFile();
-		database.printDataBase();
+		database.readInputFile(av[1]);
+		// database.printDataBase();
 	}
 	catch (const std::exception &e)
 	{

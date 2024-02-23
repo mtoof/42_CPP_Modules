@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:01:00 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/23 16:26:05 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/24 00:52:02 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,17 @@ DataBase::~DataBase()
 void DataBase::readDataFile()
 {
 	std::ifstream fd;
-	fd.open("data.csv");
+	fd.open(DATABASE_FILE);
 	if (fd.fail())
+		throw FailDataFileException();
+	struct stat fileStat;
+	if (stat(DATABASE_FILE, &fileStat) == 0)
 	{
-		std::cerr << "Couldn't open the file" << std::endl;
-		throw FileNotExistException();
+		if (S_ISDIR(fileStat.st_mode))
+		{
+			std::cout << DATABASE_FILE << " is a directory." << std::endl;
+			return;
+		}
 	}
 	std::stringstream data;
 	data << fd.rdbuf();
@@ -56,8 +62,8 @@ void DataBase::readDataFile()
 		counter++;
 		// check format
 		std::string line;
-		data >> line;
-		if (line.find(',') != std::string::npos)
+		getline(data, line);
+		if (int position = line.find(',') != std::string::npos)
 		{
 			std::stringstream tmp;
 			tmp << line;
@@ -70,8 +76,68 @@ void DataBase::readDataFile()
 		bool value_result = std::regex_match(value, valueFormat);
 		if (counter == 1 && key == "date")
 			continue;
-		if (!key.empty() && !value.empty() && key_result && value_result && checkData(key, value))
+		if (!key.empty() && !value.empty() && key_result == true && value_result == true && checkData(key, value))
 			_btc_database.insert(std::pair<std::string, std::string>(key, value));
+	}
+	fd.close();
+}
+
+void DataBase::readInputFile(std::string filename)
+{
+	std::ifstream fd;
+	fd.open(filename);
+	if (fd.fail())
+	{
+		std::cerr << "Could not open the input file" << std::endl;
+		return;
+	}
+	struct stat fileStat;
+	if (stat(filename.c_str(), &fileStat) == 0)
+	{
+		if (S_ISDIR(fileStat.st_mode))
+		{
+			std::cout << filename << " is a directory." << std::endl;
+			return;
+		}
+	}
+	std::stringstream inputdata;
+	inputdata << fd.rdbuf();
+	std::string key, value;
+	char pipe;
+	std::regex keyFormat("^\\d{4}-\\d{1,2}-\\d{1,2}$");
+	std::regex valueFormat("^\\d+(.\\d+)?$");
+	int counter = 0;
+	while (!inputdata.eof())
+	{
+		counter++;
+		// check format
+		std::string line;
+		getline(inputdata, line);
+		if (line.find(" | ") != std::string::npos)
+		{
+			std::stringstream tmp;
+			tmp << line;
+			tmp >> key >> pipe >> value;
+		}
+		else
+		{
+			std::cout << "Error: bad input => " << line << std::endl;
+			continue;
+		};
+		bool key_result = std::regex_match(key, keyFormat);
+		bool value_result = std::regex_match(value, valueFormat);
+		if (counter == 1 && key == "date")
+		{
+			std::cout << line << std::endl;
+			continue;
+		}
+		if (!key.empty() && !value.empty() && key_result == true && value_result == true && checkData(key, value))
+			std::cout << key << " " << value << std::endl;
+		else
+		{
+			std::cout << "Error: bad input => " << line << std::endl;
+			continue;
+		}
 	}
 	fd.close();
 }
@@ -152,9 +218,9 @@ const char *DataBase::InvalidDataException::what() const noexcept
 	return ("Invalid database file, Found an unusual character(s)!!!");
 }
 
-const char *DataBase::FileNotExistException::what() const noexcept
+const char *DataBase::FailDataFileException::what() const noexcept
 {
-	return ("data.csv File does not exist!!!");
+	return ("Couldn't open the Database file!!!");
 }
 
 void DataBase::printDataBase() const
