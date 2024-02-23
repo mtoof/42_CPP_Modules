@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:56:22 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/22 18:22:52 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/23 15:11:33 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ class DataBase
 {
 private:
 	std::map <std::string, std::string> _btc_database;
-	void checkDateValue(std::string str);
-	void checkDateValueInDetail(std::string str);
-	void checkRateValue(std::string str);
-	void checkLineFormat(std::stringstream &data, int &counter);
+	bool checkDateValue(std::string str);
+	bool checkRateValue(std::string str);
 
 public:
 	DataBase();
@@ -38,28 +36,13 @@ public:
 	DataBase &operator=(const DataBase &rhs);
 	~DataBase();
 	void readDataFile();
-	void checkData();
+	bool checkData(std::string date, std::string rate);
 	class InvalidDataException: public std::exception
 	{
 		public:
 			const char* what() const noexcept;
 	};
 	class FileNotExistException: public std::exception
-	{
-		public:
-			const char* what() const noexcept;
-	};
-	class DuplicatedkeyException: public std::exception
-	{
-		public:
-			const char* what() const noexcept;
-	};
-	class InvalidDateValueException: public std::exception
-	{
-		public:
-			const char* what() const noexcept;
-	};
-	class InvalidRateValueException: public std::exception
 	{
 		public:
 			const char* what() const noexcept;

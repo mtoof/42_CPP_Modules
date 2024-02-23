@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 18:43:14 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/22 13:10:40 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/23 14:02:36 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int main(int ac, char **av)
 	try
 	{
 		database.readDataFile();
+		database.printDataBase();
 	}
 	catch (const std::exception &e)
 	{

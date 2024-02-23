@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:01:00 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/22 23:41:53 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/23 15:11:16 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ DataBase &DataBase::operator=(const DataBase &rhs)
 {
 	if (this != &rhs)
 	{
-		this->_btc_database.empty();
+		this->_btc_database.clear();
 		this->_btc_database = rhs._btc_database;
 	}
 	return (*this);
@@ -41,141 +41,69 @@ void DataBase::readDataFile()
 	fd.open("data.csv");
 	if (fd.fail())
 	{
-		std::cout << "Couldn't open the file" << std::endl;
+		std::cerr << "Couldn't open the file" << std::endl;
 		throw FileNotExistException();
 	}
 	std::stringstream data;
 	data << fd.rdbuf();
 	std::string key, value;
+	std::regex keyFormat("^\\d{4}-\\d{1,2}-\\d{1,2}$");
+	std::regex valueFormat("^\\d+(.\\d+)?$");
 
 	int counter = 0;
 	while (!data.eof())
 	{
 		counter++;
 		// check format
-		std::istream& key_result = getline(data, key, ',');
-		std::istream& value_result = getline(data, value, '\n');
+		getline(data, key, ',');
+		getline(data, value, '\n');
+		bool key_result = std::regex_match(key, keyFormat);
+		bool value_result = std::regex_match(value, valueFormat);
+		checkData(key, value);
 		if (counter == 1 && key == "date")
 			continue;
-		if (key_result.fail() || value_result.fail())
-		{
-			std::cerr << key << " => at line " << counter << std::endl;
-			throw InvalidDataException();
-		}
-		if (key.empty() || value.empty())
-			throw InvalidDataException();
-		else if (!key.empty() && !value.empty())
-		{
-			// Check for duplication before insert the pair
-			if (_btc_database.find(key) != _btc_database.end())
-				throw DuplicatedkeyException();
+		if (!key.empty() && !value.empty() && key_result && value_result)
 			_btc_database.insert(std::pair<std::string, std::string>(key, value));
-		}
 	}
 	fd.close();
-	checkData();
 }
 
-void DataBase::checkData()
+bool DataBase::checkData(std::string date, std::string rate)
 {
-	std::map<std::string, std::string>::const_iterator pair;
-	for (pair = _btc_database.begin(); pair != _btc_database.end(); pair++)
-	{
-		checkDateValue(pair->first);
-		checkRateValue(pair->second);
-	}
+	if (!checkDateValue(date) || !checkRateValue(rate))
+		return false;
+	return true;
 }
 
-void DataBase::checkDateValue(std::string str)
+bool DataBase::checkDateValue(std::string str)
 {
-	struct tm date;
-	const char *format = "%Y-%m-%d";
-	std::regex regex_format("^\\d{4}-\\d{1,2}-\\d{1,2}$");
-	std::smatch match;
-	// check if it's a date
-	if (strptime(str.c_str(), format, &date) == NULL)
+	int year, month, day;
+	char dash;
+	std::istringstream(str) >> year >> dash >> month >> dash >> day;
+	std::tm timeinfo{};
+	timeinfo.tm_year = year - 1900;
+	timeinfo.tm_mon = month - 1;
+	timeinfo.tm_mday = day;
+
+	if (month == 2)
 	{
-		std::cout << str << std::endl;
-		throw InvalidDateValueException();
+		int leapYear = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
+		if (day > 29 || (day == 29 && !leapYear))
+			return false; // Invalid date
 	}
-	// check format
-	if (std::regex_match(str, match, regex_format) == false)
-	{
-		std::cout << str << std::endl;
-		throw InvalidDateValueException();
-	}
-	checkDateValueInDetail(str);
+
+	std::time_t result = mktime(&timeinfo);
+	if (result == -1)
+		return false;
+	return (timeinfo.tm_year == year - 1900 &&
+			timeinfo.tm_mon == month - 1 &&
+			timeinfo.tm_mday == day);
 }
 
-void DataBase::checkDateValueInDetail(std::string str)
-{
-	std::stringstream ss;
-	std::string year, month, day;
-	ss << str;
-	while (!ss.eof())
-	{
-		getline(ss, year, '-');
-		getline(ss, month, '-');
-		getline(ss, day, '-');
-	}
-
-	int int_year = 0, int_month = 0, int_day = 0;
-	try
-	{
-		int_year = std::stoi(year);
-		int_month = std::stoi(month);
-		int_day = std::stoi(day);
-	}
-	catch (const std::exception &e)
-	{
-		throw e;
-	}
-
-	switch (int_month)
-	{
-	case 2:
-		// check for leap year
-		if ((int_year % 4 == 0 && int_year % 100 != 0) || int_year % 400 == 0)
-		{
-			if (int_day > 29)
-			{
-				std::cout << str << std::endl;
-				throw InvalidDateValueException();
-			}
-		}
-		else
-		{
-			if (int_day > 28)
-			{
-				std::cout << str << std::endl;
-				throw InvalidDateValueException();
-			}
-		}
-		break;
-	case 4:
-	case 6:
-	case 9:
-	case 11:
-		if (int_day > 30)
-		{
-			std::cout << str << std::endl;
-			throw InvalidDateValueException();
-		}
-		break;
-	default:
-		if (int_day > 31)
-		{
-			std::cout << str << std::endl;
-			throw InvalidDateValueException();
-		}
-		break;
-	}
-}
-
-void DataBase::checkRateValue(std::string str)
+bool DataBase::checkRateValue(std::string str)
 {
 	if (str.empty())
-		throw InvalidDataException();
+		return false;
 	else
 	{
 		int index = 0;
@@ -183,14 +111,15 @@ void DataBase::checkRateValue(std::string str)
 		while (str[index])
 		{
 			if (!std::isdigit(str[index]) && str[index] != '.')
-				throw InvalidDataException();
+				return false;
 			if (str[index] == '.')
 				dot++;
 			if (dot > 1)
-				throw InvalidRateValueException();
+				return false;
 			index++;
 		}
 	}
+	return true;
 }
 
 const char *DataBase::InvalidDataException::what() const noexcept
@@ -201,21 +130,6 @@ const char *DataBase::InvalidDataException::what() const noexcept
 const char *DataBase::FileNotExistException::what() const noexcept
 {
 	return ("data.csv File does not exist!!!");
-}
-
-const char *DataBase::DuplicatedkeyException::what() const noexcept
-{
-	return ("Found duplicated key!!!");
-}
-
-const char *DataBase::InvalidDateValueException::what() const noexcept
-{
-	return ("Found Invalid date value!!!");
-}
-
-const char *DataBase::InvalidRateValueException::what() const noexcept
-{
-	return ("Found Invalid exchange rate value!!!");
 }
 
 void DataBase::printDataBase() const
