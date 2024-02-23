@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:01:00 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/23 15:11:16 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/23 16:26:05 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,22 @@ void DataBase::readDataFile()
 	{
 		counter++;
 		// check format
-		getline(data, key, ',');
-		getline(data, value, '\n');
+		std::string line;
+		data >> line;
+		if (line.find(',') != std::string::npos)
+		{
+			std::stringstream tmp;
+			tmp << line;
+			getline(tmp, key, ',');
+			getline(tmp, value, '\n');
+		}
+		else
+			continue;
 		bool key_result = std::regex_match(key, keyFormat);
 		bool value_result = std::regex_match(value, valueFormat);
-		checkData(key, value);
 		if (counter == 1 && key == "date")
 			continue;
-		if (!key.empty() && !value.empty() && key_result && value_result)
+		if (!key.empty() && !value.empty() && key_result && value_result && checkData(key, value))
 			_btc_database.insert(std::pair<std::string, std::string>(key, value));
 	}
 	fd.close();
@@ -85,16 +93,33 @@ bool DataBase::checkDateValue(std::string str)
 	timeinfo.tm_mon = month - 1;
 	timeinfo.tm_mday = day;
 
-	if (month == 2)
-	{
-		int leapYear = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
-		if (day > 29 || (day == 29 && !leapYear))
-			return false; // Invalid date
-	}
+	int leapYear = (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
 
 	std::time_t result = mktime(&timeinfo);
 	if (result == -1)
 		return false;
+	switch (timeinfo.tm_mon)
+	{
+	case 1: // February
+		// Check for leap year
+		if (day > 29 || (day == 29 && !leapYear))
+		{
+			std::cout << timeinfo.tm_mon << std::endl;
+			return false; // Invalid date
+		}
+		break;
+	case 3:	 // April
+	case 5:	 // June
+	case 8:	 // September
+	case 10: // November
+		if (timeinfo.tm_mday > 30)
+			return false;
+		break;
+	default:
+		if (day > 31)
+			return false;
+		break;
+	}
 	return (timeinfo.tm_year == year - 1900 &&
 			timeinfo.tm_mon == month - 1 &&
 			timeinfo.tm_mday == day);
