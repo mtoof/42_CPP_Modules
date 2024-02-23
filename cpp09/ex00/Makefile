@@ -6,7 +6,7 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 14:53:26 by mtoof             #+#    #+#              #
-#    Updated: 2024/02/23 14:57:04 by mtoof            ###   ########.fr        #
+#    Updated: 2024/02/23 15:12:05 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = btc
 SRC = main.cpp DataBase.cpp
 SRC_DIR = src/
 HEADER = header/
-FLAG =  -Wall -Wextra -Werror -std=c++17
+FLAG =  -Wall -Wextra -Werror -std=c++14
 OBJ_DIR = obj/
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 OBJS = $(SRCS:$(SRC_DIR)%.cpp=$(OBJ_DIR)%.o)
