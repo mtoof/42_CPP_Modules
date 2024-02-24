@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:56:22 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/24 00:58:27 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/24 20:51:15 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,29 @@
 #include <utility>
 #include <regex>
 #include <sys/stat.h>
-
+#include <float.h>
 #define DATABASE_FILE "data.csv"
+enum status
+{
+	NAGAVTIVE_NUMBER,
+	TOOLARGE_NUMBER,
+	INVALID_RATE,
+	INVALID_DATE,
+	VALID_DATA,
+	INVALID_DATA,
+};
 
 class DataBase
 {
 private:
+	bool _map;
 	std::map <std::string, std::string> _btc_database;
-	bool checkDateValue(std::string str);
-	bool checkRateValue(std::string str);
+	void readfile(std::string filename, std::ifstream &fd);
+	int checkDateValue(std::string str);
+	int checkRateValue(std::string str);
+	void parseData(std::ifstream &fd);
+	void readInputFile(std::ifstream &fd);
+	int checkData(std::string date, std::string rate);
 
 public:
 	DataBase();
@@ -39,10 +53,7 @@ public:
 	DataBase &operator=(const DataBase &rhs);
 	~DataBase();
 	
-	void readDataFile();
-	void readInputFile(std::string filename);
-	bool checkData(std::string date, std::string rate);
-	void getDataBase() const;
+	void parseFile(std::string databaseFileName, std::string inputFile);
 	void printDataBase() const;
 	
 	class InvalidDataException: public std::exception
@@ -51,6 +62,11 @@ public:
 			const char* what() const noexcept;
 	};
 	class FailDataFileException: public std::exception
+	{
+		public:
+			const char* what() const noexcept;
+	};
+	class DataBaseIsDirectoryException: public std::exception
 	{
 		public:
 			const char* what() const noexcept;

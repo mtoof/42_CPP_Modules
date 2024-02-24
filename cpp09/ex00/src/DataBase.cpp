@@ -6,13 +6,13 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:01:00 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/24 00:52:02 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/24 20:57:47 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/DataBase.hpp"
 
-DataBase::DataBase()
+DataBase::DataBase(): _map(false), _btc_database()
 {
 }
 
@@ -35,27 +35,47 @@ DataBase::~DataBase()
 {
 }
 
-void DataBase::readDataFile()
+void DataBase::parseFile(std::string databaseFileName, std::string inputfile)
 {
 	std::ifstream fd;
-	fd.open(DATABASE_FILE);
+	if (_map == false)
+	{
+		readfile(databaseFileName, fd);
+		parseData(fd);
+		if (_btc_database.empty())
+			throw InvalidDataException();
+	}
+	readfile(inputfile, fd);
+	parseData(fd);
+}
+
+void DataBase::readfile(std::string filename, std::ifstream &fd)
+{
+	fd.open(filename);
 	if (fd.fail())
+	{
+		std::cout << "Error: " << filename << ", ";
 		throw FailDataFileException();
+	}
 	struct stat fileStat;
-	if (stat(DATABASE_FILE, &fileStat) == 0)
+	if (stat(filename.c_str(), &fileStat) == 0)
 	{
 		if (S_ISDIR(fileStat.st_mode))
 		{
-			std::cout << DATABASE_FILE << " is a directory." << std::endl;
-			return;
+			std::cout << filename;
+			throw DataBaseIsDirectoryException();
 		}
 	}
+}
+
+void DataBase::parseData(std::ifstream &fd)
+{
 	std::stringstream data;
 	data << fd.rdbuf();
 	std::string key, value;
 	std::regex keyFormat("^\\d{4}-\\d{1,2}-\\d{1,2}$");
 	std::regex valueFormat("^\\d+(.\\d+)?$");
-
+	std::string delimiter = (!_map) ? "," : " | ";
 	int counter = 0;
 	while (!data.eof())
 	{
@@ -63,93 +83,75 @@ void DataBase::readDataFile()
 		// check format
 		std::string line;
 		getline(data, line);
-		if (int position = line.find(',') != std::string::npos)
+		if (int position = line.find(delimiter) != std::string::npos)
 		{
 			std::stringstream tmp;
 			tmp << line;
-			getline(tmp, key, ',');
-			getline(tmp, value, '\n');
+			if (!_map)
+			{
+				getline(tmp, key, ',');
+				getline(tmp, value, '\n');
+			}
+			else
+			{
+				tmp >> key >> delimiter >> value;
+			}
 		}
 		else
+		{
+			if (_map == true)
+				std::cout << "Error: bad input => " << line << std::endl;
 			continue;
+		}
 		bool key_result = std::regex_match(key, keyFormat);
 		bool value_result = std::regex_match(value, valueFormat);
 		if (counter == 1 && key == "date")
 			continue;
-		if (!key.empty() && !value.empty() && key_result == true && value_result == true && checkData(key, value))
-			_btc_database.insert(std::pair<std::string, std::string>(key, value));
+		if (!key.empty() && !value.empty() && key_result == true && value_result == true && checkData(key, value) == VALID_DATA)
+			if (_map == false)
+				_btc_database.insert(std::pair<std::string, std::string>(key, value));
 	}
+	_map = true;
 	fd.close();
 }
 
-void DataBase::readInputFile(std::string filename)
+int DataBase::checkData(std::string date, std::string rate)
 {
-	std::ifstream fd;
-	fd.open(filename);
-	if (fd.fail())
+	int date_status = checkDateValue(date);
+	int rate_status = checkRateValue(rate);
+	
+	switch (date_status)
 	{
-		std::cerr << "Could not open the input file" << std::endl;
-		return;
+	case INVALID_DATE:
+		if (_map == true)
+			std::cout << "Error: bad input => " << date << std::endl;
+		return INVALID_DATE;
+		break;
 	}
-	struct stat fileStat;
-	if (stat(filename.c_str(), &fileStat) == 0)
+	switch (rate_status)
 	{
-		if (S_ISDIR(fileStat.st_mode))
-		{
-			std::cout << filename << " is a directory." << std::endl;
-			return;
-		}
+	case NAGAVTIVE_NUMBER:
+		if (_map == true)
+			std::cout << "Error: not a positive number." << std::endl;
+		return NAGAVTIVE_NUMBER;
+		break;
+	case TOOLARGE_NUMBER:
+		if (_map == true)
+			std::cout << "Error: Too large a number." << std::endl;
+		return TOOLARGE_NUMBER;
+		break;
+	case INVALID_RATE:
+		if (_map == true)
+			std::cout << "Error: Invalid number => " << rate << std::endl;
+		return INVALID_RATE;
+		break;
 	}
-	std::stringstream inputdata;
-	inputdata << fd.rdbuf();
-	std::string key, value;
-	char pipe;
-	std::regex keyFormat("^\\d{4}-\\d{1,2}-\\d{1,2}$");
-	std::regex valueFormat("^\\d+(.\\d+)?$");
-	int counter = 0;
-	while (!inputdata.eof())
-	{
-		counter++;
-		// check format
-		std::string line;
-		getline(inputdata, line);
-		if (line.find(" | ") != std::string::npos)
-		{
-			std::stringstream tmp;
-			tmp << line;
-			tmp >> key >> pipe >> value;
-		}
-		else
-		{
-			std::cout << "Error: bad input => " << line << std::endl;
-			continue;
-		};
-		bool key_result = std::regex_match(key, keyFormat);
-		bool value_result = std::regex_match(value, valueFormat);
-		if (counter == 1 && key == "date")
-		{
-			std::cout << line << std::endl;
-			continue;
-		}
-		if (!key.empty() && !value.empty() && key_result == true && value_result == true && checkData(key, value))
-			std::cout << key << " " << value << std::endl;
-		else
-		{
-			std::cout << "Error: bad input => " << line << std::endl;
-			continue;
-		}
-	}
-	fd.close();
+	if (_map == true)
+		std::cout << date << " => " << rate << std::endl;
+	return VALID_DATA;
 }
 
-bool DataBase::checkData(std::string date, std::string rate)
-{
-	if (!checkDateValue(date) || !checkRateValue(rate))
-		return false;
-	return true;
-}
-
-bool DataBase::checkDateValue(std::string str)
+int DataBase::checkDateValue(std::string str)
 {
 	int year, month, day;
 	char dash;
@@ -163,7 +165,7 @@ bool DataBase::checkDateValue(std::string str)
 
 	std::time_t result = mktime(&timeinfo);
 	if (result == -1)
-		return false;
+		return INVALID_DATE;
 	switch (timeinfo.tm_mon)
 	{
 	case 1: // February
@@ -171,7 +173,7 @@ bool DataBase::checkDateValue(std::string str)
 		if (day > 29 || (day == 29 && !leapYear))
 		{
 			std::cout << timeinfo.tm_mon << std::endl;
-			return false; // Invalid date
+			return INVALID_DATE; // Invalid date
 		}
 		break;
 	case 3:	 // April
@@ -179,48 +181,69 @@ bool DataBase::checkDateValue(std::string str)
 	case 8:	 // September
 	case 10: // November
 		if (timeinfo.tm_mday > 30)
-			return false;
+			return INVALID_DATE;
 		break;
 	default:
 		if (day > 31)
-			return false;
+			return INVALID_DATE;
 		break;
 	}
 	return (timeinfo.tm_year == year - 1900 &&
 			timeinfo.tm_mon == month - 1 &&
-			timeinfo.tm_mday == day);
+			timeinfo.tm_mday == day) ? VALID_DATA : INVALID_DATE;
 }
 
-bool DataBase::checkRateValue(std::string str)
+int DataBase::checkRateValue(std::string str)
 {
 	if (str.empty())
-		return false;
+		return INVALID_RATE;
 	else
 	{
 		int index = 0;
 		int dot = 0;
 		while (str[index])
 		{
-			if (!std::isdigit(str[index]) && str[index] != '.')
-				return false;
+			if (!std::isdigit(str[index]) && str[index] != '.' && str[index] != '-' && str[index] != '+')
+				return INVALID_RATE;
 			if (str[index] == '.')
 				dot++;
 			if (dot > 1)
-				return false;
+				return INVALID_RATE;
 			index++;
 		}
+		try // check if the string is a number
+		{
+			float f_result = 0;
+			int i_result = 0;
+			dot == 1 ? f_result = std::stof(str): i_result = std::stoi(str);
+			if (i_result < 0 || f_result < 0.0)
+				return NAGAVTIVE_NUMBER;
+			if (_map == true && (i_result > 1000 || f_result > 1000.0))
+			{
+				return TOOLARGE_NUMBER;
+			}
+		}
+		catch (std::exception &e)
+		{
+				return TOOLARGE_NUMBER;
+		}
 	}
-	return true;
+	return VALID_DATA;
 }
 
 const char *DataBase::InvalidDataException::what() const noexcept
 {
-	return ("Invalid database file, Found an unusual character(s)!!!");
+	return ("Invalid database file!!!");
 }
 
 const char *DataBase::FailDataFileException::what() const noexcept
 {
 	return ("Couldn't open the Database file!!!");
+}
+
+const char *DataBase::DataBaseIsDirectoryException::what() const noexcept
+{
+	return (" is a directory, not a file!!!");
 }
 
 void DataBase::printDataBase() const
