@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:01:00 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/24 20:57:47 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/25 14:11:45 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void DataBase::parseData(std::ifstream &fd)
 	std::string key, value;
 	std::regex keyFormat("^\\d{4}-\\d{1,2}-\\d{1,2}$");
 	std::regex valueFormat("^\\d+(.\\d+)?$");
+	std::regex inputValueFormat("^[+-]?\\d+(\\.\\d+)?$");
 	std::string delimiter = (!_map) ? "," : " | ";
 	int counter = 0;
 	while (!data.eof())
@@ -104,6 +105,8 @@ void DataBase::parseData(std::ifstream &fd)
 			continue;
 		}
 		bool key_result = std::regex_match(key, keyFormat);
+		if (_map == true)
+			valueFormat = inputValueFormat;
 		bool value_result = std::regex_match(value, valueFormat);
 		if (counter == 1 && key == "date")
 			continue;
@@ -147,7 +150,19 @@ int DataBase::checkData(std::string date, std::string rate)
 		break;
 	}
 	if (_map == true)
-		std::cout << date << " => " << rate << std::endl;
+	{
+		std::map<std::string, std::string>::iterator it;
+		it = _btc_database.lower_bound(date);
+		if (it != _btc_database.begin() && it != _btc_database.end())
+			it--;
+		else
+		{
+			std::cout << "Error: " << date << " is outside the valid range of dates in the database." << std::endl;
+			return INVALID_DATE;
+		}
+		if (it != _btc_database.end())
+			std::cout << date << " => " << rate << " = " << std::stof(rate) * std::stof(it->second) << std::endl;
+	}
 	return VALID_DATA;
 }
 
