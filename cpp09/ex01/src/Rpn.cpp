@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:56:56 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/25 21:00:31 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/25 22:30:56 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,12 @@ bool Rpn::handleOperators(std::string &operatorstr)
 			_numberStack.push(first * second);
 			break;
 		case '/':
-			_numberStack.push(second / first);
+			if (first == 0)
+			{
+				std::cerr << RED "Error: Division by zero!!!" RESET << std::endl;
+				return false;
+			}
+			_numberStack.push(static_cast<int>(second / first));
 			break;
 		default:
 			std::cerr << RED "Invalid character!!!" RESET << std::endl;
