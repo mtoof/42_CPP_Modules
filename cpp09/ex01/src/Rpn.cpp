@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:56:56 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/25 19:31:54 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/25 19:55:14 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ bool Rpn::handleOperands(std::string &number)
 	{			
 		for (int index = 0; number[index]; index++)
 		{
-			if (!std::isdigit(number[index]))
+			if (!std::isdigit(number[index]) && number[index] != '-')
 			{			
 				std::cerr << RED "Error!!!" RESET << std::endl;
 				return false;
