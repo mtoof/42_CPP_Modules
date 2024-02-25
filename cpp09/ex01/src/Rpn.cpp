@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:56:56 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/25 19:55:14 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/25 21:00:31 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ Rpn::~Rpn()
 {
 }
 
-Rpn::Rpn(const Rpn &rhs): _numberStack(rhs._numberStack)
+Rpn::Rpn(const Rpn &rhs) : _numberStack(rhs._numberStack)
 {
-	
 }
 
 Rpn &Rpn::operator=(const Rpn &rhs)
@@ -47,7 +46,7 @@ bool Rpn::parse(std::string expression)
 		std::cerr << RED "Error!!!" RESET << std::endl;
 		return false;
 	}
-	while(!ss.eof())
+	while (!ss.eof())
 	{
 		counter++;
 		ss >> num;
@@ -61,7 +60,6 @@ bool Rpn::parse(std::string expression)
 			if (!handleOperands(num))
 				return false;
 		}
-		
 	}
 	print();
 	return true;
@@ -78,22 +76,22 @@ bool Rpn::handleOperators(std::string &operatorstr)
 		_numberStack.pop();
 		switch (operatorstr[0])
 		{
-			case '+':
-					_numberStack.push(first + second);
-					break;
-			case '-':
-					_numberStack.push(second - first);
-					break;
-			case '*':
-					_numberStack.push(first * second);
-					break;
-			case '/':
-					_numberStack.push(second / first);
-					break;
-			default:
-				std::cerr << RED "Invalid character!!!" RESET << std::endl;
-				return false;
-				break;
+		case '+':
+			_numberStack.push(first + second);
+			break;
+		case '-':
+			_numberStack.push(second - first);
+			break;
+		case '*':
+			_numberStack.push(first * second);
+			break;
+		case '/':
+			_numberStack.push(second / first);
+			break;
+		default:
+			std::cerr << RED "Invalid character!!!" RESET << std::endl;
+			return false;
+			break;
 		}
 	}
 	else
@@ -107,11 +105,11 @@ bool Rpn::handleOperators(std::string &operatorstr)
 bool Rpn::handleOperands(std::string &number)
 {
 	try
-	{			
+	{
 		for (int index = 0; number[index]; index++)
 		{
 			if (!std::isdigit(number[index]) && number[index] != '-')
-			{			
+			{
 				std::cerr << RED "Error!!!" RESET << std::endl;
 				return false;
 			}
@@ -125,7 +123,7 @@ bool Rpn::handleOperands(std::string &number)
 			return false;
 		}
 	}
-	catch(const std::exception& e)
+	catch (const std::exception &e)
 	{
 		std::cerr << RED "Invalid Number!!!" RESET << std::endl;
 		return false;

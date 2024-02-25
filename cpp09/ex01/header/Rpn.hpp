@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:55:55 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/25 19:31:05 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/25 21:00:27 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 #include <stack>
 #include <regex>
 #include <sstream>
-#define RESET   "\033[0m"
-#define RED     "\033[31m"
+#define RESET "\033[0m"
+#define RED "\033[31m"
 class Rpn
 {
 private:
@@ -29,6 +29,7 @@ private:
 	bool handleOperators(std::string &operatorstr);
 	bool handleOperands(std::string &number);
 	void print();
+
 public:
 	Rpn();
 	~Rpn();

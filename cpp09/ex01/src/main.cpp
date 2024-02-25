@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:57:39 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/25 20:57:58 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/25 21:00:21 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,19 @@ int main(int ac, char **av)
 		"6 -4 * 8 2 - / 3 +",
 		"2 9 - 3 5 * + -7 4 + /",
 		"-3 7 * 4 + 8 2 - /",
-		"5 6 - 3 - 2 + -8 4 / *"
-	};
-	std::string test_answer[] = 
-	{
-		"0",
-		"-11",
-		"-2",
-		"-1",
-		"-22",
-		"4",
-		"-1",
-		"-2",
-		"-2",
-		"4"
-	};
+		"5 6 - 3 - 2 + -8 4 / *"};
+	std::string test_answer[] =
+		{
+			"0",
+			"-11",
+			"-2",
+			"-1",
+			"-22",
+			"4",
+			"-1",
+			"-2",
+			"-2",
+			"4"};
 
 	if (ac != 2)
 	{
@@ -49,7 +47,7 @@ int main(int ac, char **av)
 		std::cin >> answer;
 		if (answer == 'y' || answer == 'Y')
 		{
-			for (size_t index = 0; index < sizeof(expression_array) / sizeof(std::string) ;index++)
+			for (size_t index = 0; index < sizeof(expression_array) / sizeof(std::string); index++)
 			{
 				std::cout << index + 1 << ") " << expression_array[index] << " => " << test_answer[index] << std::endl;
 				std::cout << "RPN answer = ";
@@ -60,6 +58,6 @@ int main(int ac, char **av)
 	}
 	if (!rpn.parse(av[1]))
 		return (1);
-	
+
 	return (0);
 }

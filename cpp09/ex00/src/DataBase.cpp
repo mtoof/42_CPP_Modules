@@ -6,13 +6,13 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:01:00 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/25 14:11:45 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/25 21:00:49 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/DataBase.hpp"
 
-DataBase::DataBase(): _map(false), _btc_database()
+DataBase::DataBase() : _map(false), _btc_database()
 {
 }
 
@@ -122,7 +122,7 @@ int DataBase::checkData(std::string date, std::string rate)
 {
 	int date_status = checkDateValue(date);
 	int rate_status = checkRateValue(rate);
-	
+
 	switch (date_status)
 	{
 	case INVALID_DATE:
@@ -205,7 +205,9 @@ int DataBase::checkDateValue(std::string str)
 	}
 	return (timeinfo.tm_year == year - 1900 &&
 			timeinfo.tm_mon == month - 1 &&
-			timeinfo.tm_mday == day) ? VALID_DATA : INVALID_DATE;
+			timeinfo.tm_mday == day)
+			   ? VALID_DATA
+			   : INVALID_DATE;
 }
 
 int DataBase::checkRateValue(std::string str)
@@ -230,7 +232,7 @@ int DataBase::checkRateValue(std::string str)
 		{
 			float f_result = 0;
 			int i_result = 0;
-			dot == 1 ? f_result = std::stof(str): i_result = std::stoi(str);
+			dot == 1 ? f_result = std::stof(str) : i_result = std::stoi(str);
 			if (i_result < 0 || f_result < 0.0)
 				return NAGAVTIVE_NUMBER;
 			if (_map == true && (i_result > 1000 || f_result > 1000.0))
@@ -240,7 +242,7 @@ int DataBase::checkRateValue(std::string str)
 		}
 		catch (std::exception &e)
 		{
-				return TOOLARGE_NUMBER;
+			return TOOLARGE_NUMBER;
 		}
 	}
 	return VALID_DATA;
