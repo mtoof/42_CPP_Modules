@@ -6,7 +6,7 @@
 #    By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/09 14:53:26 by mtoof             #+#    #+#              #
-#    Updated: 2024/02/26 16:28:42 by mtoof            ###   ########.fr        #
+#    Updated: 2024/02/26 22:35:37 by mtoof            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = PmergeMe
 SRC = main.cpp PmergeMe.cpp
 SRC_DIR = src/
 HEADER = header/
-FLAG =  -Wall -Wextra -Werror -std=c++14
+FLAG =  -Wall -Wextra -Werror -std=c++17
 OBJ_DIR = obj/
 SRCS = $(addprefix $(SRC_DIR), $(SRC))
 OBJS = $(SRCS:$(SRC_DIR)%.cpp=$(OBJ_DIR)%.o)
