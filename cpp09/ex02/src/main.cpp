@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:29:35 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/26 15:25:21 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/26 18:28:57 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int main(int ac, char **av)
 {
+	PmergeMe sortNumbers;
 	if (ac < 3)
 	{
 		std::cerr << "Error: Not enough numbers to be sorted" << std::endl;
@@ -31,5 +32,14 @@ int main(int ac, char **av)
 			}
 		}
 	}
+	try
+	{
+		sortNumbers.parseNumbers(av);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	
 	return 0;
 }
