@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:15 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/26 22:39:27 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/27 13:48:22 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@
 class PmergeMe
 {
 private:
-	std::vector<int> _vec;
-	std::deque<int> _deq;
+	std::vector<std::pair<int, int>> _vec;
+	std::deque<std::pair<int, int>> _deq;
 	time_t start_time;
-	// time_t end_time;
 	std::chrono::steady_clock::time_point start;
 	char *now;
+	int _last_element;
+	bool _odd_elements;
+	// time_t end_time;
 	// char *end;
 
 public:
@@ -39,7 +41,7 @@ public:
 	~PmergeMe();
 	
 	void FordJohson();
-	void parseNumbers(char **av);
+	void parseNumbers(int ac, char **av);
 	void print(std::string flag) const;
 	class InvalidNumberException: public std::exception
 	{

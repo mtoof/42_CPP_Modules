@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:18 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/26 23:11:45 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/27 16:15:24 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 PmergeMe::PmergeMe()
 {
+	_odd_elements = false;
 }
 
-PmergeMe::PmergeMe(const PmergeMe &rhs): _vec(rhs._vec), _deq(rhs._deq)
+PmergeMe::PmergeMe(const PmergeMe &rhs) : _vec(rhs._vec), _deq(rhs._deq)
 {
+	_odd_elements = rhs._odd_elements;
 }
 
 PmergeMe &PmergeMe::operator=(const PmergeMe &rhs)
@@ -28,6 +30,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &rhs)
 		_deq.clear();
 		_vec = rhs._vec;
 		_deq = rhs._deq;
+		_odd_elements = rhs._odd_elements;
 	}
 	return (*this);
 }
@@ -40,39 +43,47 @@ void PmergeMe::print(std::string flag) const
 {
 	if (flag == "before")
 	{
-		if (_vec.size() > 1)
+		std::cout << "Before: ";
+		std::vector<std::pair<int, int>>::const_iterator it;
+		for (it = _vec.begin(); it != _vec.end(); it++)
 		{
-			std::cout << "Before: ";
-			for (std::vector<int>::const_iterator it = _vec.begin(); it != _vec.end(); it++)
-			{
-				if (std::distance(it, _vec.end()) > 1)
-					std::cout << *it << " ";
-				else
-					std::cout << *it << std::endl;
-			}
+			// if (std::distance(it, _vec.end()) > 1)
+			std::cout << it->first << " " << it->second << " ";
 		}
+		if (_odd_elements)
+			std::cout << _last_element << std::endl;
+		else
+			std::cout << std::endl;
 	}
-	auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>( std::chrono::steady_clock::now( ) - start );
-	std::cout << "time = " << elapsed.count() << std::endl;
+	// auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start);
+	// std::cout << "time = " << elapsed.count() << std::endl;
 }
 
-void PmergeMe::parseNumbers(char **av)
+void PmergeMe::parseNumbers(int ac, char **av)
 {
 	start_time = time(0);
-	now  = ctime(&start_time);
+	now = ctime(&start_time);
 	start = std::chrono::steady_clock::now();
-	for (int it = 1; av[it]; it++)
+	if (ac % 2 == 0)
+		_odd_elements = true;
+	for (int it = 1; av[it]; it += 2)
 	{
-		int number = 0;
+		int first = 0, second = 0;
 		try
 		{
-			number = std::stoi(av[it]);
+			if (_odd_elements && it == ac - 1)
+			{
+				_last_element = std::stoi(av[it]);
+				break;
+			}
+			first = std::stoi(av[it]);
+			second = std::stoi(av[it + 1]);
 		}
-		catch(const std::exception &e)
+		catch (const std::exception &e)
 		{
 			throw InvalidNumberException();
 		}
-		_vec.push_back(number);
+		_vec.push_back(std::make_pair(first, second));
 	}
 	print("before");
 	FordJohson();
@@ -80,40 +91,18 @@ void PmergeMe::parseNumbers(char **av)
 
 void PmergeMe::FordJohson()
 {
-	// size_t second = 1;
-
-	// if (!std::is_sorted(_vec.begin(), _vec.end()))
-	// {
-	// 	for (size_t first = 0; first < _vec.size(); first+=2)
-	// 	{
-	// 		if (first + 1 < _vec.size())
-	// 			second = first+1;
-	// 		if (_vec.at(first) > _vec.at(second))
-	// 			std::swap(_vec.at(first), _vec.at(second));
-	// 		std::cout << _vec.at(first) << " " << _vec.at(second) << " ";
-	// 	}
-	// 	for (size_t first = 1; first < _vec.size(); first+=2)
-	// 	{
-	// 		if (first + 2 < _vec.size())
-	// 			second = first+2;
-	// 		if (_vec.at(first) > _vec.at(second))
-	// 		{
-	// 			std::swap(_vec.at(first), _vec.at(second));
-	// 			std::swap(_vec.at(first - 1), _vec.at(second - 1));
-	// 		}
-	// 	}
-	// 	FordJohson();
-	// }
-	// print("before");
-	std::cout << "back = " << _vec.back() << std::endl;
-	std::cout << "front = " << _vec.front() << std::endl;
-	return ;
+	std::vector<std::pair<int, int>>::const_iterator it;
+	for (it = _vec.begin(); it!= _vec.end(); it++)
+	{
+		if (it->first > it->second)
+			std::swap(it->first, it->second);
+	}
+	return;
 }
 
-const char* PmergeMe::InvalidNumberException::what() const noexcept
+const char *PmergeMe::InvalidNumberException::what() const noexcept
 {
 	return ("Invalid number");
 }
 
-//https://www.phind.com/search?cache=lhynuq1hwo9mq2insmrmo57e
-
+// https://www.phind.com/search?cache=lhynuq1hwo9mq2insmrmo57e

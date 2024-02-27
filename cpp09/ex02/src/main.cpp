@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:29:35 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/26 18:28:57 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/27 13:47:23 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int main(int ac, char **av)
 	}
 	try
 	{
-		sortNumbers.parseNumbers(av);
+		sortNumbers.parseNumbers(ac, av);
 	}
 	catch(const std::exception& e)
 	{
