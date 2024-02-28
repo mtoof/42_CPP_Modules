@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:18 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/27 16:15:24 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/28 17:02:41 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ void PmergeMe::print(std::string flag) const
 {
 	if (flag == "before")
 	{
+		std::vector<int>::const_iterator it;
 		std::cout << "Before: ";
-		std::vector<std::pair<int, int>>::const_iterator it;
 		for (it = _vec.begin(); it != _vec.end(); it++)
 		{
 			// if (std::distance(it, _vec.end()) > 1)
-			std::cout << it->first << " " << it->second << " ";
+			std::cout << *it << " ";
 		}
 		if (_odd_elements)
 			std::cout << _last_element << std::endl;
@@ -66,9 +66,9 @@ void PmergeMe::parseNumbers(int ac, char **av)
 	start = std::chrono::steady_clock::now();
 	if (ac % 2 == 0)
 		_odd_elements = true;
-	for (int it = 1; av[it]; it += 2)
+	for (int it = 1; av[it]; it++)
 	{
-		int first = 0, second = 0;
+		int number;
 		try
 		{
 			if (_odd_elements && it == ac - 1)
@@ -76,28 +76,63 @@ void PmergeMe::parseNumbers(int ac, char **av)
 				_last_element = std::stoi(av[it]);
 				break;
 			}
-			first = std::stoi(av[it]);
-			second = std::stoi(av[it + 1]);
+			number = std::stoi(av[it]);
 		}
 		catch (const std::exception &e)
 		{
 			throw InvalidNumberException();
 		}
-		_vec.push_back(std::make_pair(first, second));
+		_vec.push_back(number);
 	}
 	print("before");
-	FordJohson();
+	fordJohnson();
 }
 
-void PmergeMe::FordJohson()
+void PmergeMe::fordJohnson()
 {
-	std::vector<std::pair<int, int>>::const_iterator it;
-	for (it = _vec.begin(); it!= _vec.end(); it++)
-	{
-		if (it->first > it->second)
-			std::swap(it->first, it->second);
-	}
+	pairAndSort();
+	print("before");
+
+	size_t container_size = _vec.size();
+	sortByGreater(container_size);
+	separateGreaterFromSmaller();
+	print("before");
 	return;
+}
+
+void PmergeMe::pairAndSort()
+{
+	std::vector<int>::iterator it;
+	if (_vec.front() > _vec.back())
+		std::swap(_vec.front(), _vec.back());
+	for (it = _vec.begin(); it != _vec.end(); it += 2)
+	{
+		if (it + 1 != _vec.end() && *it > *(it + 1))
+			std::swap(*it, *(it + 1));
+	}
+}
+
+void PmergeMe::sortByGreater(size_t container_size)
+{
+	if (container_size > 4)
+		sortByGreater(container_size / 2);
+	size_t it = 1;
+	size_t second_it = 0;
+	for (it = 1; it < container_size; it += 2)
+	{
+		if (it + 2 < container_size)
+			second_it = it + 2;
+		else
+			break;
+		if (_vec.at(it) > _vec.at(second_it))
+		{
+			std::swap(_vec.at(it - 1), _vec.at(second_it - 1));
+			std::swap(_vec.at(it), _vec.at(second_it));
+			it = -1; // We need to reset iterator after every swap
+		}
+	}
+	std::cout << "size = " << container_size << std::endl;
+		print("before");
 }
 
 const char *PmergeMe::InvalidNumberException::what() const noexcept
