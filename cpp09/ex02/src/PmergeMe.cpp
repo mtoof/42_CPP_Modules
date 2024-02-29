@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:18 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/28 17:02:41 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/29 14:36:03 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,20 @@ void PmergeMe::print(std::string flag) const
 		else
 			std::cout << std::endl;
 	}
+	else
+	{
+		std::vector<int>::const_iterator it;
+		std::cout << flag << ": ";
+		for (it = _vec.begin(); it != _vec.end(); it++)
+		{
+			// if (std::distance(it, _vec.end()) > 1)
+			std::cout << *it << " ";
+		}
+		if (_odd_elements)
+			std::cout << _last_element << std::endl;
+		else
+			std::cout << std::endl;
+	}
 	// auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start);
 	// std::cout << "time = " << elapsed.count() << std::endl;
 }
@@ -91,12 +105,13 @@ void PmergeMe::parseNumbers(int ac, char **av)
 void PmergeMe::fordJohnson()
 {
 	pairAndSort();
-	print("before");
+	print("after pairing");
 
 	size_t container_size = _vec.size();
 	sortByGreater(container_size);
+	print("after sortbygreater");
 	separateGreaterFromSmaller();
-	print("before");
+	print("after separateGreater");
 	return;
 }
 
@@ -131,8 +146,20 @@ void PmergeMe::sortByGreater(size_t container_size)
 			it = -1; // We need to reset iterator after every swap
 		}
 	}
-	std::cout << "size = " << container_size << std::endl;
-		print("before");
+}
+
+void PmergeMe::separateGreaterFromSmaller()
+{
+	std::vector<int>::iterator item = _vec.end() - 1;
+	for (size_t it = 0; it < (_vec.size() / 2); it++)
+	{
+		int element = *item;
+		std::cout << element << std::endl;
+		_vec.pop_back();
+		std::cout << "item = " << *item << std::endl;
+		_vec.insert(_vec.begin(), element);
+		item--;
+	}
 }
 
 const char *PmergeMe::InvalidNumberException::what() const noexcept
