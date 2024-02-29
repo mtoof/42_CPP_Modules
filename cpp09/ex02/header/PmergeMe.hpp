@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:15 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/28 17:03:06 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/29 15:13:08 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ private:
 	void pairAndSort();
 	void sortByGreater(size_t container_size);
 	void separateGreaterFromSmaller();
+	void insertionSort();
 	// time_t end_time;
 	// char *end;
 

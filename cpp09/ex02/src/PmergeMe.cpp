@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:18 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/29 14:40:58 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/29 15:50:49 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ void PmergeMe::fordJohnson()
 	print("after sortbygreater");
 	separateGreaterFromSmaller();
 	print("after separateGreater");
+	insertionSort();
+	print("after insertion sort");
 	return;
 }
 
@@ -157,6 +159,23 @@ void PmergeMe::separateGreaterFromSmaller()
 		_vec.erase(item);
 		_vec.insert(_vec.begin(), element);
 		item--;
+	}
+}
+
+void PmergeMe::insertionSort()
+{
+	size_t mid = _vec.size() / 2;
+	std::vector<int>::iterator startOfSmallNumbersArray;
+	while (!std::is_sorted(_vec.begin(), _vec.end())  && _vec.begin() + mid != _vec.end())
+	{
+		startOfSmallNumbersArray = _vec.begin() + mid;
+		std::cout << "start of lowest array = " << *startOfSmallNumbersArray << std::endl;
+		std::vector<int>::iterator position;
+		position = std::lower_bound(_vec.begin(), startOfSmallNumbersArray - 1, *startOfSmallNumbersArray);
+		std::cout << "position = " << *position << std::endl;
+		_vec.insert(position, *startOfSmallNumbersArray);
+		_vec.erase(startOfSmallNumbersArray);
+		mid++;
 	}
 }
 
