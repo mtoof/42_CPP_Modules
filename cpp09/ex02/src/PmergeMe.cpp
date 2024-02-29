@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:18 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/29 14:36:03 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/02/29 14:40:58 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,9 +154,7 @@ void PmergeMe::separateGreaterFromSmaller()
 	for (size_t it = 0; it < (_vec.size() / 2); it++)
 	{
 		int element = *item;
-		std::cout << element << std::endl;
-		_vec.pop_back();
-		std::cout << "item = " << *item << std::endl;
+		_vec.erase(item);
 		_vec.insert(_vec.begin(), element);
 		item--;
 	}
