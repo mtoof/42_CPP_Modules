@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:29:35 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/27 13:47:23 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/01 11:29:52 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int main(int ac, char **av)
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
+		return (1);
 	}
 	
 	return 0;

@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:18 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/29 23:52:19 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/02 00:30:19 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void PmergeMe::print(std::string flag) const
 	if (flag == "before")
 	{
 		std::vector<int>::const_iterator it;
-		std::cout << "Before: ";
+		std::cout << "Before:   ";
 		for (it = _vec.begin(); it != _vec.end(); it++)
 		{
 			// if (std::distance(it, _vec.end()) > 1)
@@ -58,7 +58,7 @@ void PmergeMe::print(std::string flag) const
 	else
 	{
 		std::vector<int>::const_iterator it;
-		std::cout << flag << ": ";
+		std::cout << "After:   ";
 		for (it = _vec.begin(); it != _vec.end(); it++)
 		{
 			// if (std::distance(it, _vec.end()) > 1)
@@ -69,15 +69,10 @@ void PmergeMe::print(std::string flag) const
 		else
 			std::cout << std::endl;
 	}
-	// auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - start);
-	// std::cout << "time = " << elapsed.count() << std::endl;
 }
 
 void PmergeMe::parseNumbers(int ac, char **av)
 {
-	start_time = time(0);
-	now = ctime(&start_time);
-	start = std::chrono::steady_clock::now();
 	if (ac % 2 == 0)
 		_odd_elements = true;
 	for (int it = 1; av[it]; it++)
@@ -98,22 +93,24 @@ void PmergeMe::parseNumbers(int ac, char **av)
 		}
 		_vec.push_back(number);
 	}
+	start_time = std::chrono::high_resolution_clock::now();
 	print("before");
 	fordJohnson();
+	print("after");
+	end_time = std::chrono::high_resolution_clock::now();
+	std::chrono::duration<double>  diff = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
+	std::cout << std::fixed << std::setprecision(8) <<"Time to process a range of " << ac - 1 << " elements with vectore : "  << diff.count() << " microseconds" << std::endl;
+		
 }
 
 void PmergeMe::fordJohnson()
 {
 	pairAndSort();
-	print("after pairing");
-
+	
 	size_t container_size = _vec.size();
 	sortByGreater(container_size);
-	print("after sortbygreater");
 	separateGreaterFromSmaller();
-	print("after separateGreater");
 	insertionSort();
-	print("after insertion sort");
 	return;
 }
 
@@ -164,16 +161,21 @@ void PmergeMe::separateGreaterFromSmaller()
 
 void PmergeMe::insertionSort()
 {
-	size_t mid = _vec.size() / 2;
-	std::vector<int>::iterator startOfSmallNumbersArray;
-	while (!std::is_sorted(_vec.begin(), _vec.end())  && _vec.begin() + mid < _vec.end())
+	int startOfSmallNumbersArray = _vec.back();
+	std::vector<int>::iterator max_number  = std::max_element(_vec.begin(), _vec.end() - 1);
+	std::vector<int>::iterator position;
+	while (!std::is_sorted(_vec.begin(), _vec.end()))
 	{
-		startOfSmallNumbersArray = _vec.begin() + mid;
-		std::vector<int>::iterator position;
-		position = std::lower_bound(_vec.begin(), startOfSmallNumbersArray - 1, *startOfSmallNumbersArray);
-		_vec.insert(position, *startOfSmallNumbersArray);
-		_vec.erase(startOfSmallNumbersArray + 1);
-		mid++;
+		position = std::lower_bound(_vec.begin(), max_number, startOfSmallNumbersArray);
+		_vec.insert(position, startOfSmallNumbersArray);
+		_vec.pop_back();
+		max_number  = std::max_element(_vec.begin(), _vec.end());
+		startOfSmallNumbersArray = _vec.back();
+	}
+	if(_odd_elements)
+	{
+		position = std::lower_bound(_vec.begin(), _vec.end(), _last_element);
+		_vec.insert(position, _last_element);
 	}
 }
 
