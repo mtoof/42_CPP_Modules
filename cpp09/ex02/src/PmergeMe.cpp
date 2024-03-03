@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:18 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/02 00:30:19 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/03 18:25:52 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,19 +97,24 @@ void PmergeMe::parseNumbers(int ac, char **av)
 	print("before");
 	fordJohnson();
 	print("after");
-	end_time = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double>  diff = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
-	std::cout << std::fixed << std::setprecision(8) <<"Time to process a range of " << ac - 1 << " elements with vectore : "  << diff.count() << " microseconds" << std::endl;
+	// end_time = std::chrono::high_resolution_clock::now();
+	// std::chrono::duration<double>  diff = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
+	// std::cout << std::fixed << std::setprecision(8) <<"Time to process a range of " << ac - 1 << " elements with vectore : "  << diff.count() << " microseconds" << std::endl;
 		
 }
 
 void PmergeMe::fordJohnson()
 {
 	pairAndSort();
-	
 	size_t container_size = _vec.size();
 	sortByGreater(container_size);
 	separateGreaterFromSmaller();
+	for (size_t i = 0; i < (_vec.size() / 2) + 1; i++)
+		std::cout << _mainChain.at(i) << " "; 
+	std::cout << std::endl;
+	for (size_t i = 0; i < (_vec.size() / 2); i++)
+		std::cout << _pend.at(i) << " "; 
+	std::cout << std::endl;
 	insertionSort();
 	return;
 }
@@ -117,8 +122,8 @@ void PmergeMe::fordJohnson()
 void PmergeMe::pairAndSort()
 {
 	std::vector<int>::iterator it;
-	if (_vec.front() > _vec.back())
-		std::swap(_vec.front(), _vec.back());
+	// if (_vec.front() > _vec.back())
+	// 	std::swap(_vec.front(), _vec.back());
 	for (it = _vec.begin(); it != _vec.end(); it += 2)
 	{
 		if (it + 1 != _vec.end() && *it > *(it + 1))
@@ -149,34 +154,23 @@ void PmergeMe::sortByGreater(size_t container_size)
 
 void PmergeMe::separateGreaterFromSmaller()
 {
-	std::vector<int>::iterator item = _vec.end() - 1;
-	for (size_t it = 0; it < (_vec.size() / 2); it++)
+	for (size_t iter = 0; iter < _vec.size(); iter++)
 	{
-		int element = *item;
-		_vec.erase(item);
-		_vec.insert(_vec.begin(), element);
-		item--;
+		if (iter == 0 || iter % 2)
+			_mainChain.push_back(_vec.at(iter));
+		else if (iter % 2 == 0)
+			_pend.push_back(_vec.at(iter));
 	}
+}
+
+int jacobsthal()
+{
+	
 }
 
 void PmergeMe::insertionSort()
 {
-	int startOfSmallNumbersArray = _vec.back();
-	std::vector<int>::iterator max_number  = std::max_element(_vec.begin(), _vec.end() - 1);
-	std::vector<int>::iterator position;
-	while (!std::is_sorted(_vec.begin(), _vec.end()))
-	{
-		position = std::lower_bound(_vec.begin(), max_number, startOfSmallNumbersArray);
-		_vec.insert(position, startOfSmallNumbersArray);
-		_vec.pop_back();
-		max_number  = std::max_element(_vec.begin(), _vec.end());
-		startOfSmallNumbersArray = _vec.back();
-	}
-	if(_odd_elements)
-	{
-		position = std::lower_bound(_vec.begin(), _vec.end(), _last_element);
-		_vec.insert(position, _last_element);
-	}
+	
 }
 
 const char *PmergeMe::InvalidNumberException::what() const noexcept
