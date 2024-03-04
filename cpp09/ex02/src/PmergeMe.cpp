@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:18 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/03 18:25:52 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/04 02:52:04 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ void PmergeMe::print(std::string flag) const
 		std::vector<int>::const_iterator it;
 		std::cout << "Before:   ";
 		for (it = _vec.begin(); it != _vec.end(); it++)
-		{
-			// if (std::distance(it, _vec.end()) > 1)
 			std::cout << *it << " ";
-		}
 		if (_odd_elements)
 			std::cout << _last_element << std::endl;
 		else
@@ -60,14 +57,8 @@ void PmergeMe::print(std::string flag) const
 		std::vector<int>::const_iterator it;
 		std::cout << "After:   ";
 		for (it = _vec.begin(); it != _vec.end(); it++)
-		{
-			// if (std::distance(it, _vec.end()) > 1)
 			std::cout << *it << " ";
-		}
-		if (_odd_elements)
-			std::cout << _last_element << std::endl;
-		else
-			std::cout << std::endl;
+		std::cout << std::endl;
 	}
 }
 
@@ -109,13 +100,9 @@ void PmergeMe::fordJohnson()
 	size_t container_size = _vec.size();
 	sortByGreater(container_size);
 	separateGreaterFromSmaller();
-	for (size_t i = 0; i < (_vec.size() / 2) + 1; i++)
-		std::cout << _mainChain.at(i) << " "; 
-	std::cout << std::endl;
-	for (size_t i = 0; i < (_vec.size() / 2); i++)
-		std::cout << _pend.at(i) << " "; 
-	std::cout << std::endl;
 	insertionSort();
+
+
 	return;
 }
 
@@ -156,21 +143,94 @@ void PmergeMe::separateGreaterFromSmaller()
 {
 	for (size_t iter = 0; iter < _vec.size(); iter++)
 	{
-		if (iter == 0 || iter % 2)
+		if (iter % 2)
 			_mainChain.push_back(_vec.at(iter));
 		else if (iter % 2 == 0)
 			_pend.push_back(_vec.at(iter));
 	}
+	if (_odd_elements)
+		_pend.push_back(_last_element);
 }
 
-int jacobsthal()
+int jacob(std::vector<int> jArray, int n)
 {
-	
+	if (n == 0)
+		return 0;
+	if (n == 1)
+		return 1;
+	return (jArray[n - 1] + (2 * jArray[n - 2]));
+}
+
+int PmergeMe::binarySearchSort(int low, int high, int key)
+{
+	int middle = 0;
+	while (low <= high)
+	{
+		middle = low + (high - low) / 2;
+		// std::cout << "middle = " << middle << " high = " << high << " low = " << low << std::endl;
+		if (_mainChain.at(middle) < key)
+			low = middle + 1;
+		else if (_mainChain.at(middle) > key)
+			high = middle - 1;
+	}
+	return (low);
 }
 
 void PmergeMe::insertionSort()
 {
-	
+	// size_t n = 0;
+	_mainChain.insert(_mainChain.begin(), _pend.at(0));
+	std::vector<int> jArray = {0, 1};
+	// std::cout << "pend = ";
+	// for (size_t i = 0; i < _pend.size(); i++)
+	// 	std::cout << _pend.at(i) << " ";
+	// std::cout << std::endl;
+	// std::cout << "_mainChain = "; 
+	// for (size_t i = 0; i < _mainChain.size(); i++)
+	// 	std::cout << _mainChain.at(i) << " "; 
+	// std::cout << std::endl;
+	// int value = 0;
+	// int back_value;
+	while (_mainChain.size() < _vec.size())
+	{
+		jArray.push_back(jacob(jArray, jArray.size()));
+		// std::cout << "jArray back = " << jArray.back() << std::endl;
+		int prev = *(jArray.end() - 2);
+		// std::cout << "prev = " << prev << std::endl;
+		if (jArray.back() == 1)
+		{
+			int pos = binarySearchSort(0, 3, _pend.at(1));
+			_mainChain.insert(_mainChain.begin() + pos, _pend.at(1));
+			// std::cout << "_mainChain = "; 
+			// for (size_t i = 0; i < _mainChain.size(); i++)
+			// 	std::cout << _mainChain.at(i) << " "; 
+			// std::cout << std::endl;
+		}
+		else
+		{
+			for (int it = jArray.back(); it > prev; it--)
+			{
+				if (it <= int(_pend.size() - 1))
+				{
+				
+					// std::cout << "_mainChain = "; 
+					// for (size_t i = 0; i < _mainChain.size(); i++)
+					// 	std::cout << _mainChain.at(i) << " "; 
+					// std::cout << std::endl;
+					// std::cout << "it = " << it << std::endl;
+					// std::cout << "_pend.at(it) = " << _pend.at(it) << std::endl;
+					int pos = binarySearchSort(0, jArray.back() + it, _pend.at(it));
+					_mainChain.insert(_mainChain.begin() + pos, _pend.at(it));
+				}
+			}
+		}
+	}
+	std::cout << "_mainChain = "; 
+	for (size_t i = 0; i < _mainChain.size(); i++)
+		std::cout << _mainChain.at(i) << " "; 
+	std::cout << std::endl;
+	if (std::is_sorted(_mainChain.begin(), _mainChain.end()))
+		_vec = _mainChain;
 }
 
 const char *PmergeMe::InvalidNumberException::what() const noexcept

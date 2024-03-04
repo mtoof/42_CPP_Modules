@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:15 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/03 17:47:23 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/04 00:40:48 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <chrono>
 #include <algorithm>
 #include <iomanip>
+#include <cmath>
 
 class PmergeMe
 {
@@ -32,15 +33,18 @@ private:
 
 	int _last_element;
 	bool _odd_elements;
+
 	void fordJohnson();
 	void pairAndSort();
 	void sortByGreater(size_t container_size);
 	void separateGreaterFromSmaller();
 	void insertionSort();
-	std::chrono::high_resolution_clock::time_point end_time;
+	int binarySearchSort(int low, int high, int key);
 
 	PmergeMe &operator=(const PmergeMe &rhs);
 	PmergeMe(const PmergeMe &rhs);
+
+	std::chrono::high_resolution_clock::time_point end_time;
 	std::chrono::high_resolution_clock::time_point start_time;
 
 public:
