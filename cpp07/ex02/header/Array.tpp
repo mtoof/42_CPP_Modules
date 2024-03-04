@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:29:13 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/15 17:50:20 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/04 20:18:26 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,15 @@ Array<T> &Array<T>::operator=(Array const &rhs)
 
 template <typename T>
 T &Array<T>::operator[](int index)
+{
+	if (index >= 0 && index < (int)_size)
+		return (this->_array[index]);
+	else
+		throw std::out_of_range("Index is out of range");
+}
+
+template <typename T>
+const T &Array<T>::operator[](int index) const
 {
 	if (index >= 0 && index < (int)_size)
 		return (this->_array[index]);

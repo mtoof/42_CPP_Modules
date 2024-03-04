@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:29:22 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/15 17:49:24 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/04 20:17:58 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ public:
 	Array(const Array &rhs);
 	Array &operator=(Array const &rhs);
 	T &operator[](int index);
+	const T &operator[](int index) const;
 	~Array();
 	unsigned int size() const;
 };
