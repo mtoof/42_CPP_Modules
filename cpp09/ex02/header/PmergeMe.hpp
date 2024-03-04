@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:15 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/04 00:40:48 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/04 20:21:14 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ private:
 	void sortByGreater(size_t container_size);
 	void separateGreaterFromSmaller();
 	void insertionSort();
-	int binarySearchSort(int low, int high, int key);
 
 	PmergeMe &operator=(const PmergeMe &rhs);
 	PmergeMe(const PmergeMe &rhs);
