@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:18 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/04 20:21:03 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/06 00:14:34 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 PmergeMe::PmergeMe()
 {
-	_odd_elements = false;
+	_oddElements = false;
 }
 
 PmergeMe::PmergeMe(const PmergeMe &rhs) : _vec(rhs._vec), _deq(rhs._deq)
 {
-	_odd_elements = rhs._odd_elements;
+	_oddElements = rhs._oddElements;
 }
 
 PmergeMe &PmergeMe::operator=(const PmergeMe &rhs)
@@ -30,7 +30,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &rhs)
 		_deq.clear();
 		_vec = rhs._vec;
 		_deq = rhs._deq;
-		_odd_elements = rhs._odd_elements;
+		_oddElements = rhs._oddElements;
 	}
 	return (*this);
 }
@@ -41,23 +41,22 @@ PmergeMe::~PmergeMe()
 
 void PmergeMe::print(std::string flag) const
 {
+	std::vector<std::pair<int, int>>::const_iterator it;
 	if (flag == "before")
 	{
-		std::vector<int>::const_iterator it;
 		std::cout << "Before:   ";
 		for (it = _vec.begin(); it != _vec.end(); it++)
-			std::cout << *it << " ";
-		if (_odd_elements)
-			std::cout << _last_element << std::endl;
+			std::cout << it->first << " " << it->second << " ";
+		if (_oddElements)
+			std::cout << _lastElement << std::endl;
 		else
 			std::cout << std::endl;
 	}
 	else
 	{
-		std::vector<int>::const_iterator it;
 		std::cout << "After:   ";
 		for (it = _vec.begin(); it != _vec.end(); it++)
-			std::cout << *it << " ";
+			std::cout << it->first << " " << it->second << " ";
 		std::cout << std::endl;
 	}
 }
@@ -65,24 +64,26 @@ void PmergeMe::print(std::string flag) const
 void PmergeMe::parseNumbers(int ac, char **av)
 {
 	if (ac % 2 == 0)
-		_odd_elements = true;
-	for (int it = 1; av[it]; it++)
+		_oddElements = true;
+	for (int it = 1; av[it]; it += 2)
 	{
 		int number;
+		int secondNumber;
 		try
 		{
-			if (_odd_elements && it == ac - 1)
+			if (_oddElements && it == ac - 1)
 			{
-				_last_element = std::stoi(av[it]);
+				_lastElement = std::stoi(av[it]);
 				break;
 			}
 			number = std::stoi(av[it]);
+			secondNumber = std::stoi(av[it + 1]);
 		}
 		catch (const std::exception &e)
 		{
 			throw InvalidNumberException();
 		}
-		_vec.push_back(number);
+		_vec.push_back({number, secondNumber});
 	}
 	start_time = std::chrono::high_resolution_clock::now();
 	print("before");
@@ -97,18 +98,18 @@ void PmergeMe::parseNumbers(int ac, char **av)
 void PmergeMe::fordJohnson()
 {
 	pairAndSort();
-	size_t container_size = _vec.size();
-	sortByGreater(container_size);
+	print("before");
+	sortByGreater(_vec);
 	separateGreaterFromSmaller();
 	// insertionSort();
-	std::cout << "pend = ";
-	for (size_t i = 0; i < _pend.size(); i++)
-		std::cout << _pend.at(i) << " ";
-	std::cout << std::endl;
-	std::cout << "_mainChain = "; 
-	for (size_t i = 0; i < _mainChain.size(); i++)
-		std::cout << _mainChain.at(i) << " "; 
-	std::cout << std::endl;
+	// std::cout << "pend = ";
+	// for (size_t i = 0; i < _pend.size(); i++)
+	// 	std::cout << _pend.at(i) << " ";
+	// std::cout << std::endl;
+	// std::cout << "_mainChain = "; 
+	// for (size_t i = 0; i < _mainChain.size(); i++)
+	// 	std::cout << _mainChain.at(i) << " "; 
+	// std::cout << std::endl;
 
 
 	return;
@@ -116,35 +117,53 @@ void PmergeMe::fordJohnson()
 
 void PmergeMe::pairAndSort()
 {
-	std::vector<int>::iterator it;
+	std::vector<std::pair<int, int>>::iterator it;
 	// if (_vec.front() > _vec.back())
 	// 	std::swap(_vec.front(), _vec.back());
 	for (it = _vec.begin(); it != _vec.end(); it += 2)
 	{
-		if (it + 1 != _vec.end() && *it > *(it + 1))
-			std::swap(*it, *(it + 1));
+		if (it->first > it->second)
+			std::swap(it->first, it->second);
 	}
 }
 
-void PmergeMe::sortByGreater(size_t container_size)
+void PmergeMe::sortByGreater(std::vector<std::pair<int,int>> vec) 
 {
-	if (container_size > 2)
-		sortByGreater(container_size / 2);
-	size_t it = 1;
-	size_t second_it = 0;
-	for (it = 1; it < container_size; it += 2)
+        // if (left < right) {
+        //     size_t mid = left + (right - left) / 2;
+        //     sortByGreater(left, mid); // Sort the left half
+        //     sortByGreater(mid + 1, right); // Sort the right half
+        //     merge(left, mid, right); // Merge the sorted halves
+        // }
+	size_t length = vec.size();
+	if (length <= 1) return;
+
+	size_t middle = length / 2;
+	std::vector<std::pair<int, int>> leftVec, rightVec;
+	for (size_t iter = 0; iter < length; iter++)
 	{
-		if (it + 2 < container_size)
-			second_it = it + 2;
+		if (iter < middle)
+			leftVec.push_back(_vec.at(iter));
 		else
-			break;
-		if (_vec.at(it) > _vec.at(second_it))
 		{
-			std::swap(_vec.at(it - 1), _vec.at(second_it - 1));
-			std::swap(_vec.at(it), _vec.at(second_it));
-			it = -1; // We need to reset iterator after every swap
+			rightVec.push_back(_vec.at(iter));
 		}
 	}
+	sortByGreater(leftVec);
+	sortByGreater(rightVec);
+	merge(leftVec, rightVec);
+}
+
+void PmergeMe::merge(std::vector<std::pair<int, int>> leftVec, std::vector<std::pair<int, int>> rightVec) 
+{
+	// std::cout << "leftVec = ";
+	// for (size_t iter = 0; iter < leftVec.size(); iter++)
+	// 	std::cout << leftVec.at(iter) << " ";
+	// std::cout << std::endl;
+	// std::cout << "rightVec = ";
+	// for (size_t iter = 0; iter < rightVec.size(); iter++)
+	// 	std::cout << rightVec.at(iter) << " ";
+	// std::cout << std::endl;
 }
 
 void PmergeMe::separateGreaterFromSmaller()
@@ -156,8 +175,8 @@ void PmergeMe::separateGreaterFromSmaller()
 		else if (iter % 2 == 0)
 			_pend.push_back(_vec.at(iter));
 	}
-	// if (_odd_elements)
-	// 	_pend.push_back(_last_element);
+	if (_oddElements)
+		_pend.push_back(_lastElement);
 }
 
 int jacob(std::vector<int> jArray, int n)
@@ -224,11 +243,6 @@ void PmergeMe::insertionSort()
 	// for (size_t i = 0; i < _mainChain.size(); i++)
 	// 	std::cout << _mainChain.at(i) << " "; 
 	// std::cout << std::endl;
-	if (_odd_elements)
-	{
-		pos = std::lower_bound(_mainChain.begin(), _mainChain.end(), _last_element);
-		_mainChain.insert(pos, _last_element);
-	}
 		
 	if (std::is_sorted(_mainChain.begin(), _mainChain.end()))
 		_vec = _mainChain;
