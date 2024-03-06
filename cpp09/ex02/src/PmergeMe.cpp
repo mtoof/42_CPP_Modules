@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:18 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/06 17:05:18 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/06 20:04:22 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ void PmergeMe::print(std::string flag) const
 
 void PmergeMe::parseNumbers(int ac, char **av)
 {
-	int elements = ac - 1;
-	if (elements % 2 == 0)
+	if (ac % 2 == 0)
 		_oddElements = true;
 	for (int it = 1; av[it]; it += 2)
 	{
@@ -72,7 +71,7 @@ void PmergeMe::parseNumbers(int ac, char **av)
 		int secondNumber;
 		try
 		{
-			if (_oddElements && it == elements)
+			if (_oddElements && it == ac - 1)
 			{
 				_lastElement = std::stoi(av[it]);
 				break;
@@ -89,7 +88,7 @@ void PmergeMe::parseNumbers(int ac, char **av)
 	start_time = std::chrono::high_resolution_clock::now();
 	print("before");
 	fordJohnson();
-	print("after");
+	// print("after");
 	end_time = std::chrono::high_resolution_clock::now();
 	std::chrono::duration<double>  diff = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time);
 	std::cout << std::fixed << std::setprecision(8) <<"Time to process a range of " << ac - 1 << " elements with vectore : "  << diff.count() << " microseconds" << std::endl;
@@ -166,49 +165,41 @@ void PmergeMe::separateGreaterFromSmaller()
 		_pend.push_back(_lastElement);
 }
 
-int jacob(std::vector<int> jArray, int n)
+int jacobsthal(int n)
 {
 	if (n == 0)
 		return 0;
 	if (n == 1)
 		return 1;
-	return (jArray[n - 1] + (2 * jArray[n - 2]));
+	return (jacobsthal(n - 1) + (2 * jacobsthal(n - 2)));
 }
 
 void PmergeMe::insertionSort()
 {
 	_mainChain.insert(_mainChain.begin(), _pend.at(0));
-	std::vector<int> jArray = {0, 1};
 	std::vector<int>::iterator pos;
+	_pend.erase(_pend.begin());
+	int jIndex = 3;
 	while (_mainChain.size() / 2 < (_vec.size()))
 	{
-		jArray.push_back(jacob(jArray, jArray.size()));
-		int prev = *(jArray.end() - 2);
-		if (jArray.back() == 1)
+		int iter = jacobsthal(jIndex);
+		while (iter-- > 0)
 		{
-			pos = std::lower_bound(_mainChain.begin(), _mainChain.begin() + 2, _pend.at(1));
-			_mainChain.insert(pos, _pend.at(1));
-		}
-		else
-		{
-			for (int it = jArray.back(); it > prev; it--)
+			if (iter <= int(_pend.size() - 1))
 			{
-				if (it <= int(_pend.size() - 1))
-				{				
-					pos = std::lower_bound(_mainChain.begin(), _mainChain.begin() + (_mainChain.size() - _pend.size()) + it, _pend.at(it));
-					_mainChain.insert(pos, _pend.at(it));
-				}
+				pos = std::lower_bound(_mainChain.begin(), _mainChain.begin() + (_mainChain.size() - _pend.size()) + iter, _pend.at(iter));
+				_mainChain.insert(pos, _pend.at(iter));
+				_pend.erase(_pend.begin() + iter);
 			}
 		}
+		jIndex++;
 	}		
-	// std::cout << "_mainChain = "; 
-	// for (size_t i = 0; i < _mainChain.size(); i++)
-	// 	std::cout << _mainChain.at(i) << " "; 
-	// std::cout << std::endl;
+	std::cout << "_mainChain = "; 
+	for (size_t i = 0; i < _mainChain.size(); i++)
+		std::cout << _mainChain.at(i) << " "; 
+	std::cout << std::endl;
 	if (!std::is_sorted(_mainChain.begin(), _mainChain.end()))
-	{
 		std::cerr << "Error" << std::endl;
-	}
 }
 
 const char *PmergeMe::InvalidNumberException::what() const noexcept
