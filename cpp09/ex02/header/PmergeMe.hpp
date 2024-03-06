@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:15 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/06 00:14:25 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/06 16:29:51 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@
 #include <iomanip>
 #include <cmath>
 
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+
 class PmergeMe
 {
 private:
@@ -30,15 +33,15 @@ private:
 	std::deque<std::pair<int,int>> _deq;
 	std::vector<int> _mainChain;
 	std::vector<int> _pend;
-
+	
 	int _lastElement;
 	bool _oddElements;
 
 	void fordJohnson();
 	void pairAndSort();
-	void sortByGreater(std::vector<std::pair<int,int>> vec);
+	void sortByGreater(std::vector<std::pair<int,int>> &vec, size_t vecSize, size_t start);
 	void separateGreaterFromSmaller();
-	void merge(std::vector<std::pair<int, int>> leftVec, std::vector<std::pair<int, int>>rightVec);
+	void merge(std::vector<std::pair<int, int>> tmp, std::vector<std::pair<int, int>> vec, size_t start, size_t middle, size_t vecSize);
 	void insertionSort();
 	
 	PmergeMe &operator=(const PmergeMe &rhs);
