@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:15 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/06 16:29:51 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/07 12:07:13 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@
 class PmergeMe
 {
 private:
-	std::vector<std::pair<int,int>> _vec;
-	std::deque<std::pair<int,int>> _deq;
+	std::vector<int> _vec;
+	std::deque<int> _deq;
+	std::vector<std::pair<int,int>> _tmp;
 	std::vector<int> _mainChain;
 	std::vector<int> _pend;
 	
