@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 15:06:39 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/15 17:41:20 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/07 14:35:10 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <iostream>
 #include <string>
 template <typename TArray, typename TFunction>
-void iter(TArray array[], int array_size, TFunction item_function)
+void iter(TArray* array, int array_size, TFunction item_function)
 {
 	for (int index = 0; index < array_size; index++)
 		item_function(array[index]);
