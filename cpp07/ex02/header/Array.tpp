@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 14:29:13 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/04 20:18:26 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/07 16:23:07 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,11 @@
 template <typename T>
 Array<T>::Array()
 	: _array(nullptr), _size(0)
-{
-	std::cout << "Default constructor called" << std::endl;
-}
+{}
 
 template <typename T>
 Array<T>::Array(unsigned int n)
 {
-	std::cout << "Argument constructor called" << std::endl;
 	this->_array = new T[n];
 	_size = n;
 }
@@ -32,14 +29,12 @@ template <typename T>
 Array<T>::Array(const Array &rhs)
 	: _array(nullptr), _size(0)
 {
-	std::cout << "Copy constructor called" << std::endl;
 	*this = rhs;
 }
 
 template <typename T>
 Array<T> &Array<T>::operator=(Array const &rhs)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &rhs)
 	{
 		delete[] _array;
@@ -72,7 +67,6 @@ const T &Array<T>::operator[](int index) const
 template <typename T>
 Array<T>::~Array()
 {
-	std::cout << "Destructor called" << std::endl;
 	if (_array)
 	{
 		delete[] _array;

@@ -2,6 +2,8 @@
 #include <iostream>
 
 #define MAX_VAL 750
+#define MY_MAX 10000
+
 int main(int, char **)
 {
 	Array<int> numbers(MAX_VAL);
@@ -49,5 +51,31 @@ int main(int, char **)
 		numbers[i] = rand();
 	}
 	delete[] mirror; //
+
+
+	Array<int> myTest(MY_MAX);
+	for (int it = 0; it < MY_MAX; it++)
+	{
+		const int number = rand();
+		myTest[it] = number;
+	}
+	try
+	{
+		myTest[1000] = 12;
+		std::cout << myTest[1000] << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	try
+	{
+		std::cout << myTest[10000] << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	
 	return (0);
 }
