@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:37 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/08 12:32:37 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/07 16:33:08 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,43 +27,18 @@ int main()
 		tommy_pardon->beSigned(tony);
 		tony.incrementGrade();
 		tommy_pardon->execute(tony);
+		std::shared_ptr<AForm> robotomy = jimmy.makeForm("robotomy request", "Tommy");
+		robotomy->beSigned(tony);
+		tony.incrementGrade();
+		robotomy->execute(tony);
+		std::shared_ptr<AForm> shrubbery = jimmy.makeForm("shrubbery creation", "Tommy");
+		shrubbery->beSigned(tony);
+		shrubbery->execute(tony);
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
 	}
 
-	// std::cout << BLUE  "2nd test" RESET << std::endl;
-	// //Successfull sign and execute ShrubberyCreationForm
-	// try
-	// {
-		
-	// }
-	// catch(const std::exception& e)
-	// {
-	// 	std::cerr << e.what() << '\n';
-	// }
-	
-	// std::cout << BLUE  "3rd test" RESET << std::endl;
-	// //Low grade Presidentialpardonform
-	// try
-	// {
-		
-	// }
-	// catch(const std::exception &e)
-	// {
-	// 	std::cerr << e.what() << '\n';
-	// }
-	
-	// std::cout << BLUE  "4th test" RESET << std::endl;
-	// try
-	// {
-		
-	// }
-	// catch(const std::exception &e)
-	// {
-	// 	std::cerr << e.what() << '\n';
-	// }
-	
 	return 0;
 }
