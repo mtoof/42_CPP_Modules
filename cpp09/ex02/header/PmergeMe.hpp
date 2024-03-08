@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:15 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/07 12:07:13 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/08 15:31:54 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include <algorithm>
 #include <iomanip>
 #include <cmath>
+#include <utility>
+#include <numeric>
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"

@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:18 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/07 12:30:03 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/08 15:53:28 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,24 +172,25 @@ void PmergeMe::separateGreaterFromSmaller()
 	std::cout << std::endl;
 }
 
-int jacobsthal(int n)
+void SequenceGenerator(std::vector<int> &vec, int n)
 {
-	if (n == 0)
-		return 0;
-	if (n == 1)
-		return 1;
-	return (jacobsthal(n - 1) + (2 * jacobsthal(n - 2)));
+	while (std::accumulate(vec.begin(), vec.end(), 0) <= n)
+	{
+		int num = std::pow(2, vec.size() + 1) - vec.back();
+		vec.push_back(num);
+	}
 }
 
 void PmergeMe::insertionSort()
 {
 	_mainChain.insert(_mainChain.begin(), _pend.at(0));
 	std::vector<int>::iterator pos;
+	std::vector<int> sequencesOfNumbers = {2};
 	_pend.erase(_pend.begin());
-	int jIndex = 3;
+	SequenceGenerator(sequencesOfNumbers, _pend.size());
 	while (_mainChain.size() / 2 < (_tmp.size()))
 	{
-		int iter = jacobsthal(jIndex);
+		int iter = *(sequencesOfNumbers.begin());
 		while (iter-- > 0)
 		{
 			if (iter <= int(_pend.size() - 1))
@@ -199,7 +200,7 @@ void PmergeMe::insertionSort()
 				_pend.erase(_pend.begin() + iter);
 			}
 		}
-		jIndex++;
+		sequencesOfNumbers.erase(sequencesOfNumbers.begin());
 	}
 	if (!std::is_sorted(_mainChain.begin(), _mainChain.end()))
 	{
