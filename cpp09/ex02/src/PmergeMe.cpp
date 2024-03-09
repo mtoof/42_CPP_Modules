@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:18 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/08 15:53:28 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/09 23:34:38 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ void PmergeMe::print(std::string flag) const
 			// std::cout << it->first << " " << RED << it->second << RESET << " ";
 			std::cout << *it << " ";
 		if (_oddElements)
-			std::cout << _lastElement << std::endl;
-		else
-			std::cout << std::endl;
+			std::cout << _lastElement;
+		std::cout << std::endl;
 	}
 	else
 	{
@@ -116,7 +115,6 @@ void PmergeMe::pairAndSort()
 		if (it->first > it->second)
 			std::swap(it->first, it->second);
 	}
-	std::cout << std::endl;
 }
 
 void PmergeMe::sortByGreater(std::vector<std::pair<int, int>> &vec, size_t vecSize, size_t start)
@@ -167,9 +165,6 @@ void PmergeMe::separateGreaterFromSmaller()
 		_mainChain.push_back(_tmp[iter].second);
 		_pend.push_back(_tmp[iter].first);
 	}
-	if (_oddElements)
-		_pend.push_back(_lastElement);
-	std::cout << std::endl;
 }
 
 void SequenceGenerator(std::vector<int> &vec, int n)
@@ -183,28 +178,70 @@ void SequenceGenerator(std::vector<int> &vec, int n)
 
 void PmergeMe::insertionSort()
 {
+	// std::cout << "_mainChaind = ";
+	// for (size_t iter = 0; iter < _mainChain.size(); iter++)
+	// 	std::cout << _mainChain[iter] << " ";
+	// std::cout << std::endl;
+	// std::cout << "_pend       = ";
+	// for (size_t iter = 0; iter < _pend.size(); iter++)
+	// 	std::cout << _pend[iter] << " ";
+	std::cout << std::endl;
 	_mainChain.insert(_mainChain.begin(), _pend.at(0));
+	// size_t mainChainSize = _mainChain.size();
 	std::vector<int>::iterator pos;
 	std::vector<int> sequencesOfNumbers = {2};
-	_pend.erase(_pend.begin());
+	// _pend.erase(_pend.begin());
 	SequenceGenerator(sequencesOfNumbers, _pend.size());
+	std::vector<int>::iterator readAmount = sequencesOfNumbers.begin();
+	size_t prevIndex = 0;
+	size_t iter = 0;
+	size_t insertedElements = 1;
 	while (_mainChain.size() / 2 < (_tmp.size()))
 	{
-		int iter = *(sequencesOfNumbers.begin());
-		while (iter-- > 0)
+		iter += *readAmount;
+		while (iter > prevIndex)
 		{
-			if (iter <= int(_pend.size() - 1))
+			// std::cout << "_pend       = ";
+			// for (size_t iter = 0; iter < _pend.size(); iter++)
+			// 	std::cout << _pend[iter] << " ";
+			// std::cout << std::endl;
+			// std::cout << "_mainChaind = ";
+			// for (size_t iter = 0; iter < _mainChain.size(); iter++)
+			// 	std::cout << _mainChain[iter] << " ";
+			// std::cout << std::endl;
+			if (iter <= _pend.size() - 1)
 			{
-				pos = std::lower_bound(_mainChain.begin(), _mainChain.begin() + (_mainChain.size() - _pend.size()) + iter, _pend.at(iter));
+				// size_t end = (iter != _pend.back()) ? (_mainChain.size() - _pend.size()) + iter - 1 : _mainChain.size();
+				pos = std::upper_bound(_mainChain.begin(), _mainChain.begin() + iter + insertedElements, _pend.at(iter));
+				// std::cout << "iter = " << iter << std::endl;
+				// std::cout << "_pend.at(iter) = " << _pend.at(iter) << std::endl;
+				// std::cout << "_mainChain.at(iter) = " << _mainChain.at(iter) << std::endl;
+				// std::cout << "*(_mainChain.begin() + iter + insertedElements) = " << *(_mainChain.begin() + iter + insertedElements) << std::endl;
+				// std::cout << "(_mainChain.size() - mainChainSize + 1) + iter = " << (_mainChain.size() - mainChainSize + 1) + iter << std::endl;
 				_mainChain.insert(pos, _pend.at(iter));
-				_pend.erase(_pend.begin() + iter);
+				insertedElements++;
+				// _pend.erase(_pend.begin() + iter);
 			}
+			iter--;
 		}
-		sequencesOfNumbers.erase(sequencesOfNumbers.begin());
+		// sequencesOfNumbers.erase(sequencesOfNumbers.begin());
+		prevIndex += *readAmount;
+		iter = prevIndex;
+		readAmount++;
+	}
+	if (_oddElements)
+	{
+		pos = std::lower_bound(_mainChain.begin(), _mainChain.end(), _lastElement);
+		_mainChain.insert(pos, _lastElement);
+		
 	}
 	if (!std::is_sorted(_mainChain.begin(), _mainChain.end()))
 	{
-		std::cerr << "Error" << std::endl;
+		std::cerr << "Error\n" << std::endl;
+		std::cout << "_mainChaind = ";
+		for (size_t iter = 0; iter < _mainChain.size(); iter++)
+			std::cout << _mainChain[iter] << " ";
+		std::cout << std::endl;
 		throw std::runtime_error("Couldn't sort the vector");
 	}
 	else
