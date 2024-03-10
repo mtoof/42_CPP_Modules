@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:29:35 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/01 11:29:52 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/10 15:28:19 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int main(int ac, char **av)
 {
-	PmergeMe sortNumbers;
+	PmergeMe<int, std::vector> vec;
+	PmergeMe<int, std::deque> deq;
 	if (ac < 3)
 	{
 		std::cerr << "Error: Not enough numbers to be sorted" << std::endl;
@@ -34,7 +35,8 @@ int main(int ac, char **av)
 	}
 	try
 	{
-		sortNumbers.parseNumbers(ac, av);
+		vec.parseNumbers(ac, av, "vector");
+		deq.parseNumbers(ac, av, "deque");
 	}
 	catch(const std::exception& e)
 	{

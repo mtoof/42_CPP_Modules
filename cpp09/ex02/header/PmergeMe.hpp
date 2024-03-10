@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:27:15 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/08 15:31:54 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/10 15:29:47 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,24 @@
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
 
+template <typename T, template<typename...> class Container>
 class PmergeMe
 {
 private:
-	std::vector<int> _vec;
-	std::deque<int> _deq;
-	std::vector<std::pair<int,int>> _tmp;
-	std::vector<int> _mainChain;
-	std::vector<int> _pend;
+	Container<T> _vec;
+	Container<std::pair<T,T>> _tmp;
+	Container<T> _mainChain;
+	Container<T> _pend;
 	
 	int _lastElement;
 	bool _oddElements;
 
 	void fordJohnson();
 	void pairAndSort();
-	void sortByGreater(std::vector<std::pair<int,int>> &vec, size_t vecSize, size_t start);
+	void sortByGreater(Container<std::pair<T,T>> &vec, size_t vecSize, size_t start);
 	void separateGreaterFromSmaller();
-	void merge(std::vector<std::pair<int, int>> tmp, std::vector<std::pair<int, int>> vec, size_t start, size_t middle, size_t vecSize);
+	void SequenceGenerator(Container<T> &vec, int n);
+	
 	void insertionSort();
 	
 	PmergeMe &operator=(const PmergeMe &rhs);
@@ -57,7 +58,7 @@ public:
 	PmergeMe();
 	~PmergeMe();
 	
-	void parseNumbers(int ac, char **av);
+	void parseNumbers(int ac, char **av, std::string identifier);
 	void print(std::string flag) const;
 	class InvalidNumberException: public std::exception
 	{
