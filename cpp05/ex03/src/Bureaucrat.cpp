@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:35 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/08 12:31:07 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/19 18:19:18 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,11 @@ const char *Bureaucrat::GradeTooLowException::what() const noexcept
 
 void Bureaucrat::signForm(AForm &form)
 {
-	if (form.getSignature() != true)
+	if (form.getSignature())
+		std::cout << RED <<  this->_name << " couldn't sign " << form.getName() << " because it's already signed." RESET << std::endl;
+	else if (form.getSignature() != true && this->getGrade() <= static_cast<int>(form.getGradeToSign()))
 	{
+		form.beSigned(*this);
 		std::cout << GREEN << this->getName() << " signed " << form.getName() << RESET << std::endl;
 	}
 	else

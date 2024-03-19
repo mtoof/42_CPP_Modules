@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:37 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/07 16:33:08 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/19 19:23:28 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 
 int main()
 {
-	//Low grade ShrubberyCreationForm
-	std::cout << BLUE  "First test" RESET << std::endl;
 	try
 	{
 		Intern jimmy;

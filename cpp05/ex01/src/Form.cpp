@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:53:13 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/06 13:24:34 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/19 17:54:14 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Form::Form(): _name("No_name"), _signature(false), _grade_required_to_sign(42), 
 	std::cout << "Form Default constructor called" << std::endl;
 }
 
-Form::Form(std::string name_val, unsigned int grade_to_sign, unsigned int grade_to_execute): 
+Form::Form(std::string name_val, int grade_to_sign, int grade_to_execute): 
 _name(name_val), _signature(false), _grade_required_to_sign(grade_to_sign), _grade_required_to_execute(grade_to_execute)
 {
 	std::cout << "Form Default constructor called" << std::endl;
@@ -61,12 +61,12 @@ bool Form::getSignature() const
 	return this->_signature;
 }
 
-unsigned int Form::getGradeToSign() const
+int Form::getGradeToSign() const
 {
 	return this->_grade_required_to_sign;
 }
 
-unsigned int Form::getGradeToExecute() const
+int Form::getGradeToExecute() const
 {
 	return this->_grade_required_to_execute;
 }

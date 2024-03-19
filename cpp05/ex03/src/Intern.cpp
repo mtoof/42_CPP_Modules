@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:12:42 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/20 17:23:37 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/19 19:22:33 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@ static std::shared_ptr<AForm> create_shrubbery(std::string form_name)
 {
 	return std::make_shared<ShrubberyCreationForm>(form_name);
 }
+
 static std::shared_ptr<AForm> create_roboto(std::string form_name)
 {
 	return std::make_shared<RobotomyRequestForm>(form_name);
 }
+
 static std::shared_ptr<AForm> create_presidential(std::string form_name)
 {
 	 return std::make_shared<PresidentialPardonForm>(form_name);

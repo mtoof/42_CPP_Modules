@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:20 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/02 18:56:27 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/19 17:40:44 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ public:
 	Bureaucrat(const Bureaucrat &rhs);
 	Bureaucrat &operator=(const Bureaucrat &rhs);
 	~Bureaucrat();
-	
+
 	std::string getName() const;
 	int getGrade() const;
 	void incrementGrade();

@@ -6,19 +6,19 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:30:10 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/05 14:30:23 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/19 18:05:30 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
 #include <random>
 
-RobotomyRequestForm::RobotomyRequestForm(): AForm("No_name", false, 72, 45),_target("No_location")
+RobotomyRequestForm::RobotomyRequestForm(): AForm("No_name", 72, 45),_target("No_location")
 {
 	std::cout << "RobotomyRequestForm default constructor called" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target): AForm("RobotomyRequestForm", false, 72, 45),_target(target)
+RobotomyRequestForm::RobotomyRequestForm(std::string target): AForm("RobotomyRequestForm", 72, 45),_target(target)
 {
 	std::cout << "RobotomyRequestForm argument constructor called" << std::endl;
 }

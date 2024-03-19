@@ -6,17 +6,17 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:37 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/06 11:04:43 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/19 19:09:41 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
-#include "AForm.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "PresidentialPardonForm.hpp"
-#include "RobotomyRequestForm.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include "colour.hpp"
+#include "../header/Bureaucrat.hpp"
+#include "../header/AForm.hpp"
+#include "../header/ShrubberyCreationForm.hpp"
+#include "../header/PresidentialPardonForm.hpp"
+#include "../header/RobotomyRequestForm.hpp"
+#include "../header/ShrubberyCreationForm.hpp"
+#include "../header/colour.hpp"
 
 int main()
 {
@@ -25,9 +25,9 @@ int main()
 	try
 	{
 		Bureaucrat bob("Bob", 139);
-		ShrubberyCreationForm haaga("Haaga");
-		haaga.beSigned(bob);
-		haaga.execute(bob);
+		ShrubberyCreationForm district1("district1");
+		bob.signForm(district1);
+		bob.executeForm(district1);
 	}
 	catch(const std::exception& e)
 	{
@@ -40,8 +40,8 @@ int main()
 	{
 		Bureaucrat tommy("Tommy", 12);
 		ShrubberyCreationForm home("Home");
-		home.beSigned(tommy);
-		home.execute(tommy);
+		tommy.signForm(home);
+		tommy.executeForm(home);
 	}
 	catch(const std::exception& e)
 	{
@@ -52,12 +52,12 @@ int main()
 	//Low grade Presidentialpardonform
 	try
 	{
-		Bureaucrat Jane("Jane", 25);
+		Bureaucrat jane("Jane", 25);
 		PresidentialPardonForm form_x1("Alex");
-		form_x1.execute(Jane);
-		form_x1.beSigned(Jane);
+		jane.signForm(form_x1);
+		jane.executeForm(form_x1);
 		Bureaucrat James("James", 5);
-		form_x1.execute(Jane);
+		James.executeForm(form_x1);
 		// alex.execute(James);
 	}
 	catch(const std::exception &e)
@@ -68,15 +68,16 @@ int main()
 	std::cout << BLUE  "4th test" RESET << std::endl;
 	try
 	{
-		Bureaucrat Jane("Jane", 72);
+		Bureaucrat jane("Jane", 72);
 		RobotomyRequestForm office_lawn("office_lawn");
-		office_lawn.execute(Jane);
-		office_lawn.beSigned(Jane);
-		Bureaucrat James("James", 46);
+		jane.signForm(office_lawn);
+		jane.executeForm(office_lawn);
+		Bureaucrat james("James", 46);
+		james.signForm(office_lawn);
+		james.executeForm(office_lawn);
 		Bureaucrat tommy("Tommy", 42);
-		office_lawn.execute(Jane);
-		office_lawn.execute(tommy);
-		office_lawn.execute(James);
+		tommy.signForm(office_lawn);
+		tommy.executeForm(office_lawn);
 	}
 	catch(const std::exception &e)
 	{
