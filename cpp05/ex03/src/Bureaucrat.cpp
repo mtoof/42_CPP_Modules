@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 10:06:35 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/19 18:19:18 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/20 12:04:09 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,12 @@ void Bureaucrat::signForm(AForm &form)
 void Bureaucrat::executeForm(AForm const & form)
 {
 	if (this->getGrade() <= (int)form.getGradeToExecute())
+	{
+		form.execute(*this);
 		std::cout << GREEN << this->getName() << " executed " << form.getName() << RESET << std::endl;
+	}
 	else
 		std::cerr << RED "Bureaucrat " << this->getName() << " does not meet the minimum requirement grade to execute the form." RESET << std::endl;
-	
 }
 
 std::ostream &operator<<(std::ostream &out, Bureaucrat const &rhs)

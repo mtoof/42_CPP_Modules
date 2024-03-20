@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:30:10 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/07 09:37:56 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/20 12:07:07 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,18 @@
 
 RobotomyRequestForm::RobotomyRequestForm(): AForm("No_name", 72, 45),_target("No_location")
 {
-	std::cout << "RobotomyRequestForm default constructor called" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target): AForm("RobotomyRequestForm", 72, 45),_target(target)
 {
-	std::cout << "RobotomyRequestForm argument constructor called" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &rhs): AForm(rhs),_target(rhs._target)
 {
-	std::cout << "RobotomyRequestForm copy constructor called" << std::endl;
 }
 
 RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &rhs)
 {
-	std::cout << "RobotomyRequestForm copy assignment operator constructor called" << std::endl;
 	if (this != &rhs)
 		this->_target = rhs._target;
 	return (*this);

@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/04 14:30:32 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/07 09:38:03 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/20 12:07:35 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,18 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm(): AForm("No_name", 145, 137),_target("No_location")
 {
-	std::cout << "ShrubberyCreationForm default constructor called" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string const target): AForm("ShrubberyCreationForm", 145, 137), _target(target)
 {
-	std::cout << "ShrubberyCreationForm argument constructor called" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &rhs): AForm(rhs), _target(rhs._target)
 {
-	std::cout << "ShrubberyCreationForm copy constructor called" << std::endl;
 }
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm const &rhs)
 {
-	std::cout << "ShrubberyCreationForm copy assignment operator called" << std::endl;
 	if (this != &rhs)
 		this->_target = rhs._target;
 	return (*this);

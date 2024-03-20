@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/06 11:12:42 by mtoof             #+#    #+#             */
-/*   Updated: 2024/03/19 19:22:33 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/03/20 11:57:58 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ std::shared_ptr<AForm> Intern::makeForm(std::string form_name, std::string targe
 			return formCreators[index](target);
 		}
 	}
-	std::cout << RED "Intern couldn't create the " << BLUE << form_name << RED " because the form is undefined and not exist." RESET << std::endl;
+	std::cout << RED "Intern couldn't create the " << BLUE << form_name << RED " because the form does not exist." RESET << std::endl;
 	return (nullptr);
 }
