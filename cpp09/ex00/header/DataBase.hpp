@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 11:56:22 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/25 21:00:38 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/04/03 19:09:39 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 #include <sys/stat.h>
 #include <float.h>
 #define DATABASE_FILE "data.csv"
+
 enum status
 {
 	NAGAVTIVE_NUMBER,
@@ -40,10 +41,10 @@ class DataBase
 private:
 	bool _map;
 	std::map<std::string, std::string> _btc_database;
-	void readfile(std::string filename, std::ifstream &fd);
+	void readfile(std::string fileName, std::ifstream &fd);
 	int checkDateValue(std::string str);
 	int checkRateValue(std::string str);
-	void parseData(std::ifstream &fd);
+	void parseData(std::ifstream &fd, std::string fileName);
 	void readInputFile(std::ifstream &fd);
 	int checkData(std::string date, std::string rate);
 
@@ -61,7 +62,13 @@ public:
 	public:
 		const char *what() const noexcept;
 	};
-	class FailDataFileException : public std::exception
+
+	class FailOpenDataFileException : public std::exception
+	{
+	public:
+		const char *what() const noexcept;
+	};
+	class EmptyFileException : public std::exception
 	{
 	public:
 		const char *what() const noexcept;

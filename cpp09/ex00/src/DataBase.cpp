@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 12:01:00 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/25 21:00:49 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/04/08 19:25:11 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,43 +35,50 @@ DataBase::~DataBase()
 {
 }
 
-void DataBase::parseFile(std::string databaseFileName, std::string inputfile)
+void DataBase::parseFile(std::string databaseFileName, std::string inputFile)
 {
 	std::ifstream fd;
 	if (_map == false)
 	{
 		readfile(databaseFileName, fd);
-		parseData(fd);
+		parseData(fd, databaseFileName);
 		if (_btc_database.empty())
 			throw InvalidDataException();
 	}
-	readfile(inputfile, fd);
-	parseData(fd);
+	readfile(inputFile, fd);
+	parseData(fd, inputFile);
 }
 
-void DataBase::readfile(std::string filename, std::ifstream &fd)
+void DataBase::readfile(std::string fileName, std::ifstream &fd)
 {
-	fd.open(filename);
-	if (fd.fail())
+	fd.open(fileName);
+	if (!fd.is_open())
 	{
-		std::cout << "Error: " << filename << ", ";
-		throw FailDataFileException();
+		std::cout << "Error: " << fileName << ", ";
+		throw FailOpenDataFileException();
 	}
+
 	struct stat fileStat;
-	if (stat(filename.c_str(), &fileStat) == 0)
+	if (stat(fileName.c_str(), &fileStat) == 0)
 	{
 		if (S_ISDIR(fileStat.st_mode))
 		{
-			std::cout << filename;
+			std::cout << fileName;
 			throw DataBaseIsDirectoryException();
 		}
 	}
 }
 
-void DataBase::parseData(std::ifstream &fd)
+void DataBase::parseData(std::ifstream &fd, std::string fileName)
 {
 	std::stringstream data;
 	data << fd.rdbuf();
+	std::string content = data.str(); // Get the content of the string stream as a string
+	if (content.empty())
+	{
+		std::cout << "The " << fileName << " file is empty." << std::endl;
+		return;
+	}
 	std::string key, value;
 	std::regex keyFormat("^\\d{4}-\\d{1,2}-\\d{1,2}$");
 	std::regex valueFormat("^\\d+(.\\d+)?$");
@@ -95,12 +102,14 @@ void DataBase::parseData(std::ifstream &fd)
 			}
 			else
 			{
+				if (tmp.str().empty())
+					continue;
 				tmp >> key >> delimiter >> value;
 			}
 		}
 		else
 		{
-			if (_map == true)
+			if (_map == true && !line.empty())
 				std::cout << "Error: bad input => " << line << std::endl;
 			continue;
 		}
@@ -111,11 +120,19 @@ void DataBase::parseData(std::ifstream &fd)
 		if (counter == 1 && key == "date")
 			continue;
 		if (!key.empty() && !value.empty() && key_result == true && value_result == true && checkData(key, value) == VALID_DATA)
+		{
 			if (_map == false)
 				_btc_database.insert(std::pair<std::string, std::string>(key, value));
+		}
+		else
+		{
+			if (_map)
+				std::cout << "Error: bad input => " << line << std::endl;
+		}
 	}
 	_map = true;
 	fd.close();
+	data.str("");
 }
 
 int DataBase::checkData(std::string date, std::string rate)
@@ -253,7 +270,7 @@ const char *DataBase::InvalidDataException::what() const noexcept
 	return ("Invalid database file!!!");
 }
 
-const char *DataBase::FailDataFileException::what() const noexcept
+const char *DataBase::FailOpenDataFileException::what() const noexcept
 {
 	return ("Couldn't open the Database file!!!");
 }
