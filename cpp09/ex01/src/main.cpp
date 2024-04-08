@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:57:39 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/25 22:29:56 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/04/08 19:03:09 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,15 @@ int main(int ac, char **av)
 		}
 		return (1);
 	}
-	if (!rpn.parse(av[1]))
-		return (1);
-
+	try
+	{
+		if (!rpn.parse(av[1]))
+			return (1);
+	}
+	catch(std::exception &exp)
+	{
+		std::cout << exp.what() << std::endl;
+		return 1;
+	}
 	return (0);
 }

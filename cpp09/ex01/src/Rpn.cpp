@@ -6,7 +6,7 @@
 /*   By: mtoof <mtoof@student.hive.fi>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 15:56:56 by mtoof             #+#    #+#             */
-/*   Updated: 2024/02/25 22:30:56 by mtoof            ###   ########.fr       */
+/*   Updated: 2024/04/08 19:01:30 by mtoof            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ bool Rpn::handleOperands(std::string &number)
 			}
 		}
 		int result = std::stoi(number);
-		if (result < 10)
+		if (result >= 0 && result < 10)
 			_numberStack.push(result);
 		else
 		{
@@ -143,7 +143,8 @@ void Rpn::print()
 		if (_numberStack.size() == 1)
 			std::cout << _numberStack.top() << std::endl;
 		else
-			std::cout << _numberStack.top() << " ";
+			// std::cout << _numberStack.top() << " ";
+			throw std::runtime_error("Invalid Expression");
 		_numberStack.pop();
 	}
 }
